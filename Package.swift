@@ -4,21 +4,33 @@
 import PackageDescription
 
 let package = Package(
-    name: "swiftui-animation-showcase",
+    name: AnimationPkg.name,
+    platforms: [
+        .iOS(.v18),
+        .macCatalyst(.v18)
+    ],
     products: [
-        // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
-            name: "swiftui-animation-showcase",
-            targets: ["swiftui-animation-showcase"]),
+            name: AnimationPkg.Lib.agregatedLibrary,
+            targets: [AnimationPkg.Lib.agregatedLibrary]),
+        .library(
+            name: AnimationPkg.Lib.kirbyJumpingAnimation,
+            targets: [AnimationPkg.Lib.kirbyJumpingAnimation]),
     ],
     targets: [
-        // Targets are the basic building blocks of a package, defining a module or a test suite.
-        // Targets can depend on other targets in this package and products from dependencies.
-        .target(
-            name: "swiftui-animation-showcase"),
-        .testTarget(
-            name: "swiftui-animation-showcaseTests",
-            dependencies: ["swiftui-animation-showcase"]
-        ),
+        .target(name: AnimationPkg.Lib.agregatedLibrary),
+        .target(name: AnimationPkg.Lib.kirbyJumpingAnimation)
     ]
 )
+
+struct AnimationPkg {
+    
+    static let name = "SwiftUIAnimationShowcase"
+    
+    struct Lib {
+        static let agregatedLibrary = AnimationPkg.name
+        static let kirbyJumpingAnimation = "KirbyJumpingAnimation"
+    }
+    
+    
+}
