@@ -3,34 +3,55 @@
 
 import PackageDescription
 
+typealias LibNamed = Pkg.Product.Library.Named
+typealias DefaultTargetNamed = Pkg.Target.DefaultType.Named
+typealias ExecutableTargetNamed = Pkg.Target.Executable.Named
+
 let package = Package(
-    name: AnimationPkg.name,
+    name: Pkg.name,
     platforms: [
         .iOS(.v18),
-        .macCatalyst(.v18)
+        .macCatalyst(.v18),
+        .macOS(.v15)
     ],
     products: [
         .library(
-            name: AnimationPkg.Lib.agregatedLibrary,
-            targets: [AnimationPkg.Lib.agregatedLibrary]),
-        .library(
-            name: AnimationPkg.Lib.kirbyJumpingAnimation,
-            targets: [AnimationPkg.Lib.kirbyJumpingAnimation]),
+            name: LibNamed.kirbyJumping,
+            targets: [DefaultTargetNamed.kirbyJumping]),
     ],
     targets: [
-        .target(name: AnimationPkg.Lib.agregatedLibrary),
-        .target(name: AnimationPkg.Lib.kirbyJumpingAnimation)
+        .executableTarget(name: ExecutableTargetNamed.macosDemoApp),
+        .target(name: DefaultTargetNamed.kirbyJumping)
     ]
 )
 
-struct AnimationPkg {
+enum Pkg {
+    static let name: String = "swiftui-animation-showcase"
     
-    static let name = "SwiftUIAnimationShowcase"
-    
-    struct Lib {
-        static let agregatedLibrary = AnimationPkg.name
-        static let kirbyJumpingAnimation = "KirbyJumpingAnimation"
+    enum Product {
+        enum Library {
+            enum Named {
+                static let kirbyJumping = "KirbyJumpingAnimation"
+            }
+        }
     }
     
-    
+    enum Target {
+        
+        enum DefaultType {
+            enum Named {
+                static let kirbyJumping = "KirbyJumpingAnimation"
+            }
+        }
+        
+        enum Executable {
+            
+            enum Named {
+                static let macosDemoApp = "SwiftUIAnimationShowcase"
+            }
+            
+        }
+    }
 }
+
+
