@@ -15,13 +15,38 @@ let package = Package(
         .macOS(.v15)
     ],
     products: [
+        .executable(
+            name: ExecutableTargetNamed.animationShowcaseApp,
+            targets: [ExecutableTargetNamed.animationShowcaseApp]
+        ),
+        .library(
+            name: LibNamed.swiftUIAnimationShowcase,
+            type: .static,
+            targets: [DefaultTargetNamed.swiftUIAnimationShowcase]),
         .library(
             name: LibNamed.kirbyJumping,
+            type: .dynamic,
             targets: [DefaultTargetNamed.kirbyJumping]),
+        
+        .library(
+            name: LibNamed.gameboyTransition,
+            type: .dynamic, //botar o framework guarda chuva como dynamic de novo depois pra ver bug
+            targets: [DefaultTargetNamed.gameboyTransition])
     ],
     targets: [
-        .executableTarget(name: ExecutableTargetNamed.macosDemoApp),
-        .target(name: DefaultTargetNamed.kirbyJumping)
+        .executableTarget(
+            name: ExecutableTargetNamed.animationShowcaseApp,
+            dependencies: [.target(name: DefaultTargetNamed.swiftUIAnimationShowcase)]
+        ),
+        .target(
+            name: DefaultTargetNamed.swiftUIAnimationShowcase,
+            dependencies: [
+                .target(name: DefaultTargetNamed.kirbyJumping),
+                .target(name: DefaultTargetNamed.gameboyTransition)
+            ]
+        ),
+        .target(name: DefaultTargetNamed.kirbyJumping),
+        .target(name: DefaultTargetNamed.gameboyTransition),
     ]
 )
 
@@ -31,7 +56,9 @@ enum Pkg {
     enum Product {
         enum Library {
             enum Named {
-                static let kirbyJumping = "KirbyJumpingAnimation"
+                static let kirbyJumping: String = "KirbyJumpingAnimation"
+                static let gameboyTransition: String = "GameboyTransition"
+                static let swiftUIAnimationShowcase: String = "SwiftUIAnimationShowcase"
             }
         }
     }
@@ -40,14 +67,17 @@ enum Pkg {
         
         enum DefaultType {
             enum Named {
-                static let kirbyJumping = "KirbyJumpingAnimation"
+                static let kirbyJumping: String = "KirbyJumpingAnimation"
+                static let gameboyTransition: String = "GameboyTransition"
+                static let swiftUIAnimationShowcase: String = "SwiftUIAnimationShowcase"
             }
         }
         
         enum Executable {
             
             enum Named {
-                static let macosDemoApp = "SwiftUIAnimationShowcase"
+                static let animationShowcaseApp: String = "AnimationShowcaseApp"
+                
             }
             
         }

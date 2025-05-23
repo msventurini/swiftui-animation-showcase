@@ -6,6 +6,7 @@
 //
 
 import Cocoa
+import SwiftUIAnimationShowcase
 
 let app = NSApplication.shared
 let appDelegate = AppDelegate()

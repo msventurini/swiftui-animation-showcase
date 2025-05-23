@@ -40,7 +40,7 @@ class MainWindow: NSWindow {
             )
         }
         let hostingController = NSHostingController(rootView: Rectangle().overlay(content: {
-            Text("aaa")
+            ContentView()
         }))
         let vc = hostingController
         contentView = vc.view
