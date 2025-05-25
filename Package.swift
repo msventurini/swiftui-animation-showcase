@@ -62,8 +62,15 @@ let package = Package(
                 .target(name: DefaultTargetNamed.animationFoundation)
             ]
         ),
-        .target(name: DefaultTargetNamed.testingPlayground, swiftSettings: [.swiftLanguageMode(.v5)]),
+        
         .target(name: DefaultTargetNamed.animationFoundation, swiftSettings: [.swiftLanguageMode(.v6)]),
+        .target(
+            name: DefaultTargetNamed.testingPlayground,
+            dependencies: [
+                .target(name: DefaultTargetNamed.animationFoundation)
+            ],
+            swiftSettings: [.swiftLanguageMode(.v6)]
+        ),
     ]
 )
 

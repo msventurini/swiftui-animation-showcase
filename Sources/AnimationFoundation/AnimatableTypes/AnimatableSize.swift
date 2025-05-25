@@ -7,7 +7,6 @@
 
 
 import SwiftUI
-import Synchronization
 
 public struct AnimatableSize {
     
