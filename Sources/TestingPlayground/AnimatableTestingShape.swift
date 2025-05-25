@@ -10,30 +10,26 @@ import AnimationFoundation
 
 struct AnimatableTestingShape: Shape, Animatable {
     
-    var position: AnimatablePosition = .zero
-    var size: AnimatableSize = .zero
     
+    var aniRect: AnimatableRect
     
-    var animatableData: AnimatablePair<AnimatablePosition, AnimatableSize> {
+    var animatableData: AnimatableRect {
         get {
-           AnimatablePair(position, size)
+            aniRect
         }
-
         set {
-            position = newValue.first
-            size = newValue.second
+            aniRect = newValue
         }
     }
-    
     
     func path(in rect: CGRect) -> Path {
         var path = Path()
 
-        path.move(to: position.cgPoint)
+        path.move(to: aniRect.position.cgPoint)
         path.addLine(to: CGPoint(x: 0, y: rect.minY))
         path.addLine(to: CGPoint(x: rect.maxX, y: rect.minY))
-        path.addLine(to: CGPoint(x: size.width, y: rect.maxY))
-        path.addLine(to: CGPoint(x: 0, y: size.height))
+        path.addLine(to: CGPoint(x: aniRect.size.width, y: aniRect.size.height))
+        path.addLine(to: CGPoint(x: 0, y: aniRect.size.height))
 
         return path
     }
@@ -46,7 +42,7 @@ struct AnimatableTestingShape: Shape, Animatable {
     
     @Previewable @State var isTapped: Bool = false
     
-    AnimatableTestingShape(position: isTapped ? .init(x: 80, y: 80) : .zero, size: isTapped ? .init(width: 240, height: 300) : .init(width: 100, height: 400))
+    AnimatableTestingShape(aniRect: isTapped ? .init(x: -20, y: 10, width: 200, height: 300) : .init(x: 20, y: -30, width: 150, height: 170))
         .frame(width: 300, height: 300)
         .onTapGesture {
             withAnimation {

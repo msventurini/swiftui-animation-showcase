@@ -5,7 +5,6 @@
 //  Created by Matheus Silveira Venturini on 25/05/25.
 //
 
-
 import SwiftUI
 
 public struct AnimatableSize {
@@ -47,13 +46,6 @@ extension AnimatableSize: Sendable {
 }
 
 extension AnimatableSize: AdditiveArithmetic {
-    public static func - (lhs: AnimatableSize, rhs: AnimatableSize) -> AnimatableSize {
-        let result = AnimatableSize(
-            width: lhs.width - rhs.width,
-            height: lhs.height - rhs.height
-        )
-        return result
-    }
     
     public static func + (lhs: AnimatableSize, rhs: AnimatableSize) -> AnimatableSize {
         let result = AnimatableSize(
@@ -62,6 +54,16 @@ extension AnimatableSize: AdditiveArithmetic {
         )
         return result
     }
+    
+    public static func - (lhs: AnimatableSize, rhs: AnimatableSize) -> AnimatableSize {
+        let result = AnimatableSize(
+            width: lhs.width - rhs.width,
+            height: lhs.height - rhs.height
+        )
+        return result
+    }
+    
+    
     
     private static func += (lhs: inout AnimatableSize, rhs: AnimatableSize) {
         lhs.width += rhs.width
@@ -85,7 +87,7 @@ extension AnimatableSize: VectorArithmetic {
     }
     
     public var magnitudeSquared: Double {
-        return ((self.height * self.height) + (self.width + self.width))
+        return ((self.height * self.height) + (self.width * self.width))
     }
     
     

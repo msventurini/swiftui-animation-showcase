@@ -50,18 +50,20 @@ extension AnimatablePosition: Sendable {
 }
 
 extension AnimatablePosition: AdditiveArithmetic {
-    public static func - (lhs: AnimatablePosition, rhs: AnimatablePosition) -> AnimatablePosition {
-        let result = AnimatablePosition(
-            x: (lhs.x - lhs.x),
-            y: (lhs.y - rhs.y)
-        )
-        return result
-    }
+    
     
     public static func + (lhs: AnimatablePosition, rhs: AnimatablePosition) -> AnimatablePosition {
         let result = AnimatablePosition(
             x: (lhs.x + lhs.x),
             y: (lhs.y + rhs.y)
+        )
+        return result
+    }
+    
+    public static func - (lhs: AnimatablePosition, rhs: AnimatablePosition) -> AnimatablePosition {
+        let result = AnimatablePosition(
+            x: (lhs.x - lhs.x),
+            y: (lhs.y - rhs.y)
         )
         return result
     }
@@ -88,7 +90,7 @@ extension AnimatablePosition: VectorArithmetic {
     }
     
     public var magnitudeSquared: Double {
-        return ((self.y * self.y) + (self.x + self.x))
+        return ((self.y * self.y) + (self.x * self.x))
     }
     
     
