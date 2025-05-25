@@ -12,6 +12,10 @@ public struct AnimatableSize {
     public var width: Double
     public var height: Double
     
+    public var cgSize: CGSize {
+        return CGSize(width: width, height: height)
+    }
+    
     public init(width: Double, height: Double) {
         self.width = width
         self.height = height
