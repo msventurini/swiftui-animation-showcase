@@ -8,7 +8,7 @@
 
 import SwiftUI
 import Observation
-
+import AnimationFoundation
 
 
 public struct BodyColor: Animatable {
@@ -87,7 +87,7 @@ public struct Gameboy  {
     
     let model: GameboyModel
     let screenBezelSize: CGSize
-    let bodySize: CGSize
+    let bodySize: AnimatableSize
     let bodyColor: BodyColor
     let halfSize: CGSize
     let origin: CGPoint
@@ -98,7 +98,7 @@ public struct Gameboy  {
     private init(
         model: GameboyModel,
         screenBezelSize: CGSize,
-        bodySize: CGSize,
+        bodySize: AnimatableSize,
         bodyColor: BodyColor,
         origin: CGPoint
     ) {
@@ -113,7 +113,7 @@ public struct Gameboy  {
     @MainActor public static let dmg: Gameboy = .init(
         model: .gameboyDMG,
         screenBezelSize: CGSize(width: 70, height: 54),
-        bodySize: CGSize(width: 90, height: 148),
+        bodySize: .init(width: 90, height: 148),
         bodyColor: .init(red: 190/255, green: 190/255, blue: 190/255),
         origin: .init(x: 42.5, y: 13.5)
     )//94 92 230
@@ -121,7 +121,7 @@ public struct Gameboy  {
     @MainActor public static let advance: Gameboy = .init(
         model: .gameboyAdvance,
         screenBezelSize: CGSize(width: 70, height: 60),
-        bodySize: CGSize(width: 144, height: 82),
+        bodySize: .init(width: 144, height: 82),
         bodyColor: .init(red: 94/255, green: 92/255, blue: 230/255),
         origin: .init(x: 15.5, y: 46.5)
         

@@ -31,7 +31,17 @@ let package = Package(
         .library(
             name: LibNamed.gameboyTransition,
             type: .dynamic, //botar o framework guarda chuva como dynamic de novo depois pra ver bug
-            targets: [DefaultTargetNamed.gameboyTransition])
+            targets: [DefaultTargetNamed.gameboyTransition]),
+        
+            .library(
+                name: LibNamed.testingPlayground,
+                type: .dynamic, //botar o framework guarda chuva como dynamic de novo depois pra ver bug
+                targets: [DefaultTargetNamed.testingPlayground]),
+        
+            .library(
+                name: LibNamed.animationFoundation,
+                type: .dynamic, //botar o framework guarda chuva como dynamic de novo depois pra ver bug
+                targets: [DefaultTargetNamed.animationFoundation])
     ],
     targets: [
         .executableTarget(
@@ -46,7 +56,14 @@ let package = Package(
             ]
         ),
         .target(name: DefaultTargetNamed.kirbyJumping),
-        .target(name: DefaultTargetNamed.gameboyTransition),
+        .target(
+            name: DefaultTargetNamed.gameboyTransition,
+            dependencies: [
+                .target(name: DefaultTargetNamed.animationFoundation)
+            ]
+        ),
+        .target(name: DefaultTargetNamed.testingPlayground, swiftSettings: [.swiftLanguageMode(.v5)]),
+        .target(name: DefaultTargetNamed.animationFoundation, swiftSettings: [.swiftLanguageMode(.v6)]),
     ]
 )
 
@@ -59,6 +76,8 @@ enum Pkg {
                 static let kirbyJumping: String = "KirbyJumpingAnimation"
                 static let gameboyTransition: String = "GameboyTransition"
                 static let swiftUIAnimationShowcase: String = "SwiftUIAnimationShowcase"
+                static let testingPlayground: String = "TestingPlayground"
+                static let animationFoundation: String = "AnimationFoundation"
             }
         }
     }
@@ -70,6 +89,10 @@ enum Pkg {
                 static let kirbyJumping: String = "KirbyJumpingAnimation"
                 static let gameboyTransition: String = "GameboyTransition"
                 static let swiftUIAnimationShowcase: String = "SwiftUIAnimationShowcase"
+                static let testingPlayground: String = "TestingPlayground"
+                static let animationFoundation: String = "AnimationFoundation"
+
+
             }
         }
         
