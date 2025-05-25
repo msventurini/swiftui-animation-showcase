@@ -23,8 +23,9 @@ public struct Consolebody: View, @preconcurrency Animatable {
     var bodyHeight: CGFloat
     
     var rotationAngle: CGFloat
+    var color: BodyColor
     
-    public init(redComponent: CGFloat, greenComponent: CGFloat, blueComponent: CGFloat, opacityComponent: CGFloat, bodyOriginX: CGFloat, bodyOriginY: CGFloat, bodyWidth: CGFloat, bodyHeight: CGFloat, rotationAngle: CGFloat, console: Gameboy) {
+    public init(redComponent: CGFloat, greenComponent: CGFloat, blueComponent: CGFloat, opacityComponent: CGFloat, bodyOriginX: CGFloat, bodyOriginY: CGFloat, bodyWidth: CGFloat, bodyHeight: CGFloat, rotationAngle: CGFloat, console: Gameboy, color: BodyColor) {
         self.redComponent = redComponent
         self.greenComponent = greenComponent
         self.blueComponent = blueComponent
@@ -35,51 +36,45 @@ public struct Consolebody: View, @preconcurrency Animatable {
         self.bodyHeight = bodyHeight
         self.rotationAngle = rotationAngle
         self.console = console
+        self.color = color
     }
     
-    public var animatableData: AnimatablePair<
-        
-        AnimatablePair<
-            AnimatablePair< //Referente as cores
-                AnimatablePair<CGFloat, CGFloat>,
-                AnimatablePair<CGFloat, CGFloat>
-            >, AnimatablePair< //Referente ao tamanho do corpo
-                AnimatablePair<CGFloat, CGFloat>,
-                AnimatablePair<CGFloat, CGFloat>
-            >
-        >, CGFloat
-        
-
+    public var animatableData:
+    
+    AnimatablePair<
+        AnimatablePair<CGFloat, BodyColor.AnimatableData>
+    , AnimatablePair< //Referente ao tamanho do corpo
+        AnimatablePair<CGFloat, CGFloat>,
+        AnimatablePair<CGFloat, CGFloat>
+    >
+    
     > {
         get {
             AnimatablePair(
                 
+                AnimatablePair(rotationAngle, color.animatableData),
                 AnimatablePair(
-                    AnimatablePair(
-                        AnimatablePair(redComponent,greenComponent),
-                        AnimatablePair(blueComponent, opacityComponent),
-                    ),
-                    AnimatablePair(
-                        AnimatablePair(bodyOriginX, bodyOriginY),
-                        AnimatablePair(bodyWidth, bodyHeight),
-                    )
-                ), rotationAngle   
+                    AnimatablePair(bodyOriginX, bodyOriginY),
+                    AnimatablePair(bodyWidth, bodyHeight),
+                )
             )
+            
         }
         set {
-
-            redComponent = newValue.first.first.first.first
-            greenComponent = newValue.first.first.first.second
-            blueComponent = newValue.first.first.second.first
-            opacityComponent = newValue.first.first.second.second
             
-            bodyOriginX = newValue.first.second.first.first
-            bodyOriginY = newValue.first.second.first.second
-            bodyWidth = newValue.first.second.second.first
-            bodyHeight = newValue.first.second.second.second
             
-            rotationAngle = newValue.second
+            rotationAngle = newValue.first.first
+            color.animatableData = newValue.first.second
             
+            bodyOriginX = newValue.second.first.first
+            bodyOriginY = newValue.second.first.second
+            bodyWidth = newValue.second.second.first
+            bodyHeight = newValue.second.second.second
+            
+            redComponent = color.redComponent
+            greenComponent = color.greenComponent
+            blueComponent = color.blueComponent
+            opacityComponent = color.opacityComponent
         }
     }
     
@@ -115,11 +110,12 @@ public struct Consolebody: View, @preconcurrency Animatable {
             )
             
             context.drawLayer { layerContext in
-
+                
                 let rect = CGRect(
                     origin: CGPoint(x: bodyOriginX, y: bodyOriginY),
                     size: CGSize(width: bodyWidth, height: bodyHeight)
                 )
+                
                 
                 var transform: CGAffineTransform = CGAffineTransformMakeTranslation(midpoint.x, midpoint.y);
                 transform = CGAffineTransformRotate(transform, rotationAngle);
@@ -127,8 +123,9 @@ public struct Consolebody: View, @preconcurrency Animatable {
                 
                 layerContext.transform = transform
                 
+                
                 let path = Rectangle().path(in: rect)
-                layerContext.fill(path, with: .color(red: redComponent, green: greenComponent, blue: blueComponent, opacity: opacityComponent))
+                layerContext.fill(path, with: .color(red: color.redComponent, green: color.greenComponent, blue: color.blueComponent, opacity: color.opacityComponent))
                 
                 
             }
@@ -140,7 +137,7 @@ public struct Consolebody: View, @preconcurrency Animatable {
 
 #Preview {
     GameboyTransitionView()
-        
+    
     
     //    ConsoleBody()
 }

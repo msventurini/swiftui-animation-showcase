@@ -35,7 +35,8 @@ public struct GameboyTransitionView: View {
                         bodyWidth: console.bodySize.width,
                         bodyHeight: console.bodySize.height,
                         rotationAngle: isClicked ? (2 * CGFloat.pi) : 0,
-                        console: console
+                        console: console,
+                        color: console.bodyColor
                     )
 
                     HStack(spacing: isClicked ? 72 : 22) {
@@ -108,4 +109,8 @@ public struct GameboyTransitionView: View {
         
         
     }
+}
+
+#Preview {
+    GameboyTransitionView()
 }
