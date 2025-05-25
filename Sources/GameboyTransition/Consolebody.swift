@@ -8,6 +8,7 @@
 
 import SwiftUI
 import Observation
+import AnimationFoundation
 
 
 public struct Consolebody: View, @preconcurrency Animatable {
@@ -19,21 +20,21 @@ public struct Consolebody: View, @preconcurrency Animatable {
     
     var bodyOriginX: CGFloat
     var bodyOriginY: CGFloat
-    var bodyWidth: CGFloat
-    var bodyHeight: CGFloat
+//    var bodyWidth: CGFloat
+//    var bodyHeight: CGFloat
+    var bodySize: AnimatableSize
     
     var rotationAngle: CGFloat
     var color: BodyColor
     
-    public init(redComponent: CGFloat, greenComponent: CGFloat, blueComponent: CGFloat, opacityComponent: CGFloat, bodyOriginX: CGFloat, bodyOriginY: CGFloat, bodyWidth: CGFloat, bodyHeight: CGFloat, rotationAngle: CGFloat, console: Gameboy, color: BodyColor) {
+    public init(redComponent: CGFloat, greenComponent: CGFloat, blueComponent: CGFloat, opacityComponent: CGFloat, bodyOriginX: CGFloat, bodyOriginY: CGFloat, bodySize: AnimatableSize, rotationAngle: CGFloat, console: Gameboy, color: BodyColor) {
         self.redComponent = redComponent
         self.greenComponent = greenComponent
         self.blueComponent = blueComponent
         self.opacityComponent = opacityComponent
         self.bodyOriginX = bodyOriginX
         self.bodyOriginY = bodyOriginY
-        self.bodyWidth = bodyWidth
-        self.bodyHeight = bodyHeight
+        self.bodySize = bodySize
         self.rotationAngle = rotationAngle
         self.console = console
         self.color = color
@@ -45,7 +46,7 @@ public struct Consolebody: View, @preconcurrency Animatable {
         AnimatablePair<CGFloat, BodyColor.AnimatableData>
     , AnimatablePair< //Referente ao tamanho do corpo
         AnimatablePair<CGFloat, CGFloat>,
-        AnimatablePair<CGFloat, CGFloat>
+        AnimatableSize
     >
     
     > {
@@ -55,7 +56,7 @@ public struct Consolebody: View, @preconcurrency Animatable {
                 AnimatablePair(rotationAngle, color.animatableData),
                 AnimatablePair(
                     AnimatablePair(bodyOriginX, bodyOriginY),
-                    AnimatablePair(bodyWidth, bodyHeight),
+                    bodySize,
                 )
             )
             
@@ -68,8 +69,7 @@ public struct Consolebody: View, @preconcurrency Animatable {
             
             bodyOriginX = newValue.second.first.first
             bodyOriginY = newValue.second.first.second
-            bodyWidth = newValue.second.second.first
-            bodyHeight = newValue.second.second.second
+            bodySize = newValue.second.second
             
             redComponent = color.redComponent
             greenComponent = color.greenComponent
@@ -113,7 +113,7 @@ public struct Consolebody: View, @preconcurrency Animatable {
                 
                 let rect = CGRect(
                     origin: CGPoint(x: bodyOriginX, y: bodyOriginY),
-                    size: CGSize(width: bodyWidth, height: bodyHeight)
+                    size: CGSize(width: bodySize.width, height: bodySize.height)
                 )
                 
                 

@@ -22,7 +22,7 @@ public struct GameboyTransitionView: View {
         VStack {
             
             ZStack {
-//                Text("asasda")
+
                 ZStack {
 
                     Consolebody(
@@ -32,8 +32,7 @@ public struct GameboyTransitionView: View {
                         opacityComponent: console.bodyColor.opacityComponent,
                         bodyOriginX: console.origin.x,
                         bodyOriginY: console.origin.y,
-                        bodyWidth: console.bodySize.width,
-                        bodyHeight: console.bodySize.height,
+                        bodySize: console.bodySize,
                         rotationAngle: isClicked ? (2 * CGFloat.pi) : 0,
                         console: console,
                         color: console.bodyColor
