@@ -26,11 +26,11 @@ public struct GameboyTransitionView: View {
             
             ConsoleScreenPortion(bezelSize: .init(size: console.screenBezelSize), screenSize: .init(size: console.screenSize))
             
+            RightControlsPortion(bodyColor: console.bodyColor, actionButtons: console.actionButtons, aditionalAngle: console.buttonAngle)
+                .drawingGroup()
             
-            LeftControlsPortion(bodyColor: console.bodyColor, actionButtons: console.actionButtons)
             
-            
-            RightControlsPortion(bodyColor: console.bodyColor)
+            LeftControlsPortion(bodyColor: console.bodyColor)
             
         }
         .drawingGroup()
