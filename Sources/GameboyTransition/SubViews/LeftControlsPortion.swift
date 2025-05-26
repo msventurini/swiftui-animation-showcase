@@ -14,12 +14,13 @@ import AnimationFoundation
 
 struct LeftControlsPortion: View {
     var bodyColor: BodyColor
-    var numberOfButtons: Int
+    var actionButtons: [ActionButton]
     
     var body: some View {
         
         RadialLayout {
-            ForEach(0...numberOfButtons, id: \.self) { index in
+            ForEach(actionButtons) { actionButton in
+//            ForEach(0...numberOfButtons, id: \.self) { index in
                 
                 //            ForEach
                 Circle()

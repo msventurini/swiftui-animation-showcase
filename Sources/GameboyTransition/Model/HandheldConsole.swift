@@ -18,7 +18,7 @@ public struct HandheldConsole  {
     let bodySize: AnimatableSize
     let bodyColor: BodyColor
     let halfSize: CGSize
-    let numberOfButtons: Int
+    let actionButtons: [ActionButton]
     
     
     private init(
@@ -27,7 +27,7 @@ public struct HandheldConsole  {
         screenSize: CGSize,
         bodySize: AnimatableSize,
         bodyColor: BodyColor,
-        numberOfButtons: Int
+        actionButtons: [ActionButton]
     ) {
         self.model = model
         self.screenBezelSize = screenBezelSize
@@ -35,7 +35,7 @@ public struct HandheldConsole  {
         self.bodyColor = bodyColor
         self.halfSize = CGSize(width: bodySize.width * 0.5, height: bodySize.height * 0.5)
         self.screenSize = screenSize
-        self.numberOfButtons = numberOfButtons
+        self.actionButtons = actionButtons
     }
     
 //        .frame(width: (isClicked ? 61 : 47), height: (isClicked ? 41 : 43))
@@ -46,7 +46,7 @@ public struct HandheldConsole  {
         model: .gameboyDMG,
         screenBezelSize: CGSize(width: 70, height: 54), screenSize: .init(width: 47, height: 43),
         bodySize: .init(size: .init(width: 90, height: 148)),
-        bodyColor: .init(red: 190/255, green: 190/255, blue: 190/255), numberOfButtons: 2,
+        bodyColor: .init(red: 190/255, green: 190/255, blue: 190/255), actionButtons: [.aButton, .bButton],
         
     )//94 92 230
     
@@ -54,14 +54,14 @@ public struct HandheldConsole  {
         model: .gameboyAdvance,
         screenBezelSize: CGSize(width: 70, height: 60), screenSize: .init(width: 61, height: 41),
         bodySize: .init(size: .init(width: 144, height: 82)),
-        bodyColor: .init(red: 94/255, green: 92/255, blue: 230/255), numberOfButtons: 2,
+        bodyColor: .init(red: 94/255, green: 92/255, blue: 230/255), actionButtons: [.aButton, .bButton],
     )
     
     @MainActor public static let nswitch: HandheldConsole = .init(
-        model: .gameboyAdvance,
+        model: .nintendoSwitch,
         screenBezelSize: CGSize(width: 70, height: 60), screenSize: .init(width: 61, height: 41),
         bodySize: .init(size: .init(width: 144, height: 82)),
-        bodyColor: .init(red: 94/255, green: 92/255, blue: 230/255), numberOfButtons: 4,
+        bodyColor: .init(red: 94/255, green: 92/255, blue: 230/255), actionButtons: [.aButton, .bButton, .xButton, .yButton],
     )
     
     var offSetpadding: Double {
@@ -71,6 +71,8 @@ public struct HandheldConsole  {
             -25
         case .gameboyAdvance:
             1.5
+        default:
+            0.0
         }
         
     }
@@ -83,6 +85,8 @@ public struct HandheldConsole  {
         case .gameboyDMG:
             return HandheldConsole.advance
         case .gameboyAdvance:
+            return HandheldConsole.nswitch
+        case .nintendoSwitch:
             return HandheldConsole.dmg
         }
         
@@ -95,5 +99,6 @@ public struct HandheldConsole  {
     public enum GameboyModel: Sendable {
         case gameboyDMG
         case gameboyAdvance
+        case nintendoSwitch
     }
 }

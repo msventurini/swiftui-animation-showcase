@@ -10,7 +10,7 @@ import SwiftUI
 import Observation
 import AnimationFoundation
 
-enum ActionButton: String, CustomStringConvertible, Identifiable, CaseIterable {
+enum ActionButton: String, CustomStringConvertible, Identifiable, CaseIterable, Hashable, Equatable {
     
     var id: String {
         return self.description

@@ -13,7 +13,7 @@ import AnimationFoundation
 public struct GameboyTransitionView: View {
     
     @State private var isClicked = false
-    @State private var console: HandheldConsole = HandheldConsole.dmg
+    @State private var console: HandheldConsole = HandheldConsole.nswitch
     
     public init() {
         
@@ -27,7 +27,7 @@ public struct GameboyTransitionView: View {
             ConsoleScreenPortion(bezelSize: .init(size: console.screenBezelSize), screenSize: .init(size: console.screenSize))
             
             
-            LeftControlsPortion(bodyColor: console.bodyColor, numberOfButtons: console.numberOfButtons)
+            LeftControlsPortion(bodyColor: console.bodyColor, actionButtons: console.actionButtons)
             
             
             RightControlsPortion(bodyColor: console.bodyColor)
