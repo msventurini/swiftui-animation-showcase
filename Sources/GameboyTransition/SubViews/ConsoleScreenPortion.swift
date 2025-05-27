@@ -32,12 +32,11 @@ struct ConsoleScreenPortion: View {
         
         Rectangle()
             .fill(.black)
-            .frame(width: bezelSize.width, height: bezelSize.height)
-        
+            .padding()
             .overlay {
                 Rectangle()
                     .fill(.green)
-                    .frame(width: screenSize.width, height: screenSize.height)
+//                    .frame(width: screenSize.width, height: screenSize.height)
             }
     }
 }

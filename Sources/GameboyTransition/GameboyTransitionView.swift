@@ -13,7 +13,7 @@ import AnimationFoundation
 public struct GameboyTransitionView: View {
     
     @State private var isClicked = false
-    @State private var console: HandheldConsole = HandheldConsole.nswitch
+    @State private var console: HandheldConsole = HandheldConsole.dmg
     
     public init() {
         
@@ -22,18 +22,29 @@ public struct GameboyTransitionView: View {
     public var body: some View {
         
         
-        VStack {
+        ConsoleLayout(handheldLayout: console.layout) {
             
-            ConsoleScreenPortion(bezelSize: .init(size: console.screenBezelSize), screenSize: .init(size: console.screenSize))
-            
-            RightControlsPortion(bodyColor: console.bodyColor, actionButtons: console.actionButtons, aditionalAngle: console.buttonAngle)
+            ConsoleScreenPortion(bezelSize: console.model.bezel.size, screenSize: console.model.screen.size)
                 .drawingGroup()
+                .containerValue(\.handheldLayout, console.layout)
+                .containerValue(\.consoleComponent, .consoleScreen)
             
+            FrontButtonsView(appearance: console.rightControls, initialAngle: 0)
+                .drawingGroup()
+                .containerValue(\.handheldLayout, console.layout)
+                .containerValue(\.consoleComponent, .actionButtons)
             
-            LeftControlsPortion(bodyColor: console.bodyColor)
+            FrontButtonsView(appearance: console.leftControls, initialAngle: 0)
+
+        
+                .drawingGroup()
+                .containerValue(\.handheldLayout, console.layout)
+                .containerValue(\.consoleComponent, .dPad)
             
         }
         .drawingGroup()
+        .frame(width: console.model.chassisBody.size.width, height: console.model.chassisBody.size.height)
+        .frame(width: 400, height: 400)
         .onTapGesture {
             withAnimation(.bouncy) {
                 isClicked.toggle()
@@ -52,6 +63,15 @@ public struct GameboyTransitionView: View {
 
 
 
+extension ContainerValues {
+    @Entry var handheldLayout: HandheldLayout = .vertical
+}
+
+
+
+extension ContainerValues {
+    @Entry var consoleComponent: ConsoleComponent? = nil
+}
 
 
 
@@ -115,4 +135,24 @@ public struct GameboyTransitionView: View {
 //
 //    }
 //
+//}
+
+//#Preview {
+//    
+//    @Previewable @State var isTapped: Bool = false
+//    
+//    VStack {
+//        RightControlsPortion(bodyColor: .init(red: 0.5, green: 0.1, blue: 0.0), actionButtons: [.aButton, .bButton, .xButton, .yButton], aditionalAngle: isTapped ? .pi : 0, radiusProportion: isTapped ? 1.0 : 0)
+//        
+//        Button {
+//            withAnimation(.smooth) {
+//                isTapped.toggle()
+//            }
+//        } label: {
+//            Text("aaaa")
+//        }
+//            
+//    }
+//    
+//    
 //}

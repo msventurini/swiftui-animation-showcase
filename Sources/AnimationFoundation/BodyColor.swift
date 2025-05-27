@@ -8,7 +8,7 @@
 
 import SwiftUI
 import Observation
-import AnimationFoundation
+
 
 public struct BodyColor: Animatable {
     

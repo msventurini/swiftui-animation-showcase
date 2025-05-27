@@ -12,62 +12,44 @@ import AnimationFoundation
 
 public struct HandheldConsole  {
     
-    let model: GameboyModel
-    let screenBezelSize: CGSize
-    let screenSize: CGSize
-    let bodySize: AnimatableSize
-    let bodyColor: BodyColor
-    let halfSize: CGSize
-    let actionButtons: [ActionButton]
-    let buttonAngle: Double
+    let model: HandheldGameConsole
     
+    let layout: HandheldLayout
+    let leftControls: ControllerConfiguration
+    let rightControls: ControllerConfiguration
     
     private init(
-        model: GameboyModel,
-        screenBezelSize: CGSize,
-        screenSize: CGSize,
-        bodySize: AnimatableSize,
-        bodyColor: BodyColor,
-        actionButtons: [ActionButton],
-        buttonAngle: Double = .zero
+        model: HandheldGameConsole,
+        
+        
+        
+        layout: HandheldLayout,
+        leftControls: ControllerConfiguration,
+        rightControls: ControllerConfiguration
     ) {
         self.model = model
-        self.screenBezelSize = screenBezelSize
-        self.bodySize = bodySize
-        self.bodyColor = bodyColor
-        self.halfSize = CGSize(width: bodySize.width * 0.5, height: bodySize.height * 0.5)
-        self.screenSize = screenSize
-        self.actionButtons = actionButtons
-        self.buttonAngle = buttonAngle
+        
+        
+        
+        
+        self.layout = layout
+        self.leftControls = leftControls
+        self.rightControls = rightControls
     }
-    
-//        .frame(width: (isClicked ? 61 : 47), height: (isClicked ? 41 : 43))
-//        .offset(y: (isClicked ? -2 : -25))
-    
-    
+
     @MainActor public static let dmg: HandheldConsole = .init(
         model: .gameboyDMG,
-        screenBezelSize: CGSize(width: 70, height: 54), screenSize: .init(width: 47, height: 43),
-        bodySize: .init(size: .init(width: 90, height: 148)),
-        bodyColor: .init(red: 190/255, green: 190/255, blue: 190/255), actionButtons: [.aButton, .bButton], buttonAngle: Angle(degrees: 30).radians
-    )//94 92 230
+         layout: .vertical, leftControls: .init(analogStickState: .analogStickDisabled, side: .left, numberOfButtons: 4), rightControls: .init(analogStickState: .analogStickDisabled, side: .right, numberOfButtons: 2))
     
     @MainActor public static let advance: HandheldConsole = .init(
         model: .gameboyAdvance,
-        screenBezelSize: CGSize(width: 70, height: 60), screenSize: .init(width: 61, height: 41),
-        bodySize: .init(size: .init(width: 144, height: 82)),
-        bodyColor: .init(red: 94/255, green: 92/255, blue: 230/255), actionButtons: [.aButton, .bButton, .xButton], buttonAngle: Angle(degrees: 30).radians,
-    )
-    
+        layout: .horizontal, leftControls: .init(analogStickState: .analogStickDisabled, side: .left, numberOfButtons: 4), rightControls: .init(analogStickState: .analogStickDisabled, side: .right, numberOfButtons: 2))
+//
     @MainActor public static let nswitch: HandheldConsole = .init(
         model: .nintendoSwitch,
-        screenBezelSize: CGSize(width: 70, height: 60), screenSize: .init(width: 61, height: 41),
-        bodySize: .init(size: .init(width: 144, height: 82)),
-        bodyColor: .init(red: 94/255, green: 92/255, blue: 230/255), actionButtons: [.aButton, .bButton, .xButton, .yButton],
-    )
+        layout: .horizontal, leftControls: .init(analogStickState: .analogStickEnabled, side: .left, numberOfButtons: 4), rightControls: .init(analogStickState: .analogStickEnabled, side: .right, numberOfButtons: 4))
     
     var offSetpadding: Double {
-        
         switch model {
         case .gameboyDMG:
             -25
@@ -76,9 +58,7 @@ public struct HandheldConsole  {
         default:
             0.0
         }
-        
     }
-    
     
     
     @MainActor public func toggled() -> HandheldConsole {
@@ -93,14 +73,11 @@ public struct HandheldConsole  {
         }
         
     }
-    
-//    public func centerPoint(for size: CGSize) -> CGPoint {
-//        return CGPoint(x: size.width - (self.bodyRect.size.width * 0.5), y: size.height - (self.bodyRect.size.height * 0.5))
-//    }
-    
-    public enum GameboyModel: Sendable {
-        case gameboyDMG
-        case gameboyAdvance
-        case nintendoSwitch
-    }
+
 }
+
+#Preview {
+    GameboyTransitionView()
+}
+
+
