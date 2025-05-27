@@ -1,5 +1,5 @@
 //
-//  Body.swift
+//  Screen.swift
 //  swiftui-animation-showcase
 //
 //  Created by Matheus Silveira Venturini on 26/05/25.
@@ -9,24 +9,26 @@ import SwiftUI
 import Observation
 import AnimationFoundation
 
-struct ChassisBody {
+struct ScreenSection: ComponentStyleData {
+    typealias DataGroupContainer = HandheldGameConsole
+    
     
     public let size: AnimatableSize
     public let color: Color
     
-    init(console: HandheldGameConsole) {
-        size = ChassisBody.size(console: console)
-        color = ChassisBody.color(console: console)
+    init(container: HandheldGameConsole) {
+        size = ScreenSection.size(console: container)
+        color = ScreenSection.color(console: container)
     }
     
     private static func size(console: HandheldGameConsole) -> AnimatableSize {
         switch console {
         case .gameboyDMG:
-            return .init(size: .init(width: 90, height: 148))
+            return .init(width: 47, height: 43)
         case .gameboyAdvance:
-            return .init(size: .init(width: 144, height: 82))
+            return .init(width: 61, height: 41)
         case .nintendoSwitch:
-            return .init(size: .init(width: 144, height: 82))
+            return .init(width: 61, height: 41)
         }
     }
     

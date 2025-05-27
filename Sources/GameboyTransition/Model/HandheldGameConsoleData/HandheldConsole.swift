@@ -14,7 +14,6 @@ public struct HandheldConsole  {
     
     let model: HandheldGameConsole
     
-    let layout: HandheldLayout
     let leftControls: ControllerConfiguration
     let rightControls: ControllerConfiguration
     
@@ -23,7 +22,6 @@ public struct HandheldConsole  {
         
         
         
-        layout: HandheldLayout,
         leftControls: ControllerConfiguration,
         rightControls: ControllerConfiguration
     ) {
@@ -32,22 +30,18 @@ public struct HandheldConsole  {
         
         
         
-        self.layout = layout
         self.leftControls = leftControls
         self.rightControls = rightControls
     }
 
     @MainActor public static let dmg: HandheldConsole = .init(
-        model: .gameboyDMG,
-         layout: .vertical, leftControls: .init(analogStickState: .analogStickDisabled, side: .left, numberOfButtons: 4), rightControls: .init(analogStickState: .analogStickDisabled, side: .right, numberOfButtons: 2))
+        model: .gameboyDMG,leftControls: .init(analogStickState: .analogStickDisabled, side: .left, numberOfButtons: 4), rightControls: .init(analogStickState: .analogStickDisabled, side: .right, numberOfButtons: 2))
     
     @MainActor public static let advance: HandheldConsole = .init(
-        model: .gameboyAdvance,
-        layout: .horizontal, leftControls: .init(analogStickState: .analogStickDisabled, side: .left, numberOfButtons: 4), rightControls: .init(analogStickState: .analogStickDisabled, side: .right, numberOfButtons: 2))
+        model: .gameboyAdvance, leftControls: .init(analogStickState: .analogStickDisabled, side: .left, numberOfButtons: 4), rightControls: .init(analogStickState: .analogStickDisabled, side: .right, numberOfButtons: 2))
 //
     @MainActor public static let nswitch: HandheldConsole = .init(
-        model: .nintendoSwitch,
-        layout: .horizontal, leftControls: .init(analogStickState: .analogStickEnabled, side: .left, numberOfButtons: 4), rightControls: .init(analogStickState: .analogStickEnabled, side: .right, numberOfButtons: 4))
+        model: .nintendoSwitch, leftControls: .init(analogStickState: .analogStickEnabled, side: .left, numberOfButtons: 4), rightControls: .init(analogStickState: .analogStickEnabled, side: .right, numberOfButtons: 4))
     
     var offSetpadding: Double {
         switch model {

@@ -32,15 +32,15 @@ struct ConsoleLayout: Layout, Animatable {
             
             if handheldLayout == .vertical && subview.containerValues.handheldLayout == .vertical {
                 
-                if subview.containerValues.consoleComponent == .consoleScreen {
+                if subview.containerValues.consoleSection == .consoleScreen {
                     size = .init(width: bounds.width, height: bounds.height * 0.5)
                     point = bounds.origin
                     
-                } else if subview.containerValues.consoleComponent == .dPad {
+                } else if subview.containerValues.consoleSection == .controllerLeft {
                     size = .init(width: bounds.width * 0.5, height: bounds.height * 0.5)
                     point = .init(x: bounds.minX, y: bounds.midY)
 
-                } else if subview.containerValues.consoleComponent == .actionButtons {
+                } else if subview.containerValues.consoleSection == .controllerRight {
                     size = .init(width: bounds.width * 0.5, height: bounds.height * 0.5)
                     point = .init(x: bounds.midX, y: bounds.midY)
                     
@@ -49,15 +49,15 @@ struct ConsoleLayout: Layout, Animatable {
             } else if handheldLayout == .horizontal && subview.containerValues.handheldLayout == .horizontal {
                 
                 
-                if subview.containerValues.consoleComponent == .dPad {
+                if subview.containerValues.consoleSection == .controllerLeft {
                     size = .init(width: bounds.width * 0.2, height: bounds.height)
                     point = bounds.origin
 
-                } else if subview.containerValues.consoleComponent == .consoleScreen {
+                } else if subview.containerValues.consoleSection == .consoleScreen {
                     size = .init(width: bounds.width * 0.60, height: bounds.height)
                     point = .init(x: bounds.minX + bounds.width * 0.2, y: bounds.minY)
                     
-                } else if subview.containerValues.consoleComponent == .actionButtons {
+                } else if subview.containerValues.consoleSection == .controllerRight {
                     size = .init(width: bounds.width * 0.20, height: bounds.height)
                     point = .init(x: bounds.minX + bounds.width * 0.8, y: bounds.minY)
                     

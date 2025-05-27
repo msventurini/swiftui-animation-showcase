@@ -22,28 +22,28 @@ public struct GameboyTransitionView: View {
     public var body: some View {
         
         
-        ConsoleLayout(handheldLayout: console.layout) {
+        ConsoleLayout(handheldLayout: console.model.handheldLayout) {
             
             ConsoleScreenPortion(bezelSize: console.model.bezel.size, screenSize: console.model.screen.size)
                 .drawingGroup()
-                .containerValue(\.handheldLayout, console.layout)
-                .containerValue(\.consoleComponent, .consoleScreen)
+                .containerValue(\.handheldLayout, console.model.handheldLayout)
+                .containerValue(\.consoleSection, .consoleScreen)
             
             FrontButtonsView(appearance: console.rightControls, initialAngle: 0)
                 .drawingGroup()
-                .containerValue(\.handheldLayout, console.layout)
-                .containerValue(\.consoleComponent, .actionButtons)
+                .containerValue(\.handheldLayout, console.model.handheldLayout)
+                .containerValue(\.consoleSection, .controllerRight)
             
             FrontButtonsView(appearance: console.leftControls, initialAngle: 0)
 
         
                 .drawingGroup()
-                .containerValue(\.handheldLayout, console.layout)
-                .containerValue(\.consoleComponent, .dPad)
+                .containerValue(\.handheldLayout, console.model.handheldLayout)
+                .containerValue(\.consoleSection, .controllerLeft)
             
         }
         .drawingGroup()
-        .frame(width: console.model.chassisBody.size.width, height: console.model.chassisBody.size.height)
+        .frame(width: console.model.size.width, height: console.model.size.height)
         .frame(width: 400, height: 400)
         .onTapGesture {
             withAnimation(.bouncy) {
@@ -70,7 +70,7 @@ extension ContainerValues {
 
 
 extension ContainerValues {
-    @Entry var consoleComponent: ConsoleComponent? = nil
+    @Entry var consoleSection: ConsoleSection? = nil
 }
 
 
