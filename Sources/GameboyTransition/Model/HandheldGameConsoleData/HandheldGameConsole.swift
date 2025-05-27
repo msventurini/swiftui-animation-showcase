@@ -82,10 +82,10 @@ public enum HandheldGameConsole: String, DataGroupContainer {
             return [.consoleScreen, .controllerLeft, .controllerRight]
         }
     }
-
-    var aspectRatio: CGSize {
-        return CGSize(width: widthRatio, height: heightRatio)
-    }
+    //    height = <user-chosen width> * original height / original width
+    //
+    //    width = <user-chosen height> * original width / original height
+    
     
     var widthRatio: Double {
         
