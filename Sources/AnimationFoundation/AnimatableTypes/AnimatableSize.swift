@@ -31,6 +31,9 @@ public struct AnimatableSize {
         self.height = size.height
     }
     
+    public static let one: AnimatableSize = .init(width: 1, height: 1)
+
+    
 }
 
 extension AnimatableSize: BitwiseCopyable {

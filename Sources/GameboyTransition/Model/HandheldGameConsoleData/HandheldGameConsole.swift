@@ -32,17 +32,17 @@ public enum HandheldGameConsole: String, DataGroupContainer {
     var bezel: Bezel {
         return .init(console: self)
     }
-    
-    var screen: ScreenSection {
-        //        ConsoleSection.consoleScreen.getStyleData(container: <#T##HandheldGameConsole#>)
-        return .init(container: self)
-        //        return styleDataFor(component: .consoleScreen)
-    }
-    
-    var controller: ControllerSection {
-        return .init(container: self)
-    }
-    
+//    
+//    var screen: ScreenSection {
+//        //        ConsoleSection.consoleScreen.getStyleData(container: <#T##HandheldGameConsole#>)
+//        return .init(container: self)
+//        //        return styleDataFor(component: .consoleScreen)
+//    }
+//    
+//    var controller: ControllerSection {
+//        return .init(container: self)
+//    }
+//    
     //USAR ANY VAI SER BUG NO FUTURO, RESOLVER
     //    func styleDataFor(component: ConsoleSection) -> ComponentStyleData {
     func styleDataFor(component: ConsoleSection) -> any ComponentStyleData {

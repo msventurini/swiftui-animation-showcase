@@ -41,6 +41,6 @@ struct ConsoleScreenPortion: View {
     }
 }
 
-#Preview {
-    GameboyTransitionView()
-}
+//#Preview {
+//    GameboyTransitionView()
+//}
