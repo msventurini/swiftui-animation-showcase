@@ -11,20 +11,19 @@ struct SectionsGrid: Layout {
     
     func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
         
-        let containerProposedSize = proposal.replacingUnspecifiedDimensions()
+        return proposal.replacingUnspecifiedDimensions()
         
-        return containerProposedSize
     }
     
     func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
         
-        let size = bounds.size
-
+        let containerSize: CGSize = bounds.size
+        let (slice, remainder) = bounds.divided(atDistance: bounds.height * 0.5, from: .minYEdge)
+        
         for (_, subview) in subviews.enumerated() {
             
-            let point: CGPoint = .init(x: bounds.minX, y: bounds.minY)
-
-            subview.place(at: point, anchor: .zero, proposal: .init(size))
+            subview.place(at: slice.origin, anchor: .zero, proposal: .init(width: slice.width, height: slice.height))
+            
         }
     }
 }
@@ -39,10 +38,16 @@ struct ConsoleView: View {
                     let styleData = section.getStyleData(container: console)
                     
                     Rectangle()
+                        .fill(styleData.color)
                         .containerValue(\.sizeProportion, styleData.sizeProportion)
+                        .containerValue(\.originPosition, styleData.originPosition)
+                        .onAppear {
+                            print(section.id)
+                        }
                 }
             }
             .background(.red)
+            .aspectRatio(90/148, contentMode: .fit)
     }
 }
 

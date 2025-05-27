@@ -32,17 +32,7 @@ public enum HandheldGameConsole: String, DataGroupContainer {
     var bezel: Bezel {
         return .init(console: self)
     }
-//    
-//    var screen: ScreenSection {
-//        //        ConsoleSection.consoleScreen.getStyleData(container: <#T##HandheldGameConsole#>)
-//        return .init(container: self)
-//        //        return styleDataFor(component: .consoleScreen)
-//    }
-//    
-//    var controller: ControllerSection {
-//        return .init(container: self)
-//    }
-//    
+
     //USAR ANY VAI SER BUG NO FUTURO, RESOLVER
     //    func styleDataFor(component: ConsoleSection) -> ComponentStyleData {
     func styleDataFor(component: ConsoleSection) -> any ComponentStyleData {
@@ -82,10 +72,6 @@ public enum HandheldGameConsole: String, DataGroupContainer {
             return [.consoleScreen, .controllerLeft, .controllerRight]
         }
     }
-    //    height = <user-chosen width> * original height / original width
-    //
-    //    width = <user-chosen height> * original width / original height
-    
     
     var widthRatio: Double {
         
@@ -140,8 +126,4 @@ public enum HandheldGameConsole: String, DataGroupContainer {
             return 10
         }
     }
-    
-    //    11x18
-    
-    
 }
