@@ -12,10 +12,10 @@ import AnimationFoundation
 protocol ComponentStyleData {
     associatedtype DataGroupContainer
     var sliceOriginPosition: CGRectEdge { get }
-    var sizeProportion: AnimatableSize { get }
+    var sizeProportion: Double { get }
     var color: Color { get }
     
-    init(sliceOriginPosition: CGRectEdge, sizeProportion: AnimatableSize, color: Color)
+    init(sliceOriginPosition: CGRectEdge, sizeProportion: Double, color: Color)
     
 }
 
@@ -72,7 +72,7 @@ struct GeometryData {
     let console: HandheldConsoleContainer
     let consoleSection: ConsoleSection
     let sliceOriginPosition: CGRectEdge
-    let sizeProportion: AnimatableSize
+    let sizeProportion: Double
     
     init(console: HandheldConsoleContainer, consoleSection: ConsoleSection) {
         self.console = console
@@ -107,23 +107,29 @@ struct GeometryData {
         }
     }
     
-    private static func sizeProportion(console: HandheldConsoleContainer, consoleSection: ConsoleSection) -> AnimatableSize {
+    private static func sizeProportion(console: HandheldConsoleContainer, consoleSection: ConsoleSection) -> Double {
         
         switch (console, consoleSection) {
         case (.gameboyDMG, .consoleScreen):
-            return .init(width: 1.0, height: 0.5)
+            return 0.5
         case (.gameboyDMG, .controllerLeft):
-            return .init(width: 0.5, height: 0.5)
+            return 0.5
         case (.gameboyDMG, .controllerRight):
-            return .init(width: 0.5, height: 0.5)
+            return 0.5
+            
+        case (.gameboyAdvance, .controllerLeft):
+            return 0.3
         case (.gameboyAdvance, .consoleScreen):
-            return .init(width: 0.5, height: 1.0)
-        case (.gameboyAdvance, .controllerLeft), (.gameboyAdvance, .controllerRight):
-            return .init(width: 0.25, height: 1.0)
+            return 0.4
+        case (.gameboyAdvance, .controllerRight):
+            return 0.3
+            
         case (.nintendoSwitch, .consoleScreen):
-            return .init(width: 0.15, height: 0.5)
-        case (.nintendoSwitch, .controllerLeft), (.nintendoSwitch, .controllerRight):
-            return .init(width: 0.7, height: 1.0)
+            return 0.2
+        case (.nintendoSwitch, .controllerLeft):
+            return 0.6
+        case (.nintendoSwitch, .controllerRight):
+            return 0.2
         }
     }
 }
