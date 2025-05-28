@@ -69,6 +69,11 @@ protocol DataGroup:  CaseIterable, Hashable, Sendable, Identifiable, CustomStrin
 
 struct GeometryData {
     
+    enum SliceOrientation {
+        case vertical
+        case horizontal
+    }
+    
     let console: HandheldConsoleContainer
     let consoleSection: ConsoleSection
     let sliceOriginPosition: CGRectEdge
@@ -79,6 +84,16 @@ struct GeometryData {
         self.consoleSection = consoleSection
         self.sliceOriginPosition = GeometryData.sliceOriginPosition(console: console, consoleSection: consoleSection)
         self.sizeProportion = GeometryData.sizeProportion(console: console, consoleSection: consoleSection)
+    }
+    
+    var sliceOrientation: SliceOrientation {
+        switch sliceOriginPosition {
+            
+        case .minXEdge, .maxXEdge:
+            return .vertical
+        case .minYEdge, .maxYEdge:
+            return .horizontal
+        }
     }
     
     private static func sliceOriginPosition(console: HandheldConsoleContainer, consoleSection: ConsoleSection) -> CGRectEdge {

@@ -8,20 +8,10 @@
 import SwiftUI
 import AnimationFoundation
 
-//extension ContainerValues {
-//    @Entry var sizeProportion: AnimatableSize = .one
-//}
-//
-//extension ContainerValues {
-//    @Entry var originPosition: AnimatablePosition = .zero
-//}
-
 extension ContainerValues {
     @Entry var rectSliceStartingPosition: CGRectEdge? = nil
 }
 
 extension ContainerValues {
-    @Entry var rectSliceProportion: Double = .zero
+    @Entry var rectSliceProportion: Double? = nil
 }
-
-//CGRectEdge.minYEdge
