@@ -199,16 +199,16 @@ struct ControllerAditionalData {
     }
     
 }
-
-enum ScreenColorData {
-    static func color(console: HandheldGameConsole) -> Color {
-        switch console {
-        case .gameboyDMG:
-            return .init(red: 190/255, green: 190/255, blue: 190/255)
-        case .gameboyAdvance:
-            return .init(red: 94/255, green: 92/255, blue: 230/255)
-        case .nintendoSwitch:
-            return .init(red: 94/255, green: 92/255, blue: 230/255)
-        }
-    }
-}
+//
+//enum ScreenColorData {
+//    static func color(console: HandheldGameConsole) -> Color {
+//        switch console {
+//        case .gameboyDMG:
+//            return .init(red: 190/255, green: 190/255, blue: 190/255)
+//        case .gameboyAdvance:
+//            return .init(red: 94/255, green: 92/255, blue: 230/255)
+//        case .nintendoSwitch:
+//            return .init(red: 94/255, green: 92/255, blue: 230/255)
+//        }
+//    }
+//}

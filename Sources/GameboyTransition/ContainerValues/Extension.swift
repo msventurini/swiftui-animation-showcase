@@ -8,16 +8,6 @@
 import SwiftUI
 import AnimationFoundation
 
-//extension ContainerValues {
-//    @Entry var handheldLayout: HandheldLayout = .vertical
-//}
-
-//
-//
-//extension ContainerValues {
-//    @Entry var consoleSection: ConsoleSection? = nil
-//}
-
 extension ContainerValues {
     @Entry var sizeProportion: AnimatableSize = .one
 }
