@@ -5,11 +5,9 @@
 //  Created by Matheus Silveira Venturini on 26/05/25.
 //
 
-
 import SwiftUI
 import Observation
 import AnimationFoundation
-
 
 protocol ComponentStyleData {
     associatedtype DataGroupContainer
