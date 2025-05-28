@@ -9,7 +9,7 @@ import SwiftUI
 import Observation
 import AnimationFoundation
 
-public enum HandheldGameConsole: String, DataGroupContainer {
+public enum HandheldConsoleContainer: String, DataGroupContainer {
     public var id: String {
         return self.description
     }

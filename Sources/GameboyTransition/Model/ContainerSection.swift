@@ -11,7 +11,7 @@ import AnimationFoundation
 
 struct ContainerSection: ComponentStyleData {
     
-    typealias DataGroupContainer = HandheldGameConsole
+    typealias DataGroupContainer = HandheldConsoleContainer
     
     public var originPosition: AnimatablePosition
     public let sizeProportion: AnimatableSize

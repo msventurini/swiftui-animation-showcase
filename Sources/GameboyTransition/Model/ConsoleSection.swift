@@ -19,19 +19,17 @@ protocol ComponentStyleData {
     
 }
 
-//
 protocol DataGroupContainer: DataGroup {
     
 }
 
 protocol DataGroupItem: DataGroup {
     associatedtype DataContainer: DataGroupContainer
-    
 }
 
 enum ConsoleSection: DataGroupItem {
     
-    typealias DataContainer = HandheldGameConsole
+    typealias DataContainer = HandheldConsoleContainer
     
     var id: String {
         return self.description
@@ -51,11 +49,8 @@ enum ConsoleSection: DataGroupItem {
             "ControllerLeft"
         }
     }
-    
-    
-    
-    func getStyleData(container: HandheldGameConsole) -> any ComponentStyleData {
         
+    func getStyleData(container: HandheldConsoleContainer) -> any ComponentStyleData {
         
         let geometryData = GeometryData(console: container, consoleSection: self)
         let colorData = ColorData.init(console: container, consoleSection: self)
@@ -65,34 +60,28 @@ enum ConsoleSection: DataGroupItem {
             sizeProportion: geometryData.sizeProportion,
             color: colorData.color
         )
-        
     }
-    
-    
 }
 
 protocol DataGroup:  CaseIterable, Hashable, Sendable, Identifiable, CustomStringConvertible {
-    
     
 }
 
 struct GeometryData {
     
-    let console: HandheldGameConsole
+    let console: HandheldConsoleContainer
     let consoleSection: ConsoleSection
     let originPosition: AnimatablePosition
     let sizeProportion: AnimatableSize
-
     
-    
-    init(console: HandheldGameConsole, consoleSection: ConsoleSection) {
+    init(console: HandheldConsoleContainer, consoleSection: ConsoleSection) {
         self.console = console
         self.consoleSection = consoleSection
         self.originPosition = GeometryData.originPosition(console: console, consoleSection: consoleSection)
         self.sizeProportion = GeometryData.sizeProportion(console: console, consoleSection: consoleSection)
     }
     
-    private static func originPosition(console: HandheldGameConsole, consoleSection: ConsoleSection) -> AnimatablePosition {
+    private static func originPosition(console: HandheldConsoleContainer, consoleSection: ConsoleSection) -> AnimatablePosition {
         
         switch (console, consoleSection) {
         case (.gameboyDMG, .consoleScreen):
@@ -114,10 +103,9 @@ struct GeometryData {
         case (.nintendoSwitch, .controllerRight):
             return .init(x: 0.85, y: 0.0)
         }
-        
     }
     
-    private static func sizeProportion(console: HandheldGameConsole, consoleSection: ConsoleSection) -> AnimatableSize {
+    private static func sizeProportion(console: HandheldConsoleContainer, consoleSection: ConsoleSection) -> AnimatableSize {
         
         switch (console, consoleSection) {
         case (.gameboyDMG, .consoleScreen):
@@ -133,24 +121,22 @@ struct GeometryData {
         case (.nintendoSwitch, .controllerLeft), (.nintendoSwitch, .controllerRight):
             return .init(width: 0.7, height: 1.0)
         }
-        
     }
-
 }
 
 struct ColorData {
     
-    let console: HandheldGameConsole
+    let console: HandheldConsoleContainer
     let consoleSection: ConsoleSection
     let color: Color
     
-    init(console: HandheldGameConsole, consoleSection: ConsoleSection) {
+    init(console: HandheldConsoleContainer, consoleSection: ConsoleSection) {
         self.console = console
         self.consoleSection = consoleSection
         self.color = ColorData.getColor(console: console, consoleSection: consoleSection)
     }
     
-    private static func getColor(console: HandheldGameConsole, consoleSection: ConsoleSection) -> Color {
+    private static func getColor(console: HandheldConsoleContainer, consoleSection: ConsoleSection) -> Color {
         
         switch (console, consoleSection) {
         case (.gameboyDMG, _):
@@ -166,15 +152,13 @@ struct ColorData {
             return .blue
         }
     }
-    
 }
 
 
 
 struct ControllerAditionalData {
     
-    
-    private static func actionButtonAngle(console: HandheldGameConsole) -> Double {
+    private static func actionButtonAngle(console: HandheldConsoleContainer) -> Double {
         switch console {
         case .gameboyDMG:
             Angle(degrees: 60).radians
@@ -185,7 +169,7 @@ struct ControllerAditionalData {
         }
     }
     
-    private static func actionButtonCount(console: HandheldGameConsole) -> Int {
+    private static func actionButtonCount(console: HandheldConsoleContainer) -> Int {
         switch console {
         case .gameboyDMG:
             2
@@ -195,18 +179,4 @@ struct ControllerAditionalData {
             4
         }
     }
-    
 }
-//
-//enum ScreenColorData {
-//    static func color(console: HandheldGameConsole) -> Color {
-//        switch console {
-//        case .gameboyDMG:
-//            return .init(red: 190/255, green: 190/255, blue: 190/255)
-//        case .gameboyAdvance:
-//            return .init(red: 94/255, green: 92/255, blue: 230/255)
-//        case .nintendoSwitch:
-//            return .init(red: 94/255, green: 92/255, blue: 230/255)
-//        }
-//    }
-//}

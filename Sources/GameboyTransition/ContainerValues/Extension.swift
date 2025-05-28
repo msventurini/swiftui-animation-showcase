@@ -16,3 +16,12 @@ extension ContainerValues {
     @Entry var originPosition: AnimatablePosition = .zero
 }
 
+extension ContainerValues {
+    @Entry var rectSliceStartingPosition: CGRectEdge? = nil
+}
+
+extension ContainerValues {
+    @Entry var rectSliceProportion: Double = .zero
+}
+
+//CGRectEdge.minYEdge

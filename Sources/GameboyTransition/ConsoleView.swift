@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ConsoleView: View {
     
-    var console: HandheldGameConsole
+    var console: HandheldConsoleContainer
 
     var body: some View {
             SectionsGrid {
@@ -31,13 +31,13 @@ struct ConsoleView: View {
 }
 
 #Preview {
-    @Previewable @State var console: HandheldGameConsole = .gameboyDMG
+    @Previewable @State var console: HandheldConsoleContainer = .gameboyDMG
     @Previewable @State var widthSize: Double = 100
     
     VStack {
         ConsoleView(console: console)
         HStack {
-            ForEach(HandheldGameConsole.allCases) { innerConsole in
+            ForEach(HandheldConsoleContainer.allCases) { innerConsole in
                 Button {
                     withAnimation {
                         console = innerConsole
