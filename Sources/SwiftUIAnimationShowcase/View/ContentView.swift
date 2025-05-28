@@ -23,7 +23,7 @@ struct ContentView: View {
             }
         } detail: {
 //            Text("Select a color")
-            GameboyTransitionView()
+//            GameboyTransitionView()
         }
 
     }

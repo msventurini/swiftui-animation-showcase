@@ -9,14 +9,15 @@ import SwiftUI
 import Observation
 import AnimationFoundation
 
-public enum HandheldConsoleContainer: String, DataGroupContainer {
-    public var id: String {
-        return self.description
+public enum HandheldConsoleContainer: Int, Hashable, Identifiable, CaseIterable {
+    
+    public var id: Int {
+        return self.rawValue
     }
     
-    case gameboyDMG
-    case gameboyAdvance
-    case nintendoSwitch
+    case gameboyDMG = 0
+    case gameboyAdvance = 1
+    case nintendoSwitch = 2
     
     public var description: String {
         switch self {
@@ -26,14 +27,23 @@ public enum HandheldConsoleContainer: String, DataGroupContainer {
         }
     }
     
-    var sections: [ConsoleSection] {
-        switch self {
-        case .gameboyDMG:
-            return [.consoleScreen, .controllerLeft, .controllerRight]
-        case .gameboyAdvance:
-            return [.consoleScreen, .controllerLeft, .controllerRight]
-        case .nintendoSwitch:
-            return [.consoleScreen, .controllerLeft, .controllerRight]
-        }
+//    var sections: [ConsoleSection] {
+//        switch self {
+//        case .gameboyDMG:
+//            return [.screenSection, .leftControllerSection, .rightControllerSection]
+//        case .gameboyAdvance:
+//            return [.leftControllerSection, .screenSection, .rightControllerSection]
+//        case .nintendoSwitch:
+//            return [.leftControllerSection, .screenSection, .rightControllerSection]
+//        }
+//    }
+    
+    public static func < (lhs: HandheldConsoleContainer, rhs: HandheldConsoleContainer) -> Bool {
+        lhs.rawValue < rhs.rawValue
     }
 }
+
+#Preview {
+    PreviewView()
+}
+

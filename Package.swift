@@ -21,7 +21,7 @@ let package = Package(
         ),
         .library(
             name: LibNamed.swiftUIAnimationShowcase,
-            type: .static,
+            type: .dynamic,
             targets: [DefaultTargetNamed.swiftUIAnimationShowcase]),
         .library(
             name: LibNamed.kirbyJumping,

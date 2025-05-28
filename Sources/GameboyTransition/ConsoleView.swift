@@ -6,37 +6,62 @@
 //
 
 import SwiftUI
+import Foundation
+
 
 struct ConsoleView: View {
     
-    var console: HandheldConsoleContainer
-
+    @Binding var console: HandheldConsoleContainer
+    
+//    let subSections: [ConsoleSection] = HandheldConsoleContainer.gameboyDMG.sections
+    
     var body: some View {
-            SectionsGrid {
-                ForEach(console.sections) { section in
+        SectionsGrid {
+            
+//            ForEach(ConsoleSection.allCases) { section in
+                
+//                let styleData = section.getLayoutContainerData(container: console)
+//                SectionView(section: section)
+                Rectangle()
 
-                    let styleData = section.getStyleData(container: console)
-                    
-                    Rectangle()
-                        .fill(styleData.color)
-                        .containerValue(\.rectSliceStartingPosition, styleData.sliceOriginPosition)
-                        .containerValue(\.rectSliceProportion, styleData.sizeProportion)
-                    
-                }
-            }
-            .background(.red)
-            .aspectRatio(90/148, contentMode: .fit)
+//            }
+        }
     }
 }
 
+struct SectionView: View {
+    
+    @Environment(\.currentContainer) private var currentContainer
+    
+    let section: ConsoleSection
+    
+//    private let styleData: SectionStyleData
+    
+    init(section: ConsoleSection) {
+        self.section = section
+//        self.styleData = section.getViewStyleData(container: <#T##HandheldConsoleContainer#>)
+        
+    }
+    
+    var body: some View {
+        Rectangle()
+//            .fill(styleData.color)
+//            .containerValue(\.rectSliceStartingPosition, styleData.sliceOriginPosition)
+//            .containerValue(\.rectSliceProportion, styleData.sizeProportion)
+//            .containerValue(\.sliceOrientation, ((styleData.sliceOriginPosition == .maxXEdge) || (styleData.sliceOriginPosition == .minXEdge)) ? .horizontal : .vertical )
+//            .containerValue(\.sectionIdentifier, section.description)
+    }
+    
+}
+
+
 struct PreviewView: View {
     
-    @State var console: HandheldConsoleContainer = .gameboyDMG
-    @State var widthSize: Double = 100
+    @State var console: HandheldConsoleContainer = .gameboyAdvance
     
     var body: some View {
         VStack {
-            ConsoleView(console: console)
+            ConsoleView(console: $console)
             HStack {
                 ForEach(HandheldConsoleContainer.allCases) { innerConsole in
                     Button {

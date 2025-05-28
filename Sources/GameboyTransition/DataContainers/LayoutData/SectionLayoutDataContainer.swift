@@ -9,17 +9,15 @@ import SwiftUI
 import Observation
 import AnimationFoundation
 
-struct ContainerSection: ComponentStyleData {
-    
-    typealias DataGroupContainer = HandheldConsoleContainer
-    
+struct SectionLayoutDataContainer: Sendable, Equatable, Hashable {
+        
     public var sliceOriginPosition: CGRectEdge
     public let sizeProportion: Double
-    public let color: Color
 
-    init(sliceOriginPosition: CGRectEdge, sizeProportion: Double, color: Color) {
+    init(sliceOriginPosition: CGRectEdge, sizeProportion: Double) {
         self.sliceOriginPosition = sliceOriginPosition
         self.sizeProportion = sizeProportion
-        self.color = color
     }
 }
+
+
