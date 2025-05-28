@@ -22,7 +22,4 @@ struct ContainerSection: ComponentStyleData {
         self.sizeProportion = sizeProportion
         self.color = color
     }
-    
-    
-
 }
