@@ -13,12 +13,12 @@ struct ContainerSection: ComponentStyleData {
     
     typealias DataGroupContainer = HandheldConsoleContainer
     
-    public var originPosition: AnimatablePosition
+    public var sliceOriginPosition: CGRectEdge
     public let sizeProportion: AnimatableSize
     public let color: Color
 
-    init(originPosition: AnimatablePosition, sizeProportion: AnimatableSize, color: Color) {
-        self.originPosition = originPosition
+    init(sliceOriginPosition: CGRectEdge, sizeProportion: AnimatableSize, color: Color) {
+        self.sliceOriginPosition = sliceOriginPosition
         self.sizeProportion = sizeProportion
         self.color = color
     }

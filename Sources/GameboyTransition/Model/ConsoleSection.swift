@@ -11,11 +11,11 @@ import AnimationFoundation
 
 protocol ComponentStyleData {
     associatedtype DataGroupContainer
+    var sliceOriginPosition: CGRectEdge { get }
     var sizeProportion: AnimatableSize { get }
-    var originPosition: AnimatablePosition { get }
     var color: Color { get }
     
-    init(originPosition: AnimatablePosition, sizeProportion: AnimatableSize, color: Color)
+    init(sliceOriginPosition: CGRectEdge, sizeProportion: AnimatableSize, color: Color)
     
 }
 
@@ -56,7 +56,7 @@ enum ConsoleSection: DataGroupItem {
         let colorData = ColorData.init(console: container, consoleSection: self)
         
         return ContainerSection(
-            originPosition: geometryData.originPosition,
+            sliceOriginPosition: geometryData.sliceOriginPosition,
             sizeProportion: geometryData.sizeProportion,
             color: colorData.color
         )
@@ -71,37 +71,39 @@ struct GeometryData {
     
     let console: HandheldConsoleContainer
     let consoleSection: ConsoleSection
-    let originPosition: AnimatablePosition
+    let sliceOriginPosition: CGRectEdge
     let sizeProportion: AnimatableSize
     
     init(console: HandheldConsoleContainer, consoleSection: ConsoleSection) {
         self.console = console
         self.consoleSection = consoleSection
-        self.originPosition = GeometryData.originPosition(console: console, consoleSection: consoleSection)
+        self.sliceOriginPosition = GeometryData.sliceOriginPosition(console: console, consoleSection: consoleSection)
         self.sizeProportion = GeometryData.sizeProportion(console: console, consoleSection: consoleSection)
     }
     
-    private static func originPosition(console: HandheldConsoleContainer, consoleSection: ConsoleSection) -> AnimatablePosition {
+    private static func sliceOriginPosition(console: HandheldConsoleContainer, consoleSection: ConsoleSection) -> CGRectEdge {
         
         switch (console, consoleSection) {
         case (.gameboyDMG, .consoleScreen):
-            return .zero
+            return .minYEdge
         case (.gameboyDMG, .controllerLeft):
-            return .init(x: 0.0, y: 0.5)
+            return .minXEdge
         case (.gameboyDMG, .controllerRight):
-            return .init(x: 0.5, y: 0.5)
-        case (.gameboyAdvance, .consoleScreen):
-            return .init(x: 0.0, y: 0.0)
+            return .minXEdge
+            
         case (.gameboyAdvance, .controllerLeft):
-            return .init(x: 0.25, y: 0.0)
+            return .minXEdge
+        case (.gameboyAdvance, .consoleScreen):
+            return .minXEdge
         case (.gameboyAdvance, .controllerRight):
-            return .init(x: 0.75, y: 0.0)
+            return .minXEdge
+            
         case (.nintendoSwitch, .consoleScreen):
-            return .init(x: 0.15, y: 0.0)
+            return .minXEdge
         case (.nintendoSwitch, .controllerLeft):
-            return .init(x: 0.0, y: 0.0)
+            return .minXEdge
         case (.nintendoSwitch, .controllerRight):
-            return .init(x: 0.85, y: 0.0)
+            return .minXEdge
         }
     }
     
@@ -110,7 +112,9 @@ struct GeometryData {
         switch (console, consoleSection) {
         case (.gameboyDMG, .consoleScreen):
             return .init(width: 1.0, height: 0.5)
-        case (.gameboyDMG, .controllerLeft), (.gameboyDMG, .controllerRight):
+        case (.gameboyDMG, .controllerLeft):
+            return .init(width: 0.5, height: 0.5)
+        case (.gameboyDMG, .controllerRight):
             return .init(width: 0.5, height: 0.5)
         case (.gameboyAdvance, .consoleScreen):
             return .init(width: 0.5, height: 1.0)

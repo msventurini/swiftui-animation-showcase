@@ -14,15 +14,17 @@ struct ConsoleView: View {
     var body: some View {
             SectionsGrid {
                 ForEach(console.sections) { section in
+                    
+//                    let styleData = section.getStyleData(container: console)
                     let styleData = section.getStyleData(container: console)
                     
                     Rectangle()
                         .fill(styleData.color)
-                        .containerValue(\.sizeProportion, styleData.sizeProportion)
-                        .containerValue(\.originPosition, styleData.originPosition)
-                        .onAppear {
-                            print(section.id)
-                        }
+//                        .containerValue(\.sizeProportion, styleData.sizeProportion)
+//                        .containerValue(\.originPosition, styleData.originPosition)
+//                        .onAppear {
+//                            print(section.id)
+//                        }
                 }
             }
             .background(.red)
