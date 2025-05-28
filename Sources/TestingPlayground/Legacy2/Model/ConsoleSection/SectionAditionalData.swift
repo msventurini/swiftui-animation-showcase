@@ -11,7 +11,7 @@ import AnimationFoundation
 
 struct SectionAditionalData {
     
-    private static func actionButtonAngle(console: HandheldConsoleContainer) -> Double {
+    private static func actionButtonAngle(console: ContainerDataProvider) -> Double {
         switch console {
         case .gameboyDMG:
             Angle(degrees: 60).radians
@@ -22,7 +22,7 @@ struct SectionAditionalData {
         }
     }
     
-    private static func actionButtonCount(console: HandheldConsoleContainer) -> Int {
+    private static func actionButtonCount(console: ContainerDataProvider) -> Int {
         switch console {
         case .gameboyDMG:
             2

@@ -8,5 +8,5 @@
 import SwiftUI
 
 extension EnvironmentValues {
-    @Entry var currentContainer: HandheldConsoleContainer? = nil
+    @Entry var currentContainer: ContainerDataProvider? = nil
 }

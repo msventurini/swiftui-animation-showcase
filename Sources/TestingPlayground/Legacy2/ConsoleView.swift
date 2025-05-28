@@ -11,7 +11,7 @@ import Foundation
 
 struct ConsoleView: View {
     
-    @Binding var console: HandheldConsoleContainer
+    @Binding var console: ContainerDataProvider
     
 //    let subSections: [ConsoleSection] = HandheldConsoleContainer.gameboyDMG.sections
     
@@ -57,13 +57,13 @@ struct SectionView: View {
 
 struct PreviewView: View {
     
-    @State var console: HandheldConsoleContainer = .gameboyAdvance
+    @State var console: ContainerDataProvider = .gameboyAdvance
     
     var body: some View {
         VStack {
             ConsoleView(console: $console)
             HStack {
-                ForEach(HandheldConsoleContainer.allCases) { innerConsole in
+                ForEach(ContainerDataProvider.allCases) { innerConsole in
                     Button {
                         withAnimation {
                             console = innerConsole

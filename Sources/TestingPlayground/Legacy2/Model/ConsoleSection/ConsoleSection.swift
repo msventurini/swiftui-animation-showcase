@@ -48,7 +48,7 @@ struct ConsoleSection: Identifiable {
 //        }
 //    }
     
-    func getViewStyleData(container: HandheldConsoleContainer) -> SectionStyleDataContainer {
+    func getViewStyleData(container: ContainerDataProvider) -> SectionStyleDataContainer {
         
         let colorData = ColorData(console: container, consoleSectionIdentifier: sectionID)
 
@@ -56,7 +56,7 @@ struct ConsoleSection: Identifiable {
         
     }
     
-    func getLayoutContainerData(container: HandheldConsoleContainer) -> SectionLayoutDataContainer {
+    func getLayoutContainerData(container: ContainerDataProvider) -> SectionLayoutDataContainer {
         
         let geometryData = SectionGeometryData(console: container, consoleSection: sectionID)
         
