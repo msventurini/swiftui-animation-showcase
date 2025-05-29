@@ -10,7 +10,7 @@ import SwiftData
 
 struct ContainerView: View {
     
-    let console: ConsoleModel
+    let console: Console
     
     var body: some View {
         

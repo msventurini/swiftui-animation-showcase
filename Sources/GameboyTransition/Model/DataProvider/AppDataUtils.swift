@@ -17,7 +17,7 @@ public struct AppDataUtils {
         
         let modelConfiguration = ModelConfiguration(isStoredInMemoryOnly: true)
         
-        let container = try! ModelContainer(for: ConsoleModel.self, configurations: modelConfiguration)
+        let container = try! ModelContainer(for: Console.self, configurations: modelConfiguration)
 
         insertDefaultDataAt(context: container.mainContext)
         
@@ -30,69 +30,6 @@ public struct AppDataUtils {
             .forEach( { context.insert($0) } )
     }
     
-    public enum ContainerProvider: Int, Hashable, Identifiable, CaseIterable {
-        
-        public var id: Int {
-            return self.rawValue
-        }
-        
-        case gameboyDMG = 0
-        case gameboyAdvance = 1
-        case nintendoSwitch = 2
-        
-        var description: String {
-            switch self {
-            case .gameboyDMG: return "Gameboy"
-            case .gameboyAdvance: return "Gameboy Advance"
-            case .nintendoSwitch: return "Nintendo Switch"
-            }
-        }
-        
-        static var allContainerModels: [ConsoleModel] {
-            return ContainerProvider
-                .allCases
-                .map({ ConsoleModel(
-                    containerName: $0.description,
-                    width: $0.width,
-                    height: $0.height
-                ) })
-        }
-        
-        var releaseOrderNumber: Int {
-            switch self {
-            case .gameboyDMG:
-                0
-            case .gameboyAdvance:
-                1
-            case .nintendoSwitch:
-                2
-            }
-        }
-        
-        var width: Double {
-            switch self {
-            case .gameboyDMG:
-                90
-            case .gameboyAdvance:
-                144
-            case .nintendoSwitch:
-                240
-            }
-        }
-        
-        var height: Double {
-            switch self {
-            case .gameboyDMG:
-                148
-            case .gameboyAdvance:
-                82
-            case .nintendoSwitch:
-                102
-            }
-        }
-        
-        
-    }
     
 }
 

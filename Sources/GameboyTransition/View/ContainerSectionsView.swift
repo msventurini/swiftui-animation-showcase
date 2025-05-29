@@ -10,16 +10,25 @@ import SwiftUI
 import SwiftData
 
 struct ContainerSectionsView: View {
-    let console: ConsoleModel
+    let console: Console
     
     var body: some View {
         
         Rectangle()
             .fill(.secondary)
             .overlay {
-                Text(console.containerName)
+                
+                VStack {
+                    Text(console.chronologicalNumber.description)
+                    Text(console.containerName)
+                }
+                
             }
         
         
     }
+}
+
+#Preview(traits: .modifier(ContainerPreviewModifier())) {
+    ContainerSelectionView()
 }

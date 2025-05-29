@@ -12,28 +12,23 @@ import SwiftUIComponentKit
 
 struct ContainerSelectionView: View {
     @Environment(\.modelContext) var modelContext
-    @Query(sort: \ConsoleModel.containerName)
-    private var consoles: [ConsoleModel]
-    
-    @State private var selectedConsole: ConsoleModel? = nil
-    
-    var body: some View {
+    @Query(sort: \Console.chronologicalNumber, order: .forward)
+    private var consoles: [Console]
         
-        ToolbarPickerNavigationView(collection: consoles, selected: $selectedConsole) { console in
+    var body: some View {
+
+        ToolbarPickerNavigationView(collection: consoles) { console in
             
                 ContainerView(console: console)
             
         } bottomToolbar: { selectedConsole, collection in
             
-            ToolbarInlinePicker(selected: $selectedConsole, collection: consoles) { consoleModel in
+            ToolbarInlinePicker(selected: selectedConsole, collection: consoles) { consoleModel in
                 Text(consoleModel.containerName)
             }
             
         }
-        .task {
-          
-            selectedConsole = consoles.first
-        }
+        
         
     }
 }
