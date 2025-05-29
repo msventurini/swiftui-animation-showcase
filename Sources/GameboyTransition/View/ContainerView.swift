@@ -13,13 +13,11 @@ struct ContainerView: View {
     let console: Console
     
     var body: some View {
-        
         ConsoleFrameLayout {
-            ContainerSectionsView(console: console)
+            ContainerSectionsView(sectionCollection: console.sections)
                 .containerValue(\.frameWidth, console.width)
                 .containerValue(\.frameHeight, console.height)
-        }
-        
+        }        
     }
 }
 

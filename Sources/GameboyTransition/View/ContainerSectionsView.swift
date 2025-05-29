@@ -10,20 +10,26 @@ import SwiftUI
 import SwiftData
 
 struct ContainerSectionsView: View {
-    let console: Console
+    
+    let sectionCollection: [ConsoleSection]
     
     var body: some View {
         
-        Rectangle()
-            .fill(.secondary)
-            .overlay {
-                
-                VStack {
-                    Text(console.chronologicalNumber.description)
-                    Text(console.containerName)
+        ForEach(sectionCollection) { consoleSection in
+            Rectangle()
+                .fill(.secondary)
+                .overlay {
+                    
+                    VStack {
+                        Text(consoleSection.sectionID.name)
+                        Text(consoleSection.sectionID.id.description)
+                    }
+                    
+                    
                 }
-                
-            }
+        }
+        
+        
         
         
     }

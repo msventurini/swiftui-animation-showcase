@@ -18,5 +18,13 @@ public enum SectionIdentifier: Int, Identifiable, Hashable, Codable {
     case consoleScreen = 0
     case controllerRight = 1
     case controllerLeft = 2
+    
+    var name: String {
+        switch self {
+        case .consoleScreen: "Console Screen"
+        case .controllerRight: "Control lerRight"
+        case .controllerLeft: "Control lerLeft"
+        }
+    }
 
 }
