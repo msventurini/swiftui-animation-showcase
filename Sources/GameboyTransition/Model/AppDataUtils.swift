@@ -51,7 +51,11 @@ struct AppDataUtils {
         static var allContainerModels: [ConsoleModel] {
             return ContainerProvider
                 .allCases
-                .map({ ConsoleModel(containerName: $0.description) })
+                .map({ ConsoleModel(
+                    containerName: $0.description,
+                    width: $0.width,
+                    height: $0.height
+                ) })
         }
         
         var releaseOrderNumber: Int {
@@ -65,6 +69,42 @@ struct AppDataUtils {
             }
         }
         
+        var width: Double {
+            switch self {
+            case .gameboyDMG:
+                90
+            case .gameboyAdvance:
+                144
+            case .nintendoSwitch:
+                240
+            }
+        }
+        
+        var height: Double {
+            switch self {
+            case .gameboyDMG:
+                148
+            case .gameboyAdvance:
+                82
+            case .nintendoSwitch:
+                102
+            }
+        }
+        
+        
     }
     
+}
+
+struct ConsoleFrameTesting: View {
+    var body: some View {
+        ForEach(AppDataUtils.ContainerProvider.allCases) { container in
+            Rectangle()
+                .frame(width: container.width, height: container.height)
+        }
+    }
+}
+
+#Preview {
+    ConsoleFrameTesting()
 }

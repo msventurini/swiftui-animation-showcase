@@ -24,3 +24,10 @@ extension ContainerValues {
     @Entry var sectionIdentifier: String = ""
 }
 
+extension ContainerValues {
+    @Entry var frameWidth: Double? = nil
+}
+
+extension ContainerValues {
+    @Entry var frameHeight: Double? = nil
+}

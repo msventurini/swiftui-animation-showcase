@@ -13,6 +13,14 @@ struct ContainerView: View {
     let console: ConsoleModel
     
     var body: some View {
-        Text(console.containerName)
+        
+        Rectangle()
+            .fill(.secondary)
+            .frame(width: console.width, height: console.height)
+            .overlay {
+                Text(console.containerName)
+            }
+        
+        
     }
 }

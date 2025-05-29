@@ -20,9 +20,15 @@ struct ContainerSelectionView: View {
     var body: some View {
         
         ToolbarPickerNavigationView(collection: consoles, selected: $selectedConsole) { console in
-
+            
+            
+            
             ContainerView(console: console)
-
+                .containerValue(\.frameWidth, console.width)
+                .containerValue(\.frameHeight, console.height)
+            
+            
+            
         } bottomToolbar: { selectedConsole, collection in
             
             ToolbarInlinePicker(selected: $selectedConsole, collection: consoles) { consoleModel in
@@ -30,10 +36,15 @@ struct ContainerSelectionView: View {
             }
             
         }
-
+        .task {
+          
+            selectedConsole = consoles.first
+        }
+        
     }
 }
 
 #Preview(traits: .modifier(ContainerPreviewData())) {
     ContainerSelectionView()
 }
+

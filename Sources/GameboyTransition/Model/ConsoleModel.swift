@@ -14,8 +14,13 @@ import SwiftData
     
     var containerName: String
     
-    init(containerName: String) {
+    var width: Double
+    var height: Double
+    
+    init(containerName: String, width: Double, height: Double) {
         self.containerName = containerName
+        self.width = width
+        self.height = height
     }
     
 }
