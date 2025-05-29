@@ -26,11 +26,13 @@ struct ContainerSelectionView: View {
                     ContainerView(console: model)
                 } onEmptySelection: {
                     
-                    
+                    Text("a")
                 }
             }
             .toolbar {
-                ToolbarInlinePicker(selectedItem: $selectedConsole, itemCollection: consoles, showNilAsOption: true)
+                ToolbarInlinePicker(selection: $selectedConsole, collection: consoles, showNilAsOption: true) { consoleModel in
+                    Text(consoleModel.containerName)
+                }
             }
         }
     }
@@ -41,25 +43,7 @@ struct ContainerSelectionView: View {
 }
 
 
-struct ToolbarInlinePicker<ItemType>: ToolbarContent where ItemType: Hashable & Identifiable {
-    
-    @Binding var selectedItem: ItemType?
-    var itemCollection: [ItemType]
-    var showNilAsOption: Bool
-    
-    var body: some ToolbarContent {
-        ToolbarItemGroup(placement: .bottomBar) {
-            Picker("Console Selection", selection: $selectedItem) {
-                Text("none").tag(nil as ConsoleModel?)
-                ForEach(itemCollection) { item in
-                    Text("a")
-                        .tag(item)
-                }
-            }
-            .pickerStyle(.segmented)
-        }
-    }
-}
+
 
 struct ToolbarPickerNavigationView: View {
     var body: some View {
