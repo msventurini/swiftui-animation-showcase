@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SectionsGrid: Layout {
+struct IrregularGrid: Layout {
     
     func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
         
@@ -36,8 +36,4 @@ struct SectionsGrid: Layout {
             
         }
     }
-}
-
-#Preview {
-    PreviewView()
 }

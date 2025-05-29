@@ -12,19 +12,19 @@ import AnimationFoundation
 
 internal struct SectionGeometryData {
     
-    let console: ContainerDataProvider
+    let console: AppDataUtils.ContainerProvider
     let consoleSectionIdentifier: ConsoleSection.SectionID
     let sliceOriginPosition: CGRectEdge
     let sizeProportion: Double
     
-    internal init(console: ContainerDataProvider, consoleSection: ConsoleSection.SectionID) {
+    internal init(console: AppDataUtils.ContainerProvider, consoleSection: ConsoleSection.SectionID) {
         self.console = console
         self.consoleSectionIdentifier = consoleSection
         self.sliceOriginPosition = SectionGeometryData.sliceOriginPosition(console: console, consoleSection: consoleSection)
         self.sizeProportion = SectionGeometryData.sizeProportion(console: console, consoleSection: consoleSection)
     }
     
-    private static func sliceOriginPosition(console: ContainerDataProvider, consoleSection: ConsoleSection.SectionID) -> CGRectEdge {
+    private static func sliceOriginPosition(console: AppDataUtils.ContainerProvider, consoleSection: ConsoleSection.SectionID) -> CGRectEdge {
         
         switch (console, consoleSection) {
         case (.gameboyDMG, .consoleScreen):
@@ -50,7 +50,7 @@ internal struct SectionGeometryData {
         }
     }
     
-    private static func sizeProportion(console: ContainerDataProvider, consoleSection: ConsoleSection.SectionID) -> Double {
+    private static func sizeProportion(console: AppDataUtils.ContainerProvider, consoleSection: ConsoleSection.SectionID) -> Double {
         
         switch (console, consoleSection) {
         case (.gameboyDMG, .consoleScreen):

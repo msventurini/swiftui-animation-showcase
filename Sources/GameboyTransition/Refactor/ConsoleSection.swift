@@ -15,12 +15,8 @@ struct ConsoleSection: Identifiable {
     var id: SectionID {
         return sectionID
     }
-    
-//    static let allCases: [ConsoleSection] = [screenSection, leftControllerSection, rightControllerSection]
-    
-    
-    private let sectionID: SectionID
-    
+
+    private let sectionID: SectionID    
     private let styleData: SectionStyleDataContainer
     private let layoutData: SectionLayoutDataContainer
     
@@ -29,26 +25,8 @@ struct ConsoleSection: Identifiable {
         self.styleData = styleData
         self.layoutData = layoutData
     }
-    
-    
-//    static let screenSection = ConsoleSection(sectionID: .consoleScreen)
-//    static let leftControllerSection = ConsoleSection(sectionID: .controllerLeft)
-//    static let rightControllerSection = ConsoleSection(sectionID: .controllerRight)
-    
-//    var description: String {
-//        switch self {
-//        case .screenSection:
-//            "ConsoleScreen"
-//        case .rightControllerSection:
-//            "ControllerRight"
-//        case .leftControllerSection:
-//            "ControllerLeft"
-//        default:
-//            "none"
-//        }
-//    }
-    
-    func getViewStyleData(container: ContainerDataProvider) -> SectionStyleDataContainer {
+
+    func getViewStyleData(container: AppDataUtils.ContainerProvider) -> SectionStyleDataContainer {
         
         let colorData = ColorData(console: container, consoleSectionIdentifier: sectionID)
 
@@ -56,7 +34,7 @@ struct ConsoleSection: Identifiable {
         
     }
     
-    func getLayoutContainerData(container: ContainerDataProvider) -> SectionLayoutDataContainer {
+    func getLayoutContainerData(container: AppDataUtils.ContainerProvider) -> SectionLayoutDataContainer {
         
         let geometryData = SectionGeometryData(console: container, consoleSection: sectionID)
         
@@ -80,8 +58,4 @@ struct ConsoleSection: Identifiable {
 
     }
     
-}
-
-#Preview {
-    PreviewView()
 }
