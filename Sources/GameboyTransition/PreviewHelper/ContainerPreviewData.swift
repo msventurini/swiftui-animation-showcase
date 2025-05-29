@@ -18,7 +18,6 @@ struct ContainerPreviewData: PreviewModifier {
 
     func body(content: Content, context: ModelContainer) -> some View {
         content
-//            .modelContainer(context.container.self)
             .modelContainer(context)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
     }

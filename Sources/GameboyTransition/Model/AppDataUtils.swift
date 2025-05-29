@@ -11,9 +11,9 @@ import Observation
 import SwiftData
 
 @MainActor
-struct AppDataUtils {
+public struct AppDataUtils {
     
-    static var container: ModelContainer {
+    public static var container: ModelContainer {
         
         let modelConfiguration = ModelConfiguration(isStoredInMemoryOnly: true)
         
@@ -24,13 +24,13 @@ struct AppDataUtils {
         return container
     }
     
-    static func insertDefaultDataAt(context: ModelContext) {
+    public static func insertDefaultDataAt(context: ModelContext) {
         ContainerProvider
             .allContainerModels
             .forEach( { context.insert($0) } )
     }
     
-    enum ContainerProvider: Int, Hashable, Identifiable, CaseIterable {
+    public enum ContainerProvider: Int, Hashable, Identifiable, CaseIterable {
         
         public var id: Int {
             return self.rawValue

@@ -10,9 +10,9 @@ import SwiftUI
 import Observation
 import SwiftData
 
-enum SectionIdentifier: Int, Identifiable, Hashable, Codable {
+public enum SectionIdentifier: Int, Identifiable, Hashable, Codable {
     
-    var id: Int {
+    public var id: Int {
         return rawValue
     }
     

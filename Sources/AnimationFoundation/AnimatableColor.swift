@@ -36,7 +36,7 @@ public struct AnimatableColor: Animatable, Codable {
         }
     
     
-    init(red: CGFloat, green: CGFloat, blue: CGFloat, opacity: CGFloat = 1) {
+    public init(red: CGFloat, green: CGFloat, blue: CGFloat, opacity: CGFloat = 1) {
         self.redComponent = red
         self.greenComponent = green
         self.blueComponent = blue
@@ -44,7 +44,7 @@ public struct AnimatableColor: Animatable, Codable {
         
     }
     
-    func asSwiftUIColor() -> Color {
+    public func asSwiftUIColor() -> Color {
         return Color(red: redComponent, green: greenComponent, blue: blueComponent, opacity: opacityComponent)
     }
 }
