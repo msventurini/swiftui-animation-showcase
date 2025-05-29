@@ -44,7 +44,9 @@ let package = Package(
                 targets: [DefaultTargetNamed.animationFoundation])
     ],
     dependencies: [
-        .package(url: "https://github.com/msventurini/VentUI.git", branch: "main")
+        .package(path: "../VentUI"),
+//        .package(url: "https://github.com/msventurini/VentUI.git", branch: "main")
+//        .package(url: "https://github.com/msventurini/VentUI.git", branch: "main")
     ],
     targets: [
         .executableTarget(
