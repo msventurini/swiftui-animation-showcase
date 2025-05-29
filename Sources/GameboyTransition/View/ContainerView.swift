@@ -23,17 +23,4 @@ struct ContainerView: View {
     }
 }
 
-struct ContainerSectionsView: View {
-    let console: ConsoleModel
-    
-    var body: some View {
-        
-        Rectangle()
-            .fill(.secondary)
-            .overlay {
-                Text(console.containerName)
-            }
-        
-        
-    }
-}
+
