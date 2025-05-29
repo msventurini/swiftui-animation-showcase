@@ -21,13 +21,7 @@ struct ContainerSelectionView: View {
         
         ToolbarPickerNavigationView(collection: consoles, selected: $selectedConsole) { console in
             
-            
-            
-            ContainerView(console: console)
-                .containerValue(\.frameWidth, console.width)
-                .containerValue(\.frameHeight, console.height)
-            
-            
+                ContainerView(console: console)
             
         } bottomToolbar: { selectedConsole, collection in
             

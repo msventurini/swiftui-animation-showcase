@@ -14,9 +14,22 @@ struct ContainerView: View {
     
     var body: some View {
         
+        ConsoleFrameLayout {
+            ContainerSectionsView(console: console)
+                .containerValue(\.frameWidth, console.width)
+                .containerValue(\.frameHeight, console.height)
+        }
+        
+    }
+}
+
+struct ContainerSectionsView: View {
+    let console: ConsoleModel
+    
+    var body: some View {
+        
         Rectangle()
             .fill(.secondary)
-            .frame(width: console.width, height: console.height)
             .overlay {
                 Text(console.containerName)
             }
