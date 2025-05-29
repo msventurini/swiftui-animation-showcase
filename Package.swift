@@ -43,6 +43,9 @@ let package = Package(
                 type: .dynamic, //botar o framework guarda chuva como dynamic de novo depois pra ver bug
                 targets: [DefaultTargetNamed.animationFoundation])
     ],
+    dependencies: [
+        .package(url: "https://github.com/msventurini/VentUI.git", branch: "main")
+    ],
     targets: [
         .executableTarget(
             name: ExecutableTargetNamed.animationShowcaseApp,
@@ -59,6 +62,8 @@ let package = Package(
         .target(
             name: DefaultTargetNamed.gameboyTransition,
             dependencies: [
+                .product(name: "SwiftUIComponentKit", package: "VentUI"),
+//                .target(name: "SwiftUIComponentKit"),
                 .target(name: DefaultTargetNamed.animationFoundation)
             ]
         ),

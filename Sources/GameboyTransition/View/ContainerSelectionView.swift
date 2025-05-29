@@ -8,6 +8,7 @@
 import SwiftUI
 import Observation
 import SwiftData
+import SwiftUIComponentKit
 
 struct ContainerSelectionView: View {
     @Environment(\.modelContext) var modelContext

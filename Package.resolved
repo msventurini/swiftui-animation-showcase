@@ -1,0 +1,15 @@
+{
+  "originHash" : "9487fd3b5d5580066e2de9a2959bd1d3e192e8c7ba28bd0d497623cbe4963871",
+  "pins" : [
+    {
+      "identity" : "ventui",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/msventurini/VentUI.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "3b75d0ba0b74f9f952c399f1bb64c5f5d3bf8bc4"
+      }
+    }
+  ],
+  "version" : 3
+}
