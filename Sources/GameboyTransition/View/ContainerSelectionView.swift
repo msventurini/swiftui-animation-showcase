@@ -38,7 +38,7 @@ struct ContainerSelectionView: View {
     }
 }
 
-#Preview(traits: .modifier(ContainerPreviewData())) {
+#Preview(traits: .modifier(ContainerPreviewModifier())) {
     ContainerSelectionView()
 }
 

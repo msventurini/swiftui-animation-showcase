@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftData
 
-struct ContainerPreviewData: PreviewModifier {
+struct ContainerPreviewModifier: PreviewModifier {
 
     static func makeSharedContext() async throws -> ModelContainer {
         let modelContainer = AppDataUtils.container
