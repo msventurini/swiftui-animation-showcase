@@ -9,25 +9,50 @@ import SwiftUI
 import Observation
 import SwiftData
 
-struct EmptySelectionView: View {
+//struct TestView<Content>: View where Content: View {
+//    
+//    @ViewBuilder let content: () -> Content
+//    
+//    var body: some View {
+//        content("Some text")
+//    }
+//}
+
+struct EmptySelectionView<Content>: View where Content: View {
+    
+    @Environment(\.emptySelectionContents) private var emptySelectionContents
+        
+    @ViewBuilder let content: Content?
+    
     var body: some View {
         ContentUnavailableView {
-            Label("Select Anything", systemImage: "gamecontroller.circle")
+            Label(
+                emptySelectionContents.labelText,
+                systemImage: emptySelectionContents.systemImage
+            )
         } description: {
-            Text("You'll be amazed by the animations!")
+            Text(emptySelectionContents.description)
         } actions: {
-            Text("a")
+                content
+
+
         }
     }
 }
 
 
 #Preview {
-    EmptySelectionView()
+    EmptySelectionView {
+        Text("a")
+    }
 }
 
-extension FocusedValues {
-    @Entry var emptySelectionContents: EmptySelectionContents? = nil
+extension EnvironmentValues {
+    @Entry var emptySelectionContents: EmptySelectionContents = .init(
+        labelText: "Nothing Here",
+        systemImage: "exclamationmark.square",
+        description: "Select some option."
+    )
 }
 
 

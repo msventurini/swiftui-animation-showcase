@@ -11,7 +11,6 @@ import SwiftData
 
 struct ContainerSelectionView: View {
     @Environment(\.modelContext) var modelContext
-
     @Query(sort: \ConsoleModel.containerName)
     private var consoles: [ConsoleModel]
     
@@ -24,16 +23,11 @@ struct ContainerSelectionView: View {
             VStack {
                 
                 OptionalConsoleSelection(selectedConsole) { model in
-                    
                     ContainerView(console: model)
-                    
                 } onEmptySelection: {
                     
-                    EmptySelectionView()
                     
                 }
-                
-                
             }
             .toolbar {
                 ToolbarInlinePicker(selectedConsole: $selectedConsole, consoles: consoles, showNilAsOption: true)
@@ -62,12 +56,9 @@ struct ToolbarInlinePicker: ToolbarContent {
                         .tag(console)
                 }
             }
-            
             .pickerStyle(.segmented)
         }
     }
-    
-    
 }
 
 struct ToolbarPickerNavigationView: View {
