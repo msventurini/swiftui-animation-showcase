@@ -20,5 +20,6 @@ struct ContainerPreviewData: PreviewModifier {
         content
 //            .modelContainer(context.container.self)
             .modelContainer(context)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }

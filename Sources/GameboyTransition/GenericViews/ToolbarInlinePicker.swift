@@ -15,7 +15,7 @@ struct ToolbarInlinePicker<ItemType, Content>: ToolbarContent where ItemType: Ha
     @Binding var selected: ItemType?
     var collection: [ItemType]
     @ViewBuilder let content: (ItemType) -> Content
-
+    
     private var showNilAsOption: Bool = true
     
     init(selected: Binding<ItemType?>, collection: [ItemType], content: @escaping (ItemType) -> Content) {
@@ -23,17 +23,24 @@ struct ToolbarInlinePicker<ItemType, Content>: ToolbarContent where ItemType: Ha
         self.collection = collection
         self.content = content
     }
-    
+
+#if os(macOS)
+    let barPlacement: ToolbarItemPlacement = .navigation
+#else
+    let barPlacement: ToolbarItemPlacement = .bottomBar
+
+#endif
     var body: some ToolbarContent {
-        ToolbarItemGroup(placement: .bottomBar) {
-            Picker("", selection: $selected) {
-                Text("none").tag(nil as ConsoleModel?)
-                ForEach(collection) { item in
-                    content(item)
-                        .tag(item)
+        ToolbarItemGroup(placement: barPlacement) {
+            
+                Picker("", selection: $selected) {
+                    Text("none").tag(nil as ConsoleModel?)
+                    ForEach(collection) { item in
+                        content(item)
+                            .tag(item)
+                    }
                 }
+                .pickerStyle(.segmented)
             }
-            .pickerStyle(.segmented)
         }
     }
-}
