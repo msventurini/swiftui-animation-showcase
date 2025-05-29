@@ -12,14 +12,21 @@ import SwiftData
 
 struct ToolbarInlinePicker<ItemType, Content>: ToolbarContent where ItemType: Hashable & Identifiable, Content: View {
     
-    @Binding var selection: ItemType?
+    @Binding var selected: ItemType?
     var collection: [ItemType]
-    var showNilAsOption: Bool
     @ViewBuilder let content: (ItemType) -> Content
 
+    private var showNilAsOption: Bool = true
+    
+    init(selected: Binding<ItemType?>, collection: [ItemType], content: @escaping (ItemType) -> Content) {
+        self._selected = selected
+        self.collection = collection
+        self.content = content
+    }
+    
     var body: some ToolbarContent {
         ToolbarItemGroup(placement: .bottomBar) {
-            Picker("", selection: $selection) {
+            Picker("", selection: $selected) {
                 Text("none").tag(nil as ConsoleModel?)
                 ForEach(collection) { item in
                     content(item)

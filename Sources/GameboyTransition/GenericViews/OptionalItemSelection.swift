@@ -10,23 +10,24 @@ import SwiftUI
 import Observation
 import SwiftData
 
-struct OptionalConsoleSelection<Content: View, EmptyContent: View>: View {
 
-    var selectedConsole: ConsoleModel?
-    var content: (ConsoleModel) -> Content?
+struct OptionalItemSelection<Content, EmptyContent, ItemType>: View where Content: View, EmptyContent: View, ItemType: Hashable & Identifiable {
+
+    var selected: ItemType?
+    var content: (ItemType) -> Content?
     var emptySelectionContent: EmptyContent
     
     
     @ViewBuilder var conditionalContent: some View {
-        if let selectedConsole {
-            content(selectedConsole)
+        if let selected {
+            content(selected)
         } else {
             emptySelectionContent
         }
     }
     
-    init(_ selectedConsole: ConsoleModel?, @ViewBuilder content: @escaping (ConsoleModel) -> Content, @ViewBuilder onEmptySelection emptySelectionContent: () -> EmptyContent) {
-        self.selectedConsole = selectedConsole
+    init(_ selected: ItemType?, @ViewBuilder content: @escaping (ItemType) -> Content, @ViewBuilder onEmptySelection emptySelectionContent: () -> EmptyContent = { EmptySelectionView() }) {
+        self.selected = selected
         self.content = content
         self.emptySelectionContent = emptySelectionContent()
     }

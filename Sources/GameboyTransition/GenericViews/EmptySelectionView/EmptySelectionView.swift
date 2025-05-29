@@ -37,9 +37,7 @@ struct EmptySelectionView<Content>: View where Content: View {
 
 
 #Preview {
-    EmptySelectionView {
-        Text("a")
-    }
+    EmptySelectionView()
 }
 
 
