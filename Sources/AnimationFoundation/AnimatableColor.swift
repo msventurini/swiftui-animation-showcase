@@ -10,7 +10,7 @@ import SwiftUI
 import Observation
 
 
-public struct BodyColor: Animatable {
+public struct AnimatableColor: Animatable, Codable {
     
     var redComponent: CGFloat
     var greenComponent: CGFloat
@@ -49,33 +49,33 @@ public struct BodyColor: Animatable {
     }
 }
 
-extension BodyColor: BitwiseCopyable {
+extension AnimatableColor: BitwiseCopyable {
     
 }
 
-extension BodyColor: Copyable {
+extension AnimatableColor: Copyable {
     
 }
 
-extension BodyColor: Equatable {
+extension AnimatableColor: Equatable {
     
 }
 
-extension BodyColor: Sendable {
+extension AnimatableColor: Sendable {
     
 }
 
-extension BodyColor : AdditiveArithmetic {
-    public static func - (lhs: BodyColor, rhs: BodyColor) -> BodyColor {
+extension AnimatableColor : AdditiveArithmetic {
+    public static func - (lhs: AnimatableColor, rhs: AnimatableColor) -> AnimatableColor {
         let result = lhs.animatableData - rhs.animatableData
         return .init(red: result.first.first, green: result.first.second, blue: result.second.first, opacity: result.second.second)
     }
     
-    public static func + (lhs: BodyColor, rhs: BodyColor) -> BodyColor {
+    public static func + (lhs: AnimatableColor, rhs: AnimatableColor) -> AnimatableColor {
         let result = lhs.animatableData + rhs.animatableData
         return .init(red: result.first.first, green: result.first.second, blue: result.second.first, opacity: result.second.second)
     }
     
-    public static let zero: BodyColor = .init(red: 0, green: 0, blue: 0, opacity: 0)
+    public static let zero: AnimatableColor = .init(red: 0, green: 0, blue: 0, opacity: 0)
     
 }

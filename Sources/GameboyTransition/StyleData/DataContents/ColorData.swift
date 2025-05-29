@@ -12,16 +12,16 @@ import AnimationFoundation
 internal struct ColorData {
     
     let console: AppDataUtils.ContainerProvider
-    let consoleSectionIdentifier: ConsoleSection.SectionID
+    let consoleSectionIdentifier: SectionIdentifier
     let color: Color
     
-    init(console: AppDataUtils.ContainerProvider, consoleSectionIdentifier: ConsoleSection.SectionID) {
+    init(console: AppDataUtils.ContainerProvider, consoleSectionIdentifier: SectionIdentifier) {
         self.console = console
         self.consoleSectionIdentifier = consoleSectionIdentifier
         self.color = ColorData.getColor(console: console, consoleSection: consoleSectionIdentifier)
     }
     
-    private static func getColor(console: AppDataUtils.ContainerProvider, consoleSection: ConsoleSection.SectionID) -> Color {
+    private static func getColor(console: AppDataUtils.ContainerProvider, consoleSection: SectionIdentifier) -> Color {
         
         switch (console, consoleSection) {
         case (.gameboyDMG, _):

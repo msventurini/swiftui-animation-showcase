@@ -10,7 +10,7 @@ import SwiftUI
 import Observation
 import AnimationFoundation
 
-struct SectionStyleDataContainer: Sendable, Equatable {
+struct SectionStyleDataContainer: Sendable, Equatable, Codable {
     
     let color: Color
     
