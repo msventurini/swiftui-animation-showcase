@@ -10,37 +10,27 @@ import Observation
 import SwiftData
 import AnimationFoundation
 
-@Model class ConsoleSection {
+@Model public class ConsoleSection {
 
-    var drawingOrderNumber: Int
-
-    var sectionID: SectionIdentifier
-
+    public var drawingOrderNumber: Int
+//    public var sectionID: SectionIdentifier
+    public var sizeProportion: Double
+    public var console: Console?
+    public var sliceOriginPosition: CGRectEdge { return codableSliceOriginPosition.asCGRectEdge }
+    public var color: Color { return animatableColor.asSwiftUIColor() }
+    
     private var animatableColor: AnimatableColor
-
-    var sizeProportion: Double
-    
     private var codableSliceOriginPosition: CodableRectEdge
-    
-    var console: Console?
-    
-    var sliceOriginPosition: CGRectEdge {
-        return codableSliceOriginPosition.asCGRectEdge
-    }
-    
-    var color: Color {
-        return animatableColor.asSwiftUIColor()
-    }
     
     init(
         orderNumber drawingOrderNumber: Int,
-        section sectionID: SectionIdentifier,
+//        section sectionID: SectionIdentifier,
         color animatableColor: AnimatableColor,
         originPosition: CodableRectEdge,
         sizeProportion: Double
     ) {
         self.drawingOrderNumber = drawingOrderNumber
-        self.sectionID = sectionID
+//        self.sectionID = sectionID
         self.animatableColor = animatableColor
         self.codableSliceOriginPosition = originPosition
         self.sizeProportion = sizeProportion

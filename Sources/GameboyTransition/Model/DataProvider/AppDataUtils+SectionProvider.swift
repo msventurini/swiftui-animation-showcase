@@ -6,26 +6,55 @@
 //
 
 import SwiftUI
+import SwiftData
 import AnimationFoundation
+
 
 extension AppDataUtils {
     
-    private static func sliceOriginPosition(console: AppDataUtils.ContainerProvider, consoleSection: SectionIdentifier) -> CodableRectEdge {
+    enum SectionProvider: Int, Identifiable, Hashable, Codable {
         
-        switch (console, consoleSection) {
-        case (.gameboyDMG, .consoleScreen): .minY
-        case (.gameboyDMG, .controllerLeft): .minX
-        case (.gameboyDMG, .controllerRight): .minX
+        public var id: Int {
+            return rawValue
+        }
+        
+        case consoleScreen = 0
+        case controllerRight = 1
+        case controllerLeft = 2
+        
+        var name: String {
+            switch self {
+            case .consoleScreen: "Console Screen"
+            case .controllerRight: "Control lerRight"
+            case .controllerLeft: "Control lerLeft"
+            }
+        }
+        
+        private static func sliceOriginPosition(console: AppDataUtils.ContainerProvider, consoleSection: SectionProvider) -> CodableRectEdge {
             
-        case (.gameboyAdvance, .controllerLeft): .minX
-        case (.gameboyAdvance, .consoleScreen): .minX
-        case (.gameboyAdvance, .controllerRight): .minX
+            switch (console, consoleSection) {
+            case (.gameboyDMG, .consoleScreen): .minY
+            case (.gameboyDMG, .controllerLeft): .minX
+            case (.gameboyDMG, .controllerRight): .minX
+                
+            case (.gameboyAdvance, .controllerLeft): .minX
+            case (.gameboyAdvance, .consoleScreen): .minX
+            case (.gameboyAdvance, .controllerRight): .minX
 
-        case (.nintendoSwitch, .consoleScreen): .minX
-        case (.nintendoSwitch, .controllerLeft):  .minX
-        case (.nintendoSwitch, .controllerRight): .minX
+            case (.nintendoSwitch, .consoleScreen): .minX
+            case (.nintendoSwitch, .controllerLeft):  .minX
+            case (.nintendoSwitch, .controllerRight): .minX
+            }
+        }
+        
+        public static func insertContainerDefaultData(console: Console, context: ModelContext) {
+            
+            
         }
     }
+    
+    
+
     
 }
 
@@ -82,6 +111,7 @@ extension AppDataUtils {
 //        }
 //    }
 //}
+
 
 
 //

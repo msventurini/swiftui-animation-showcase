@@ -27,14 +27,15 @@ public struct AppDataUtils {
     public static func insertDefaultDataAt(context: ModelContext) {
         ContainerProvider
             .allContainerModels
-//            .forEach( { context.insert($0) } )
+
             .forEach { console in
                 context.insert(console)
+                
+                
             }
         
         try? context.save()
     }
-    
     
 }
 

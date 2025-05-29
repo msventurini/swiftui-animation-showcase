@@ -21,8 +21,9 @@ struct ContainerSectionsView: View {
                 .overlay {
                     
                     VStack {
-                        Text(consoleSection.sectionID.name)
-                        Text(consoleSection.sectionID.id.description)
+                        Text("a")
+//                        Text(consoleSection.sectionID.name)
+//                        Text(consoleSection.sectionID.id.description)
                     }
                     
                     
