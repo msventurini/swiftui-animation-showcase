@@ -12,46 +12,30 @@ import SwiftData
 import SwiftUIComponentKit
 
 struct ConsoleFrameLayout: Layout {
-    
-    
-    
-    var animatableData: AnimatablePair<Double, Double> {
-        get {
-            AnimatablePair(frameWidth, frameHeight)
-        }
-        
-        set {
-            frameWidth = newValue.first
-            frameHeight = newValue.second
-            
-        }
-    }
-    
-    var frameWidth: Double
-    var frameHeight: Double
+
     
     func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
         
-        let width = frameWidth
-        let height = frameHeight
-        
-        return .init(width: width, height: height)
+//        let width = frameWidth
+//        let height = frameHeight
+//        
+//        return .init(width: width, height: height)
+        return proposal.replacingUnspecifiedDimensions()
     }
     
     func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
-        var currentRect = CGRect(x: bounds.midX - (frameWidth * 0.5), y: bounds.midY - (frameHeight * 0.5), width: frameWidth, height: frameHeight)
         
-        var currentSlice = currentRect
+        var currentSlice = bounds
         
         for (index, subview) in subviews.enumerated() {
             
             let horizontalSliceProportion = subview.containerValues.horizontalSliceProportion
             let horizontalSliceOrigin: CGRectEdge = .minXEdge
-            let horizontalSliceSize = horizontalSliceProportion * frameWidth
+            let horizontalSliceSize = horizontalSliceProportion * bounds.width
             
             let verticalOrigin: CGRectEdge = .minYEdge
             let verticalSliceProportion = subview.containerValues.verticalSliceProportion
-            let verticalSliceSize = verticalSliceProportion * frameHeight
+            let verticalSliceSize = verticalSliceProportion * bounds.height
             
             if horizontalSliceProportion > 0 {
                 let (slice, remainder) = currentSlice.divided(atDistance: horizontalSliceSize, from: horizontalSliceOrigin)

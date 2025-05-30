@@ -30,6 +30,10 @@ extension AppDataUtils {
             }
         }
         
+        func swiftDataModelFor(container: Container) -> ConsoleSection {
+            return .init(id: self.id, drawingOrderNumber: self.getDrawOrderNumber(at: container), sectionName: self.name)
+        }
+        
         func observableModelFor(container: Container) -> ConsoleSection {
 //            return .init(
 //                drawingOrderNumber: self.getDrawOrderNumber(at: container),
@@ -39,15 +43,15 @@ extension AppDataUtils {
             return .init(
                 id: self.id,
                 drawingOrderNumber: self.getDrawOrderNumber(at: container),
-                sectionName: self.name,
-                originX: self.originX(container: container),
-                originY: self.originY(container: container),
-                widthProportion: self.widthProportion(container: container),
-                heightProportion: self.heightProportion(container: container),
-                width: self.width(container: container),
-                heigh: self.height(container: container),
-                horizontalSliceProportion: self.horizontalSliceProportion(console: container),
-                verticalSliceProportion: self.verticalSliceProportion(console: container)
+                sectionName: self.name
+//                originX: self.originX(container: container),
+//                originY: self.originY(container: container),
+//                widthProportion: self.widthProportion(container: container),
+//                heightProportion: self.heightProportion(container: container),
+//                width: self.width(container: container),
+//                heigh: self.height(container: container),
+//                horizontalSliceProportion: self.horizontalSliceProportion(console: container),
+//                verticalSliceProportion: self.verticalSliceProportion(console: container)
             )
             
         }

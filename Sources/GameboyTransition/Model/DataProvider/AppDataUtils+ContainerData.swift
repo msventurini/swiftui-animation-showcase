@@ -43,15 +43,15 @@ extension AppDataUtils {
             )
         }
         
-//        var swiftDataModel: Container {
-//            return Container(
-//                containerID: self.containerID,
-//                chronologicalNumber: self.chronologicalNumber,
-//                containerName: self.name,
-//                width: self.width,
-//                height: self.height
-//            )
-//        }
+        var swiftDataModel: Container {
+            return Container(
+                containerID: self.containerID,
+                chronologicalNumber: self.chronologicalNumber,
+                containerName: self.name,
+                width: self.width,
+                height: self.height
+            )
+        }
         
         var containerID: ContainerID {
             switch self {

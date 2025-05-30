@@ -16,35 +16,26 @@ import SwiftData
     
     public var drawingOrderNumber: Int
     public var sectionName: String
-    
-    public var originX: Double
-    public var originY: Double
-    public var widthProportion: Double
-    public var heightProportion: Double
-    
-    public var console: Console?
-    
-    public var width: Double
-    public var heigh: Double
-    
-    public var horizontalSliceProportion: Double
-    public var verticalSliceProportion: Double
-    
-    
-    init(id: Int, drawingOrderNumber: Int, sectionName: String, originX: Double, originY: Double, widthProportion: Double, heightProportion: Double, width: Double, heigh: Double, horizontalSliceProportion: Double, verticalSliceProportion: Double) {
+
+    public var console: Container?
+
+    init(id: Int, drawingOrderNumber: Int, sectionName: String) {
         self.id = id
         self.drawingOrderNumber = drawingOrderNumber
         self.sectionName = sectionName
-        self.originX = originX
-        self.originY = originY
-        self.widthProportion = widthProportion
-        self.heightProportion = heightProportion
-        self.width = width
-        self.heigh = heigh
-        self.horizontalSliceProportion = horizontalSliceProportion
-        self.verticalSliceProportion = verticalSliceProportion
-        
     }
+    
+//    init(id: Int, drawingOrderNumber: Int, sectionName: String, originX: Double, originY: Double, widthProportion: Double, heightProportion: Double, width: Double, heigh: Double, horizontalSliceProportion: Double, verticalSliceProportion: Double) {
+//        self.id = id
+//        self.drawingOrderNumber = drawingOrderNumber
+//        self.sectionName = sectionName
+//        self.widthProportion = widthProportion
+//        self.heightProportion = heightProportion
+//        self.width = width
+//        self.heigh = heigh
+//        
+//        
+//    }
 
     public static func == (lhs: ConsoleSection, rhs: ConsoleSection) -> Bool {
         lhs.id == rhs.id
