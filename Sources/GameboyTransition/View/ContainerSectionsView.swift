@@ -15,12 +15,17 @@ struct ContainerSectionsView: View {
     
     var body: some View {
         
+        IrregularGrid {
             ForEach(sectionCollection) { consoleSection in
                 Rectangle()
                     .fill(consoleSection.color)
+                    .containerValue(\.rectSliceProportion, consoleSection.sizeProportion)
+                    .containerValue(\.rectSliceStartingPosition, consoleSection.sliceOriginPosition)
+                
             }
+        }
+                
         
-
     }
 }
 
