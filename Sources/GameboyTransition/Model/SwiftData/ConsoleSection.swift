@@ -24,7 +24,7 @@ import AnimationFoundation
     
     init(
         orderNumber drawingOrderNumber: Int,
-        sectionName sectionName: String,
+        sectionName: String,
         color animatableColor: AnimatableColor,
         originPosition: CodableRectEdge,
         sizeProportion: Double
