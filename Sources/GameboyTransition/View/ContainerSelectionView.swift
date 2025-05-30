@@ -18,11 +18,31 @@ struct ContainerSelectionView: View {
         @Bindable var containerCollection = self.containerCollection
         VStack {
             
-            ConsoleSectionsViewer { section in
-                ContainerSectionView(consoleSection: section)
-
-            }
-
+            Rectangle()
+                .fill(.pink)
+                .overlay {
+                    ConsoleFrameLayout2(frameWidth: containerCollection.selected.width, frameHeight: containerCollection.selected.height) {
+                        ForEach(containerCollection.selected.sections.sorted(by: { $0.drawingOrderNumber < $1.drawingOrderNumber })) { section in
+                            
+                            Rectangle()
+                            //            .fill(consoleSection.animatableColor.asSwiftUIColor())
+                                .strokeBorder()
+                                .containerValue(\.frameWidth, section.width)
+                                .containerValue(\.frameHeight, section.heigh)
+                                .containerValue(\.frameWidth, section.originX)
+                                .containerValue(\.frameHeight, section.originY)
+                            
+                            
+                            
+                            //                                .environment(section)
+                            //                                .containerValue(\.consoleSectionData, section)
+                            
+                        }
+                        
+                    }
+                }
+            
+            
             
             HStack {
                 ForEach(containerCollection.containers) { container in
@@ -53,19 +73,19 @@ struct ContainerSelectionView: View {
 struct ConsoleSectionsViewer<Content>: View where Content: View {
     
     @Environment(ContainerCollection.self) private var containerCollection: ContainerCollection
-
+    
     
     @ViewBuilder let content: (ConsoleSection) -> Content
-
+    
     var body: some View {
         @Bindable var containerCollection = self.containerCollection
-
+        
         ConsoleFrameLayout2(frameWidth: containerCollection.selected.width, frameHeight: containerCollection.selected.height) {
             
             ForEach(containerCollection.selected.sections) { consoleSection in
                 
                 content(consoleSection)
-
+                
             }
         }
     }
@@ -75,15 +95,15 @@ struct ConsoleSectionsViewer<Content>: View where Content: View {
 
 struct ContainerSectionView: View, Animatable {
     
-    var consoleSection: ConsoleSection
+    @Environment(ConsoleSection.self) private var consoleSection: ConsoleSection
+    
+    //    var consoleSection: ConsoleSection
     
     var body: some View {
-        Rectangle()
-            .fill(consoleSection.animatableColor.asSwiftUIColor())
-            .strokeBorder()
-            .containerValue(\.sliceOrientation, consoleSection.sliceOrientation)
-            .containerValue(\.rectSliceProportion, consoleSection.sizeProportion)
-            .containerValue(\.rectSliceStartingPosition, consoleSection.sliceOriginPosition)
+        
+        //            .containerValue(\.sliceOrientation, consoleSection.sliceOrientation)
+        //            .containerValue(\.rectSliceProportion, consoleSection.sizeProportion)
+        //            .containerValue(\.rectSliceStartingPosition, consoleSection.sliceOriginPosition)
     }
 }
 
@@ -98,9 +118,9 @@ struct ConsoleFrameLayout2: Layout {
     
     var animatableData: AnimatablePair<Double, Double> {
         get {
-           AnimatablePair(frameWidth, frameHeight)
+            AnimatablePair(frameWidth, frameHeight)
         }
-
+        
         set {
             frameWidth = newValue.first
             frameHeight = newValue.second
@@ -129,9 +149,9 @@ struct ConsoleFrameLayout2: Layout {
         for (_, subview) in subviews.enumerated() {
             
             print(subview.containerValues.sectionIdentifier)
-            let sliceOrigin = subview.containerValues.rectSliceStartingPosition
-            let sliceSizeProportion = subview.containerValues.rectSliceProportion
-            let sliceOrientation = subview.containerValues.sliceOrientation
+            let sliceOrigin: CGRectEdge = .minXEdge
+            let sliceSizeProportion = 0.5
+            let sliceOrientation: SliceOrientation = .horizontal
             print(sliceOrientation)
             
             let sliceSize = (sliceOrientation == .horizontal) ? bounds.width * sliceSizeProportion : bounds.height * sliceSizeProportion
@@ -143,6 +163,7 @@ struct ConsoleFrameLayout2: Layout {
             subview.place(at: slice.origin, anchor: .zero, proposal: .init(width: slice.width, height: slice.height))
             
         }
+        
         
         
     }

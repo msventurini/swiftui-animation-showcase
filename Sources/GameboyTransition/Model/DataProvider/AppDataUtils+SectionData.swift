@@ -30,22 +30,24 @@ extension AppDataUtils {
             }
         }
         
-//        func swiftDataModelFor(container: Container) -> ConsoleSection {
-//            return .init(
-//                orderNumber: self.getDrawOrderNumber(at: container),
-//                sectionName: self.name,
-//                color: self.getColor(console: container),
-//                originPosition: self.sliceOriginPosition(console: container),
-//                sizeProportion: self.sizeProportion(console: container))
-//        }
-//        
         func observableModelFor(container: Container) -> ConsoleSection {
+//            return .init(
+//                drawingOrderNumber: self.getDrawOrderNumber(at: container),
+//                sectionName: self.name
+//            )
+            
             return .init(
-                orderNumber: self.getDrawOrderNumber(at: container),
+                id: self.id,
+                drawingOrderNumber: self.getDrawOrderNumber(at: container),
                 sectionName: self.name,
-                color: self.getColor(console: container),
-                originPosition: self.sliceOriginPosition(console: container),
-                sizeProportion: self.sizeProportion(console: container))
+                originX: self.originX(container: container),
+                originY: self.originY(container: container),
+                widthProportion: self.widthProportion(container: container),
+                heightProportion: self.heightProportion(container: container),
+                width: self.width(container: container),
+                heigh: self.height(container: container)
+            )
+            
         }
         
         public func sliceOriginPosition(console: Container) -> CodableRectEdge {
@@ -65,10 +67,39 @@ extension AppDataUtils {
             }
         }
        
-        public func sizeProportion(console: Container) -> Double {
-            
-            switch (console.containerID, self) {
-            case (.gameboyDMG, .consoleScreen): 0.5
+        public func originX(container: Container) -> Double {
+            switch (container.containerID, self) {
+            case (.gameboyDMG, .consoleScreen): .zero
+            case (.gameboyDMG, .controllerLeft): .zero
+            case (.gameboyDMG, .controllerRight): 0.5
+                
+            case (.gameboyAdvance, .controllerLeft): .zero
+            case (.gameboyAdvance, .consoleScreen): 0.3
+            case (.gameboyAdvance, .controllerRight): 0.7
+                
+            case (.nintendoSwitch, .consoleScreen): .zero
+            case (.nintendoSwitch, .controllerLeft):  0.2
+            case (.nintendoSwitch, .controllerRight): 0.8
+            }
+        }
+        
+        public func originY(container: Container) -> Double {
+            switch (container.containerID, self) {
+            case (.gameboyDMG, .consoleScreen): .zero 
+            case (.gameboyDMG, .controllerLeft): 0.5 
+            case (.gameboyDMG, .controllerRight): 0.5 
+            case (.gameboyAdvance, .controllerLeft): .zero 
+            case (.gameboyAdvance, .consoleScreen): .zero 
+            case (.gameboyAdvance, .controllerRight): .zero 
+            case (.nintendoSwitch, .consoleScreen): .zero 
+            case (.nintendoSwitch, .controllerLeft): .zero 
+            case (.nintendoSwitch, .controllerRight): .zero 
+            }
+        }
+        
+        public func widthProportion(container: Container) -> Double {
+            switch (container.containerID, self) {
+            case (.gameboyDMG, .consoleScreen): 1.0
             case (.gameboyDMG, .controllerLeft): 0.5
             case (.gameboyDMG, .controllerRight): 0.5
                 
@@ -76,12 +107,37 @@ extension AppDataUtils {
             case (.gameboyAdvance, .consoleScreen): 0.4
             case (.gameboyAdvance, .controllerRight): 0.3
                 
-            case (.nintendoSwitch, .consoleScreen): 0.6
-            case (.nintendoSwitch, .controllerLeft): 0.2
+            case (.nintendoSwitch, .consoleScreen): 0.2
+            case (.nintendoSwitch, .controllerLeft): 0.6
             case (.nintendoSwitch, .controllerRight): 0.2
             }
         }
 
+        public func heightProportion(container: Container) -> Double {
+            switch (container.containerID, self) {
+            case (.gameboyDMG, .consoleScreen): 0.5
+            case (.gameboyDMG, .controllerLeft): 0.5
+            case (.gameboyDMG, .controllerRight): 0.5
+                
+            case (.gameboyAdvance, .controllerLeft): 1.0
+            case (.gameboyAdvance, .consoleScreen): 1.0
+            case (.gameboyAdvance, .controllerRight): 1.0
+                
+            case (.nintendoSwitch, .consoleScreen): 1.0
+            case (.nintendoSwitch, .controllerLeft): 1.0
+            case (.nintendoSwitch, .controllerRight): 1.0
+            }
+        }
+        
+        public func width(container: Container) -> Double {
+            return self.widthProportion(container: container) * container.width
+        }
+        
+        public func height(container: Container) -> Double {
+            return self.heightProportion(container: container) * container.height
+        }
+    
+        
         public func getColor(console: Container) -> AnimatableColor {
             
             switch (console.containerID, self) {
@@ -115,29 +171,29 @@ extension AppDataUtils {
             
         }
         
-//        private static func getDrawOrderNumber(
-//            for section: AppDataUtils.SectionProvider,
-//            at container: AppDataUtils.ContainerProvider
-//        ) -> Int {
-//            
-//            switch (container, section) {
-//                
-//            case (.gameboyDMG, .consoleScreen): 0
-//            case (.gameboyDMG, .controllerLeft): 1
-//            case (.gameboyDMG, .controllerRight): 2
-//                
-//            case (.gameboyAdvance, .consoleScreen): 1
-//            case (.gameboyAdvance, .controllerLeft): 0
-//            case (.gameboyAdvance, .controllerRight): 2
-//                
-//            case (.nintendoSwitch, .consoleScreen): 1
-//            case (.nintendoSwitch, .controllerLeft): 0
-//            case (.nintendoSwitch, .controllerRight): 2
-//                
-//            }
-//            
-//        }
-
+        //        private static func getDrawOrderNumber(
+        //            for section: AppDataUtils.SectionProvider,
+        //            at container: AppDataUtils.ContainerProvider
+        //        ) -> Int {
+        //
+        //            switch (container, section) {
+        //
+        //            case (.gameboyDMG, .consoleScreen): 0
+        //            case (.gameboyDMG, .controllerLeft): 1
+        //            case (.gameboyDMG, .controllerRight): 2
+        //
+        //            case (.gameboyAdvance, .consoleScreen): 1
+        //            case (.gameboyAdvance, .controllerLeft): 0
+        //            case (.gameboyAdvance, .controllerRight): 2
+        //
+        //            case (.nintendoSwitch, .consoleScreen): 1
+        //            case (.nintendoSwitch, .controllerLeft): 0
+        //            case (.nintendoSwitch, .controllerRight): 2
+        //
+        //            }
+        //
+        //        }
+        
     }
     
     
@@ -158,7 +214,7 @@ extension AppDataUtils {
 //        }
 
 //private static func allCasesFor(console: AppDataUtils.ContainerProvider) -> [ConsoleSection] {
-//    
+//
 //    switch (console, consoleSection) {
 //    case (.gameboyDMG, _): AnimatableColor(red: 190/255, green: 190/255, blue: 190/255, opacity: 1)
 //    case (.gameboyAdvance, _): AnimatableColor(red: 94/255, green: 92/255, blue: 230/255, opacity: 1)
@@ -176,7 +232,7 @@ extension AppDataUtils {
 //        .map({
 //            ConsoleSection(
 //                orderNumber: , color: <#T##AnimatableColor#>, originPosition: <#T##CodableRectEdge#>, sizeProportion: <#T##Double#>)
-//            
+//
 //            Console(
 //                chronologicalNumber: $0.chronologicalNumber,
 //                containerName: $0.description,
