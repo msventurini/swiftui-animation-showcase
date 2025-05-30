@@ -10,10 +10,13 @@ import Observation
 import SwiftUIComponentKit
 
 struct ContainerSelectionView: View {
-    @Environment(ContainerCollection.self) private var containerCollection: ContainerCollection
+//    @Environment(ContainerCollection.self) private var containerCollection: ContainerCollection
+//
+    
+        @State var containerCollection: ContainerCollection = .init()
     
     var body: some View {
-        @Bindable var containerCollection = self.containerCollection
+
         VStack {
             
             Rectangle()
@@ -23,15 +26,17 @@ struct ContainerSelectionView: View {
                         ForEach(containerCollection.selected.sections.sorted(by: { $0.drawingOrderNumber < $1.drawingOrderNumber })) { section in
                             
                             Rectangle()
-                            
-                                .strokeBorder()
-                                .containerValue(\.frameWidth, section.width)
-                                .containerValue(\.frameHeight, section.heigh)
-                                .containerValue(\.frameWidth, section.originX)
-                                .containerValue(\.frameHeight, section.originY)
-                                .containerValue(\.horizontalSliceProportion, section.horizontalSliceProportion)
-                                .containerValue(\.verticalSliceProportion, section.verticalSliceProportion)
-                                .containerValue(\.drawingOrder, section.drawingOrderNumber)
+                                    .strokeBorder()
+                                    .containerValue(\.frameWidth, section.width)
+                                    .containerValue(\.frameHeight, section.heigh)
+                                    .containerValue(\.frameWidth, section.originX)
+                                    .containerValue(\.frameHeight, section.originY)
+                                    .containerValue(\.horizontalSliceProportion, section.horizontalSliceProportion)
+                                    .containerValue(\.verticalSliceProportion, section.verticalSliceProportion)
+                                    .containerValue(\.drawingOrder, section.drawingOrderNumber)
+//                                    .frame(width: section.width, height: section.heigh)
+//                            }
+                                    .tag(section.drawingOrderNumber)
                             
                             
                         }
@@ -60,7 +65,8 @@ struct ContainerSelectionView: View {
 }
 
 
-#Preview(traits: .modifier(ContainerPreviewModifier())) {
+//#Preview(traits: .modifier(ContainerPreviewModifier())) {
+#Preview {
     ContainerSelectionView()
 }
 

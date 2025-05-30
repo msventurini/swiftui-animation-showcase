@@ -10,11 +10,11 @@ import SwiftData
 
 struct GameBoyTransition: View {
     
-    @State var containerCollection: ContainerCollection = .init()
+
     
     var body: some View {
         ContainerSelectionView()
-            .environment(containerCollection)
+//            .environment(containerCollection)
     }
 }
 
