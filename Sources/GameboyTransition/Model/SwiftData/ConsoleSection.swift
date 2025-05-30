@@ -16,10 +16,17 @@ import AnimationFoundation
     public var sizeProportion: Double
     public var console: Container?
     public var sliceOriginPosition: CGRectEdge { return codableSliceOriginPosition.asCGRectEdge }
+    public var sliceOrientation: SliceOrientation {
+    
+        let isHorizontal = ((sliceOriginPosition == .maxXEdge) || (sliceOriginPosition == .minXEdge))
+        let orientation: SliceOrientation = isHorizontal ? .horizontal : .vertical
+        return orientation
+        
+    }
     public var color: Color { return animatableColor.asSwiftUIColor() }
     
-    private var animatableColor: AnimatableColor
-    private var codableSliceOriginPosition: CodableRectEdge
+    public var animatableColor: AnimatableColor
+    public var codableSliceOriginPosition: CodableRectEdge
     
     init(
         orderNumber drawingOrderNumber: Int,

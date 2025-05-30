@@ -11,36 +11,52 @@ import Observation
 import SwiftData
 import SwiftUIComponentKit
 
+
+
 struct ConsoleFrameLayout: Layout {
+    
+    @Binding var frameWidth: Double
+    @Binding var frameHeight: Double
+    
     func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
-        return proposal.replacingUnspecifiedDimensions()
+        
+        let width = frameWidth
+        let height = frameHeight
+
+        return .init(width: width, height: height)
     }
     
     func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
         
-        let width = subviews
-            .compactMap({ $0.containerValues.frameWidth })
-            .reduce(0, +)
+        print(proposal)
+        print(bounds)
         
-        let heightArray = subviews
-            .compactMap({ $0.containerValues.frameHeight })
-            .reduce(0, +)
-        
+        var currentSlice = bounds
+
         for (_, subview) in subviews.enumerated() {
-            let viewSize = subview.sizeThatFits(.init(width: width, height: heightArray))
+            print("chamou")
+            print(subview.containerValues.sectionIdentifier)
+            let sliceOrigin = subview.containerValues.rectSliceStartingPosition
+            let sliceSizeProportion = subview.containerValues.rectSliceProportion
+            let sliceOrientation = subview.containerValues.sliceOrientation
             
-            subview.place(at: .init(x: bounds.midX, y: bounds.midY), anchor: .center, proposal: .init(viewSize))
+            
+            let sliceSize = (sliceOrientation == .horizontal) ? bounds.width * sliceSizeProportion : bounds.height * sliceSizeProportion
+            
+            let (slice, remainder) = currentSlice.divided(atDistance: sliceSize, from: sliceOrigin)
+            
+            currentSlice = remainder
+            
+            subview.place(at: slice.origin, anchor: .zero, proposal: .init(width: slice.width, height: slice.height))
+            
         }
+        
+        
     }
-}
-
-#Preview {
-    ForEach(AppDataUtils.ContainerData.allCases.dropFirst()) { console in
-        ConsoleFrameLayoutDebugView(console: console)
-    }
+    
 }
 
 
-
-
-
+#Preview(traits: .modifier(ContainerPreviewModifier())) {
+    ContainerSelectionView()
+}

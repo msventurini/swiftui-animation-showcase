@@ -11,26 +11,55 @@ import SwiftUIComponentKit
 
 struct ContainerSelectionView: View {
     @Environment(ContainerCollection.self) private var containerCollection: ContainerCollection
-
     
-        
+    
+    
     var body: some View {
-        
-
-        ToolbarPickerNavigationView(collection: containerCollection.containers) { console in
-            
-                ContainerView(console: console)
-            
-            
-        } bottomToolbar: { selectedConsole, collection in
-            
-            ToolbarInlinePicker(selected: selectedConsole, collection: collection) { consoleModel in
-                Text(consoleModel.containerName)
+        @Bindable var containerCollection = self.containerCollection
+        VStack {
+            ConsoleFrameLayout(frameWidth: $containerCollection.selected.width, frameHeight: $containerCollection.selected.height) {
+                
+                ForEach(containerCollection.selected.sections) { consoleSection in
+                    
+                    ContainerSectionView(consoleSection: consoleSection)
+                    
+                }
             }
             
+            HStack {
+                ForEach(containerCollection.containers) { container in
+                    
+                    Button {
+                        withAnimation(.bouncy) {
+                            containerCollection.selected = container
+                        }
+                        
+                    } label: {
+                        Text(container.containerName)
+                    }
+                    .buttonStyle(.bordered)
+                }
+            }
         }
-        
-        
+    }
+}
+
+//@Observable class ConsoleLayoutSectionValues {
+//    var sliceProportion
+//    var sliceOriginPosition
+//}
+
+struct ContainerSectionView: View, Animatable {
+    
+    var consoleSection: ConsoleSection
+    
+    var body: some View {
+        Rectangle()
+            .fill(consoleSection.animatableColor.asSwiftUIColor())
+            .strokeBorder()
+            .containerValue(\.sliceOrientation, consoleSection.sliceOrientation)
+            .containerValue(\.rectSliceProportion, consoleSection.sizeProportion)
+            .containerValue(\.rectSliceStartingPosition, consoleSection.sliceOriginPosition)
     }
 }
 

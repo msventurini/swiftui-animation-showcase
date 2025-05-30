@@ -11,10 +11,11 @@ import Observation
 @Observable class ContainerCollection {
     
     var containers: [Container]
+    var selected: Container
     
     init() {
         
-        self.containers = AppDataUtils
+        let localContainers = AppDataUtils
             .ContainerData
             .allCases
             .map { containerData in
@@ -29,6 +30,13 @@ import Observation
                 
             }
         
+        self.containers = localContainers
+        
+        guard let first = localContainers.first else {
+            fatalError("Error loading ContainerCollection")
+        }
+        
+        self.selected = first
     }
     
     

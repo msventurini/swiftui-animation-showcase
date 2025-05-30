@@ -1,29 +1,28 @@
+////
+////  ContainerView.swift
+////  swiftui-animation-showcase
+////
+////  Created by Matheus Silveira Venturini on 28/05/25.
+////
 //
-//  ContainerView.swift
-//  swiftui-animation-showcase
+//import SwiftUI
+//import SwiftData
 //
-//  Created by Matheus Silveira Venturini on 28/05/25.
+//struct ContainerView: View {
+//    
+//    @Environment(ContainerCollection.self) private var containerCollection: ContainerCollection
 //
-
-import SwiftUI
-import SwiftData
-
-struct ContainerView: View {
-    
-    let console: Container
-    
-    var body: some View {
-        ConsoleFrameLayout {
-            ContainerSectionsView(sectionCollection: console.sections.sorted(by: { $0.drawingOrderNumber < $1.drawingOrderNumber }))
-                .containerValue(\.frameWidth, console.width)
-                .containerValue(\.frameHeight, console.height)
-        }
-    }
-}
-
-
-#Preview(traits: .modifier(ContainerPreviewModifier())) {
-    ContainerSelectionView()
-        
-}
-
+//    var body: some View {
+////        ConsoleFrameLayout {
+//
+//            
+////        }
+//    }
+//}
+//
+//
+//#Preview(traits: .modifier(ContainerPreviewModifier())) {
+//    ContainerSelectionView()
+//        
+//}
+//
