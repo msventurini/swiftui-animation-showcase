@@ -43,9 +43,7 @@ struct ConsoleFrameLayout: Layout {
         
         var currentSlice = currentRect
         
-        for (index, subview) in subviews.enumerated().sorted(by: { a, b in
-            a.element.containerValues.drawingOrder < b.element.containerValues.drawingOrder
-        }) {
+        for (index, subview) in subviews.enumerated() {
             
             let horizontalSliceProportion = subview.containerValues.horizontalSliceProportion
             let horizontalSliceOrigin: CGRectEdge = .minXEdge
