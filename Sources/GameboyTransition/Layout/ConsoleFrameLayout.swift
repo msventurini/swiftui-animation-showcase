@@ -4,59 +4,80 @@
 ////
 ////  Created by Matheus Silveira Venturini on 29/05/25.
 ////
-//
-//
-//import SwiftUI
-//import Observation
-//import SwiftData
-//import SwiftUIComponentKit
-//
-//
-//
-//struct ConsoleFrameLayout: Layout {
-//    
-//    @Binding var frameWidth: Double
-//    @Binding var frameHeight: Double
-//    
-//    func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
-//        
-//        let width = frameWidth
-//        let height = frameHeight
-//
-//        return .init(width: width, height: height)
-//    }
-//    
-//    func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
-//        
-//        print(proposal)
-//        print(bounds)
-//        
-//        var currentSlice = bounds
-//
-//        for (_, subview) in subviews.enumerated() {
-//            print("chamou")
-//            print(subview.containerValues.sectionIdentifier)
-//            let sliceOrigin = subview.containerValues.rectSliceStartingPosition
-//            let sliceSizeProportion = subview.containerValues.rectSliceProportion
-//            let sliceOrientation = subview.containerValues.sliceOrientation
-//            
-//            
-//            let sliceSize = (sliceOrientation == .horizontal) ? bounds.width * sliceSizeProportion : bounds.height * sliceSizeProportion
-//            
-//            let (slice, remainder) = currentSlice.divided(atDistance: sliceSize, from: sliceOrigin)
-//            
-//            currentSlice = remainder
-//            
-//            subview.place(at: slice.origin, anchor: .zero, proposal: .init(width: slice.width, height: slice.height))
-//            
-//        }
-//        
-//        
-//    }
-//    
-//}
-//
-//
-//#Preview(traits: .modifier(ContainerPreviewModifier())) {
-//    ContainerSelectionView()
-//}
+
+
+import SwiftUI
+import Observation
+import SwiftData
+import SwiftUIComponentKit
+
+struct ConsoleFrameLayout: Layout {
+    
+    
+    
+    var animatableData: AnimatablePair<Double, Double> {
+        get {
+            AnimatablePair(frameWidth, frameHeight)
+        }
+        
+        set {
+            frameWidth = newValue.first
+            frameHeight = newValue.second
+            
+        }
+    }
+    
+    var frameWidth: Double
+    var frameHeight: Double
+    
+    func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
+        
+        let width = frameWidth
+        let height = frameHeight
+        
+        return .init(width: width, height: height)
+    }
+    
+    func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
+        var currentRect = CGRect(x: bounds.midX - (frameWidth * 0.5), y: bounds.midY - (frameHeight * 0.5), width: frameWidth, height: frameHeight)
+        
+        var currentSlice = currentRect
+        
+        for (index, subview) in subviews.enumerated().sorted(by: { a, b in
+            a.element.containerValues.drawingOrder < b.element.containerValues.drawingOrder
+        }) {
+            
+            let horizontalSliceProportion = subview.containerValues.horizontalSliceProportion
+            let horizontalSliceOrigin: CGRectEdge = .minXEdge
+            let horizontalSliceSize = horizontalSliceProportion * frameWidth
+            
+            let verticalOrigin: CGRectEdge = .minYEdge
+            let verticalSliceProportion = subview.containerValues.verticalSliceProportion
+            let verticalSliceSize = verticalSliceProportion * frameHeight
+            
+            if horizontalSliceProportion > 0 {
+                let (slice, remainder) = currentSlice.divided(atDistance: horizontalSliceSize, from: horizontalSliceOrigin)
+                
+                currentSlice = remainder
+                
+                subview.place(at: slice.origin, anchor: .zero, proposal: .init(width: slice.width, height: slice.height))
+            }
+            
+            if verticalSliceProportion > 0 {
+                let (slice, remainder) = currentSlice.divided(atDistance: verticalSliceSize, from: verticalOrigin)
+                
+                currentSlice = remainder
+                
+                subview.place(at: slice.origin, anchor: .zero, proposal: .init(width: slice.width, height: slice.height))
+            }
+        }
+        
+        
+        
+    }
+    
+}
+
+#Preview(traits: .modifier(ContainerPreviewModifier())) {
+    ContainerSelectionView()
+}

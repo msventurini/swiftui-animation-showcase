@@ -45,7 +45,9 @@ extension AppDataUtils {
                 widthProportion: self.widthProportion(container: container),
                 heightProportion: self.heightProportion(container: container),
                 width: self.width(container: container),
-                heigh: self.height(container: container)
+                heigh: self.height(container: container),
+                horizontalSliceProportion: self.horizontalSliceProportion(console: container),
+                verticalSliceProportion: self.verticalSliceProportion(console: container)
             )
             
         }
@@ -64,6 +66,40 @@ extension AppDataUtils {
             case (.nintendoSwitch, .consoleScreen): .minX
             case (.nintendoSwitch, .controllerLeft):  .minX
             case (.nintendoSwitch, .controllerRight): .minX
+            }
+        }
+        
+        public func horizontalSliceProportion(console: Container) -> Double {
+            
+            switch (console.containerID, self) {
+            case (.gameboyDMG, .consoleScreen): 0
+            case (.gameboyDMG, .controllerLeft): 0.5
+            case (.gameboyDMG, .controllerRight): 0.5
+                
+            case (.gameboyAdvance, .controllerLeft): 0.3
+            case (.gameboyAdvance, .consoleScreen): 0.4
+            case (.gameboyAdvance, .controllerRight): 0.3
+                
+            case (.nintendoSwitch, .consoleScreen): 0.2
+            case (.nintendoSwitch, .controllerLeft):  0.6
+            case (.nintendoSwitch, .controllerRight): 0.2
+            }
+        }
+        
+        public func verticalSliceProportion(console: Container) -> Double {
+            
+            switch (console.containerID, self) {
+            case (.gameboyDMG, .consoleScreen): 0.5
+            case (.gameboyDMG, .controllerLeft): 0
+            case (.gameboyDMG, .controllerRight): 0
+                
+            case (.gameboyAdvance, .controllerLeft): 0
+            case (.gameboyAdvance, .consoleScreen): 0
+            case (.gameboyAdvance, .controllerRight): 0
+                
+            case (.nintendoSwitch, .consoleScreen): 0
+            case (.nintendoSwitch, .controllerLeft):  0
+            case (.nintendoSwitch, .controllerRight): 0
             }
         }
        

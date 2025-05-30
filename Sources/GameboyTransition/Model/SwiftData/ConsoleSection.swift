@@ -24,8 +24,11 @@ import AnimationFoundation
     public var width: Double
     public var heigh: Double
     
+    public var horizontalSliceProportion: Double
+    public var verticalSliceProportion: Double
     
-    init(id: Int, drawingOrderNumber: Int, sectionName: String, originX: Double, originY: Double, widthProportion: Double, heightProportion: Double, width: Double, heigh: Double) {
+    
+    init(id: Int, drawingOrderNumber: Int, sectionName: String, originX: Double, originY: Double, widthProportion: Double, heightProportion: Double, width: Double, heigh: Double, horizontalSliceProportion: Double, verticalSliceProportion: Double) {
         self.id = id
         self.drawingOrderNumber = drawingOrderNumber
         self.sectionName = sectionName
@@ -35,6 +38,9 @@ import AnimationFoundation
         self.heightProportion = heightProportion
         self.width = width
         self.heigh = heigh
+        self.horizontalSliceProportion = horizontalSliceProportion
+        self.verticalSliceProportion = verticalSliceProportion
+        
     }
 
     public static func == (lhs: ConsoleSection, rhs: ConsoleSection) -> Bool {

@@ -45,3 +45,17 @@ extension ContainerValues {
 extension ContainerValues {
     @Entry var consoleSectionData: ConsoleSection? = nil
 }
+
+extension ContainerValues {
+    @Entry var horizontalSliceProportion: Double = 0
+}
+
+extension ContainerValues {
+    @Entry var verticalSliceProportion: Double = 0
+}
+
+extension ContainerValues {
+    @Entry var drawingOrder: Int = 1000
+}
+
+
