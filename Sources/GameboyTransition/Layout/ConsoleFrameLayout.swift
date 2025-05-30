@@ -35,12 +35,10 @@ struct ConsoleFrameLayout: Layout {
 }
 
 #Preview {
-    ForEach(AppDataUtils.ContainerProvider.allCases) { console in
+    ForEach(AppDataUtils.ContainerProvider.allCases.dropFirst()) { console in
         ConsoleFrameLayoutDebugView(console: console)
     }
 }
-
-
 
 
 

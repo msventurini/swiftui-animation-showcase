@@ -21,6 +21,7 @@ struct ContainerSelectionView: View {
             
                 ContainerView(console: console)
             
+            
         } bottomToolbar: { selectedConsole, collection in
             
             ToolbarInlinePicker(selected: selectedConsole, collection: consoles) { consoleModel in

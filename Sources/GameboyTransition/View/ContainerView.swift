@@ -18,15 +18,12 @@ struct ContainerView: View {
                 .containerValue(\.frameWidth, console.width)
                 .containerValue(\.frameHeight, console.height)
         }
-        .overlay(alignment: .bottomTrailing) {
-            Text(console.sections.count.description)
-            Text(console.containerName)
-                .padding()
-        }
     }
 }
 
 
 #Preview(traits: .modifier(ContainerPreviewModifier())) {
     ContainerSelectionView()
+        
 }
+
