@@ -8,8 +8,9 @@
 import SwiftUI
 import Observation
 import AnimationFoundation
+import SwiftData
 
-@Observable public class ConsoleSection: Identifiable, Equatable, Hashable {
+@Model public class ConsoleSection: Identifiable, Equatable, Hashable {
 
     public var id: Int
     
@@ -20,6 +21,8 @@ import AnimationFoundation
     public var originY: Double
     public var widthProportion: Double
     public var heightProportion: Double
+    
+    public var console: Console?
     
     public var width: Double
     public var heigh: Double

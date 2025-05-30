@@ -10,10 +10,10 @@ import Observation
 import SwiftUIComponentKit
 
 struct ContainerSelectionView: View {
-//    @Environment(ContainerCollection.self) private var containerCollection: ContainerCollection
+    @Environment(ContainerCollection.self) private var containerCollection: ContainerCollection
 //
     
-        @State var containerCollection: ContainerCollection = .init()
+//        @State var containerCollection: ContainerCollection = .init()
     
     var body: some View {
 

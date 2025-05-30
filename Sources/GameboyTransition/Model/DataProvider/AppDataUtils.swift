@@ -13,39 +13,39 @@ import SwiftData
 @MainActor
 public struct AppDataUtils {
     
-//    public static var container: ModelContainer {
-//        
-//        let modelConfiguration = ModelConfiguration(isStoredInMemoryOnly: true)
-//        
-//        let container = try! ModelContainer(for: Container.self, configurations: modelConfiguration)
-//
-//        insertDefaultDataAt(context: container.mainContext)
-//        
-//        return container
-//    }
+    public static var container: ModelContainer {
+        
+        let modelConfiguration = ModelConfiguration(isStoredInMemoryOnly: true)
+        
+        let container = try! ModelContainer(for: Container.self, configurations: modelConfiguration)
+
+        insertDefaultDataAt(context: container.mainContext)
+        
+        return container
+    }
     
-//    public static func insertDefaultDataAt(context: ModelContext) {
-//        ContainerData
-//            .allCases
-//            .forEach { containerData in
-//                
-//                let containerModel = containerData.swiftDataModel
-//                context.insert(containerModel)
-//                
-//                containerData
-//                    .sections
-//                    .forEach { section in
-//                        
-//                        let sectionModel = section.swiftDataModelFor(container: containerModel)
-//                        
-//                        sectionModel.console = containerModel
-//                        
-//                        context.insert(sectionModel)
-//                        
-//                    }
-//            }
-//        try? context.save()
-//    }
+    public static func insertDefaultDataAt(context: ModelContext) {
+        ContainerData
+            .allCases
+            .forEach { containerData in
+                
+                let containerModel = containerData.swiftDataModel
+                context.insert(containerModel)
+                
+                containerData
+                    .sections
+                    .forEach { section in
+                        
+                        let sectionModel = section.swiftDataModelFor(container: containerModel)
+                        
+                        sectionModel.console = containerModel
+                        
+                        context.insert(sectionModel)
+                        
+                    }
+            }
+        try? context.save()
+    }
     
 }
 
