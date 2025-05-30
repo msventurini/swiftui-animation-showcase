@@ -17,20 +17,18 @@ struct ContainerSelectionView: View {
     var body: some View {
         @Bindable var containerCollection = self.containerCollection
         VStack {
-            ConsoleFrameLayout(frameWidth: $containerCollection.selected.width, frameHeight: $containerCollection.selected.height) {
-                
-                ForEach(containerCollection.selected.sections) { consoleSection in
-                    
-                    ContainerSectionView(consoleSection: consoleSection)
-                    
-                }
+            
+            ConsoleSectionsViewer { section in
+                ContainerSectionView(consoleSection: section)
+
             }
+
             
             HStack {
                 ForEach(containerCollection.containers) { container in
                     
                     Button {
-                        withAnimation(.bouncy) {
+                        withAnimation(.snappy) {
                             containerCollection.selected = container
                         }
                         
@@ -48,6 +46,32 @@ struct ContainerSelectionView: View {
 //    var sliceProportion
 //    var sliceOriginPosition
 //}
+
+//struct ConsoleSectionsViewer<Content>
+
+
+struct ConsoleSectionsViewer<Content>: View where Content: View {
+    
+    @Environment(ContainerCollection.self) private var containerCollection: ContainerCollection
+
+    
+    @ViewBuilder let content: (ConsoleSection) -> Content
+
+    var body: some View {
+        @Bindable var containerCollection = self.containerCollection
+
+        ConsoleFrameLayout2(frameWidth: containerCollection.selected.width, frameHeight: containerCollection.selected.height) {
+            
+            ForEach(containerCollection.selected.sections) { consoleSection in
+                
+                content(consoleSection)
+
+            }
+        }
+    }
+}
+
+
 
 struct ContainerSectionView: View, Animatable {
     
@@ -67,3 +91,60 @@ struct ContainerSectionView: View, Animatable {
     ContainerSelectionView()
 }
 
+
+struct ConsoleFrameLayout2: Layout {
+    
+    
+    
+    var animatableData: AnimatablePair<Double, Double> {
+        get {
+           AnimatablePair(frameWidth, frameHeight)
+        }
+
+        set {
+            frameWidth = newValue.first
+            frameHeight = newValue.second
+            
+        }
+    }
+    
+    var frameWidth: Double
+    var frameHeight: Double
+    
+    func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
+        
+        let width = frameWidth
+        let height = frameHeight
+
+        return .init(width: width, height: height)
+    }
+    
+    func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
+        
+        print(proposal)
+        print(bounds)
+        
+        var currentSlice = bounds
+
+        for (_, subview) in subviews.enumerated() {
+            
+            print(subview.containerValues.sectionIdentifier)
+            let sliceOrigin = subview.containerValues.rectSliceStartingPosition
+            let sliceSizeProportion = subview.containerValues.rectSliceProportion
+            let sliceOrientation = subview.containerValues.sliceOrientation
+            print(sliceOrientation)
+            
+            let sliceSize = (sliceOrientation == .horizontal) ? bounds.width * sliceSizeProportion : bounds.height * sliceSizeProportion
+            
+            let (slice, remainder) = currentSlice.divided(atDistance: sliceSize, from: sliceOrigin)
+            
+            currentSlice = remainder
+            
+            subview.place(at: slice.origin, anchor: .zero, proposal: .init(width: slice.width, height: slice.height))
+            
+        }
+        
+        
+    }
+    
+}

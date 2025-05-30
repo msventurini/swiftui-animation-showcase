@@ -61,13 +61,16 @@ let package = Package(
             ]
         ),
         .target(name: DefaultTargetNamed.kirbyJumping),
+        
+        
         .target(
             name: DefaultTargetNamed.gameboyTransition,
             dependencies: [
                 .product(name: "SwiftUIComponentKit", package: "VentUI"),
-//                .target(name: "SwiftUIComponentKit"),
-                .target(name: DefaultTargetNamed.animationFoundation)
-            ]
+                //                .target(name: "SwiftUIComponentKit"),
+                
+                    .target(name: DefaultTargetNamed.animationFoundation)
+            ], swiftSettings: [.swiftLanguageMode(.v6)]
         ),
         
         .target(name: DefaultTargetNamed.animationFoundation, swiftSettings: [.swiftLanguageMode(.v6)]),
