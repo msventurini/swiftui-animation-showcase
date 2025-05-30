@@ -7,6 +7,9 @@
 
 import SwiftUI
 
+
+
+
 extension AppDataUtils {
     public enum ContainerProvider: Int, Hashable, Identifiable, CaseIterable {
         
@@ -26,12 +29,35 @@ extension AppDataUtils {
             }
         }
         
-        static var allContainerModels: [Console] {
+        var name: String {
+            self.description
+        }
+        
+        var swiftDataModel: Container {
+            return Container(
+                containerID: self.containerID,
+                chronologicalNumber: self.chronologicalNumber,
+                containerName: self.name,
+                width: self.width,
+                height: self.height
+            )
+        }
+        
+        var containerID: ContainerID {
+            switch self {
+            case .gameboyDMG: .gameboyDMG
+            case .gameboyAdvance: .gameboyAdvance
+            case .nintendoSwitch: .nintendoSwitch
+            }
+        }
+        
+        static var allContainerModels: [Container] {
             return ContainerProvider
                 .allCases
-                .map({ Console(
+                .map({ Container(
+                    containerID: $0.containerID,
                     chronologicalNumber: $0.chronologicalNumber,
-                    containerName: $0.description,
+                    containerName: $0.name,
                     width: $0.width,
                     height: $0.height
                 ) })
@@ -56,6 +82,16 @@ extension AppDataUtils {
             case .nintendoSwitch: 102
             }
         }
+
+        var sections: [SectionProvider] {
+            switch self {
+            case .gameboyDMG: [.consoleScreen, .controllerLeft, .controllerRight]
+            case .gameboyAdvance: [.controllerLeft, .consoleScreen, .controllerRight]
+            case .nintendoSwitch: [.controllerLeft, .consoleScreen, .controllerRight]
+            }
+        }
+
+
     }
     
 }

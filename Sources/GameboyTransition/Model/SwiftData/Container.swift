@@ -10,8 +10,9 @@ import SwiftUI
 import Observation
 import SwiftData
 
-@Model public final class Console {
+@Model public final class Container {
     
+    public var containerID: ContainerID
     public var chronologicalNumber: Int
     public var containerName: String
     public var width: Double
@@ -20,7 +21,8 @@ import SwiftData
     @Relationship(deleteRule: .cascade, inverse: \ConsoleSection.console)
     public var sections = [ConsoleSection]()
     
-    public init(chronologicalNumber: Int,containerName: String, width: Double, height: Double) {
+    public init(containerID: ContainerID, chronologicalNumber: Int,containerName: String, width: Double, height: Double) {
+        self.containerID = containerID
         self.chronologicalNumber = chronologicalNumber
         self.containerName = containerName
         self.width = width

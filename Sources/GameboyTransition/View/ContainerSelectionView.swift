@@ -12,8 +12,8 @@ import SwiftUIComponentKit
 
 struct ContainerSelectionView: View {
     @Environment(\.modelContext) var modelContext
-    @Query(sort: \Console.chronologicalNumber, order: .forward)
-    private var consoles: [Console]
+    @Query(sort: \Container.chronologicalNumber, order: .forward)
+    private var consoles: [Container]
         
     var body: some View {
 

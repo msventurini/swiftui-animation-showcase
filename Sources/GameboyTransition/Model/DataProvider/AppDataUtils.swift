@@ -17,7 +17,7 @@ public struct AppDataUtils {
         
         let modelConfiguration = ModelConfiguration(isStoredInMemoryOnly: true)
         
-        let container = try! ModelContainer(for: Console.self, configurations: modelConfiguration)
+        let container = try! ModelContainer(for: Container.self, configurations: modelConfiguration)
 
         insertDefaultDataAt(context: container.mainContext)
         
@@ -26,14 +26,24 @@ public struct AppDataUtils {
     
     public static func insertDefaultDataAt(context: ModelContext) {
         ContainerProvider
-            .allContainerModels
-
-            .forEach { console in
-                context.insert(console)
+            .allCases
+            .forEach { containerData in
                 
+                let containerModel = containerData.swiftDataModel
+                context.insert(containerModel)
                 
+                containerData
+                    .sections
+                    .forEach { section in
+                        
+                        let sectionModel = section.swiftDataModelFor(container: containerModel)
+                        
+                        sectionModel.console = containerModel
+                        
+                        context.insert(sectionModel)
+                        
+                    }
             }
-        
         try? context.save()
     }
     

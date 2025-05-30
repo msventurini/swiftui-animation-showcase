@@ -15,20 +15,28 @@ struct ContainerSectionsView: View {
     
     var body: some View {
         
-        ForEach(sectionCollection) { consoleSection in
-            Rectangle()
-                .fill(.secondary)
-                .overlay {
-                    
-                    VStack {
-                        Text("a")
-//                        Text(consoleSection.sectionID.name)
-//                        Text(consoleSection.sectionID.id.description)
+        ZStack {
+            ForEach(sectionCollection) { consoleSection in
+                Rectangle()
+                    .fill(.secondary)
+                    .overlay {
+                        
+                        VStack {
+                            Text("a")
+    //                        Text(consoleSection.sectionID.name)
+    //                        Text(consoleSection.sectionID.id.description)
+                        }
+                        
+                        
                     }
                     
-                    
-                }
+            }
+         
         }
+        
+        
+        
+        
         
         
         

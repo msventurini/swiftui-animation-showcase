@@ -12,7 +12,7 @@ import AnimationFoundation
 
 extension AppDataUtils {
     
-    enum SectionProvider: Int, Identifiable, Hashable, Codable {
+    enum SectionProvider: Int, Identifiable, Hashable, Codable, CaseIterable {
         
         public var id: Int {
             return rawValue
@@ -30,9 +30,18 @@ extension AppDataUtils {
             }
         }
         
-        private static func sliceOriginPosition(console: AppDataUtils.ContainerProvider, consoleSection: SectionProvider) -> CodableRectEdge {
+        func swiftDataModelFor(container: Container) -> ConsoleSection {
+            return .init(
+                orderNumber: self.getDrawOrderNumber(at: container),
+                sectionName: self.name,
+                color: self.getColor(console: container),
+                originPosition: self.sliceOriginPosition(console: container),
+                sizeProportion: self.sizeProportion(console: container))
+        }
+        
+        public func sliceOriginPosition(console: Container) -> CodableRectEdge {
             
-            switch (console, consoleSection) {
+            switch (console.containerID, self) {
             case (.gameboyDMG, .consoleScreen): .minY
             case (.gameboyDMG, .controllerLeft): .minX
             case (.gameboyDMG, .controllerRight): .minX
@@ -40,23 +49,132 @@ extension AppDataUtils {
             case (.gameboyAdvance, .controllerLeft): .minX
             case (.gameboyAdvance, .consoleScreen): .minX
             case (.gameboyAdvance, .controllerRight): .minX
-
+                
             case (.nintendoSwitch, .consoleScreen): .minX
             case (.nintendoSwitch, .controllerLeft):  .minX
             case (.nintendoSwitch, .controllerRight): .minX
             }
         }
-        
-        public static func insertContainerDefaultData(console: Console, context: ModelContext) {
+       
+        public func sizeProportion(console: Container) -> Double {
             
+            switch (console.containerID, self) {
+            case (.gameboyDMG, .consoleScreen): 0.5
+            case (.gameboyDMG, .controllerLeft): 0.5
+            case (.gameboyDMG, .controllerRight): 0.5
+                
+            case (.gameboyAdvance, .controllerLeft): 0.3
+            case (.gameboyAdvance, .consoleScreen): 0.4
+            case (.gameboyAdvance, .controllerRight): 0.3
+                
+            case (.nintendoSwitch, .consoleScreen): 0.2
+            case (.nintendoSwitch, .controllerLeft): 0.6
+            case (.nintendoSwitch, .controllerRight): 0.2
+            }
+        }
+
+        public func getColor(console: Container) -> AnimatableColor {
+            
+            switch (console.containerID, self) {
+            case (.gameboyDMG, _): AnimatableColor(red: 190/255, green: 190/255, blue: 190/255, opacity: 1)
+            case (.gameboyAdvance, _): AnimatableColor(red: 94/255, green: 92/255, blue: 230/255, opacity: 1)
+            case (.nintendoSwitch, .consoleScreen): AnimatableColor(red: 0, green: 0, blue: 0, opacity: 1)
+            case (.nintendoSwitch, .controllerLeft): AnimatableColor(red: 1, green: 0, blue: 0, opacity: 1)
+            case (.nintendoSwitch, .controllerRight): AnimatableColor(red: 0, green: 0, blue: 1, opacity: 1)
+            }
+        }
+        
+        public func getDrawOrderNumber(
+            at container: Container
+        ) -> Int {
+            
+            switch (container.containerID, self) {
+                
+            case (.gameboyDMG, .consoleScreen): 0
+            case (.gameboyDMG, .controllerLeft): 1
+            case (.gameboyDMG, .controllerRight): 2
+                
+            case (.gameboyAdvance, .consoleScreen): 1
+            case (.gameboyAdvance, .controllerLeft): 0
+            case (.gameboyAdvance, .controllerRight): 2
+                
+            case (.nintendoSwitch, .consoleScreen): 1
+            case (.nintendoSwitch, .controllerLeft): 0
+            case (.nintendoSwitch, .controllerRight): 2
+                
+            }
             
         }
+        
+//        private static func getDrawOrderNumber(
+//            for section: AppDataUtils.SectionProvider,
+//            at container: AppDataUtils.ContainerProvider
+//        ) -> Int {
+//            
+//            switch (container, section) {
+//                
+//            case (.gameboyDMG, .consoleScreen): 0
+//            case (.gameboyDMG, .controllerLeft): 1
+//            case (.gameboyDMG, .controllerRight): 2
+//                
+//            case (.gameboyAdvance, .consoleScreen): 1
+//            case (.gameboyAdvance, .controllerLeft): 0
+//            case (.gameboyAdvance, .controllerRight): 2
+//                
+//            case (.nintendoSwitch, .consoleScreen): 1
+//            case (.nintendoSwitch, .controllerLeft): 0
+//            case (.nintendoSwitch, .controllerRight): 2
+//                
+//            }
+//            
+//        }
+
     }
     
     
-
+    
     
 }
+
+//
+//
+//        public static func insertContainerDefaultData(section: AppDataUtils.SectionProvider, into console: Console, context: ModelContext) {
+//
+//            console.sections.forEach { section in
+//                ConsoleSection(
+//                    orderNumber: AppDataUtils.SectionProvider.getDrawOrderNumber(for: section, at: console),
+//                    color: <#T##AnimatableColor#>, originPosition: <#T##CodableRectEdge#>, sizeProportion: <#T##Double#>)
+//            }
+//
+//        }
+
+//private static func allCasesFor(console: AppDataUtils.ContainerProvider) -> [ConsoleSection] {
+//    
+//    switch (console, consoleSection) {
+//    case (.gameboyDMG, _): AnimatableColor(red: 190/255, green: 190/255, blue: 190/255, opacity: 1)
+//    case (.gameboyAdvance, _): AnimatableColor(red: 94/255, green: 92/255, blue: 230/255, opacity: 1)
+//    case (.nintendoSwitch, .consoleScreen): AnimatableColor(red: 0, green: 0, blue: 0, opacity: 1)
+//    case (.nintendoSwitch, .controllerLeft): AnimatableColor(red: 1, green: 0, blue: 0, opacity: 1)
+//    case (.nintendoSwitch, .controllerRight): AnimatableColor(red: 0, green: 0, blue: 1, opacity: 1)
+//    }
+//}
+
+
+//
+//static func allSectionModels: [ConsoleSection] {
+//    return SectionProvider
+//        .allCases
+//        .map({
+//            ConsoleSection(
+//                orderNumber: , color: <#T##AnimatableColor#>, originPosition: <#T##CodableRectEdge#>, sizeProportion: <#T##Double#>)
+//            
+//            Console(
+//                chronologicalNumber: $0.chronologicalNumber,
+//                containerName: $0.description,
+//                width: $0.width,
+//                height: $0.height
+//            ) })
+//}
 
 
 //public enum ContainerProvider: Int, Hashable, Identifiable, CaseIterable {
@@ -131,31 +249,7 @@ extension AppDataUtils {
 //
 
 //
-//    private static func sizeProportion(console: AppDataUtils.ContainerProvider, consoleSection: SectionIdentifier) -> Double {
-//
-//        switch (console, consoleSection) {
-//        case (.gameboyDMG, .consoleScreen):
-//            return 0.5
-//        case (.gameboyDMG, .controllerLeft):
-//            return 0.5
-//        case (.gameboyDMG, .controllerRight):
-//            return 0.5
-//
-//        case (.gameboyAdvance, .controllerLeft):
-//            return 0.3
-//        case (.gameboyAdvance, .consoleScreen):
-//            return 0.4
-//        case (.gameboyAdvance, .controllerRight):
-//            return 0.3
-//
-//        case (.nintendoSwitch, .consoleScreen):
-//            return 0.2
-//        case (.nintendoSwitch, .controllerLeft):
-//            return 0.6
-//        case (.nintendoSwitch, .controllerRight):
-//            return 0.2
-//        }
-//    }
+
 //}
 //
 //
@@ -171,20 +265,6 @@ extension AppDataUtils {
 //        self.color = ColorData.getColor(console: console, consoleSection: consoleSectionIdentifier)
 //    }
 //
-//    private static func getColor(console: AppDataUtils.ContainerProvider, consoleSection: SectionIdentifier) -> AnimatableColor {
 //
-//        switch (console, consoleSection) {
-//        case (.gameboyDMG, _):
-//            return AnimatableColor(red: 190/255, green: 190/255, blue: 190/255, opacity: 1)
-//        case (.gameboyAdvance, _):
-//            return AnimatableColor(red: 94/255, green: 92/255, blue: 230/255, opacity: 1)
-//        case (.nintendoSwitch, .consoleScreen):
-//            return AnimatableColor(red: 0, green: 0, blue: 0, opacity: 1)
-//        case (.nintendoSwitch, .controllerLeft):
-//            return AnimatableColor(red: 1, green: 0, blue: 0, opacity: 1)
-//        case (.nintendoSwitch, .controllerRight):
-//            return AnimatableColor(red: 0, green: 0, blue: 1, opacity: 1)
-//        }
-//    }
 //
 //}

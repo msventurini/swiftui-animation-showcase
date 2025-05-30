@@ -13,9 +13,9 @@ import AnimationFoundation
 @Model public class ConsoleSection {
 
     public var drawingOrderNumber: Int
-//    public var sectionID: SectionIdentifier
+    public var sectionName: String
     public var sizeProportion: Double
-    public var console: Console?
+    public var console: Container?
     public var sliceOriginPosition: CGRectEdge { return codableSliceOriginPosition.asCGRectEdge }
     public var color: Color { return animatableColor.asSwiftUIColor() }
     
@@ -24,13 +24,13 @@ import AnimationFoundation
     
     init(
         orderNumber drawingOrderNumber: Int,
-//        section sectionID: SectionIdentifier,
+        sectionName sectionName: String,
         color animatableColor: AnimatableColor,
         originPosition: CodableRectEdge,
         sizeProportion: Double
     ) {
         self.drawingOrderNumber = drawingOrderNumber
-//        self.sectionID = sectionID
+        self.sectionName = sectionName
         self.animatableColor = animatableColor
         self.codableSliceOriginPosition = originPosition
         self.sizeProportion = sizeProportion
