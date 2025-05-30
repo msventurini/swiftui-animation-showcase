@@ -18,11 +18,43 @@ import SwiftData
     public var sectionName: String
 
     public var console: Container?
+    
+    public var originX: Double
+    public var originY: Double
+    
+    public var widthRatioToContainer: Double
+    public var heightRatioToContainer: Double
 
-    init(id: Int, drawingOrderNumber: Int, sectionName: String) {
+    public var containerWidth: Double
+    public var containerHeight: Double
+    
+    public var width: Double
+    public var height: Double
+//    
+//    public var centerPointX: Double
+//    public var centerPointY: Double
+//    
+    
+    init(id: Int, drawingOrderNumber: Int, sectionName: String, originX: Double, originY: Double, widthRatioToContainer: Double, heightRatioToContainer: Double, containerWidth: Double, containerHeight: Double, /*centerPointX: Double, centerPointY: Double,*/ console: Container? = nil) {
         self.id = id
+        
         self.drawingOrderNumber = drawingOrderNumber
         self.sectionName = sectionName
+        
+        self.originX = originX
+        self.originY = originY
+        
+        self.widthRatioToContainer = widthRatioToContainer
+        self.heightRatioToContainer = heightRatioToContainer
+        
+        self.containerWidth = containerWidth
+        self.containerHeight = containerWidth
+        self.width = containerWidth * widthRatioToContainer
+        self.height = containerHeight * heightRatioToContainer
+        self.console = console
+        
+//        self.centerPointX = centerPointX
+//        self.centerPointY = centerPointY
     }
     
 //    init(id: Int, drawingOrderNumber: Int, sectionName: String, originX: Double, originY: Double, widthProportion: Double, heightProportion: Double, width: Double, heigh: Double, horizontalSliceProportion: Double, verticalSliceProportion: Double) {

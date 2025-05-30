@@ -1,12 +1,12 @@
+////
+////  SectionsGrid.swift
+////  swiftui-animation-showcase
+////
+////  Created by Matheus Silveira Venturini on 27/05/25.
+////
 //
-//  SectionsGrid.swift
-//  swiftui-animation-showcase
+//import SwiftUI
 //
-//  Created by Matheus Silveira Venturini on 27/05/25.
-//
-
-import SwiftUI
-
 //struct IrregularGrid: Layout {
 //    
 //    func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {

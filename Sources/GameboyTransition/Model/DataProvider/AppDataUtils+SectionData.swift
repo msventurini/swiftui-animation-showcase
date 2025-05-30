@@ -31,30 +31,34 @@ extension AppDataUtils {
         }
         
         func swiftDataModelFor(container: Container) -> ConsoleSection {
-            return .init(id: self.id, drawingOrderNumber: self.getDrawOrderNumber(at: container), sectionName: self.name)
-        }
-        
-        func observableModelFor(container: Container) -> ConsoleSection {
-//            return .init(
-//                drawingOrderNumber: self.getDrawOrderNumber(at: container),
-//                sectionName: self.name
-//            )
             
             return .init(
                 id: self.id,
                 drawingOrderNumber: self.getDrawOrderNumber(at: container),
-                sectionName: self.name
+                sectionName: self.name,
+                originX: self.originX(container: container),
+                originY: self.originY(container: container),
+                widthRatioToContainer: self.widthProportion(container: container),
+                heightRatioToContainer: self.heightProportion(container: container),
+                containerWidth: self.containerWidth(container: container),
+                containerHeight: self.containerHeight(container: container),
+            )
+        }
+        
+//        func observableModelFor(container: Container) -> ConsoleSection {
+//
+//            return .init(
+//                id: self.id,
+//                drawingOrderNumber: self.getDrawOrderNumber(at: container),
+//                sectionName: self.name,
 //                originX: self.originX(container: container),
 //                originY: self.originY(container: container),
-//                widthProportion: self.widthProportion(container: container),
-//                heightProportion: self.heightProportion(container: container),
-//                width: self.width(container: container),
-//                heigh: self.height(container: container),
-//                horizontalSliceProportion: self.horizontalSliceProportion(console: container),
-//                verticalSliceProportion: self.verticalSliceProportion(console: container)
-            )
-            
-        }
+//                widthRatioToContainer: self.widthProportion(container: container),
+//                heightRatioToContainer: self.heightProportion(container: container),
+//                containerWidth: self.containerWidth(container: container),
+//                containerHeight: self.containerHeight(container: container)
+//            )
+//        }
         
         public func sliceOriginPosition(console: Container) -> CodableRectEdge {
             
@@ -140,7 +144,7 @@ extension AppDataUtils {
         public func widthProportion(container: Container) -> Double {
             switch (container.containerID, self) {
             case (.gameboyDMG, .consoleScreen): 1.0
-            case (.gameboyDMG, .controllerLeft): 0.5
+            case (.gameboyDMG, .controllerLeft): -0.5
             case (.gameboyDMG, .controllerRight): 0.5
                 
             case (.gameboyAdvance, .controllerLeft): 0.3
@@ -156,8 +160,8 @@ extension AppDataUtils {
         public func heightProportion(container: Container) -> Double {
             switch (container.containerID, self) {
             case (.gameboyDMG, .consoleScreen): 0.5
-            case (.gameboyDMG, .controllerLeft): 0.5
-            case (.gameboyDMG, .controllerRight): 0.5
+            case (.gameboyDMG, .controllerLeft): -0.5
+            case (.gameboyDMG, .controllerRight): -0.5
                 
             case (.gameboyAdvance, .controllerLeft): 1.0
             case (.gameboyAdvance, .consoleScreen): 1.0
@@ -169,12 +173,12 @@ extension AppDataUtils {
             }
         }
         
-        public func width(container: Container) -> Double {
-            return self.widthProportion(container: container) * container.width
+        public func containerWidth(container: Container) -> Double {
+            return container.width
         }
         
-        public func height(container: Container) -> Double {
-            return self.heightProportion(container: container) * container.height
+        public func containerHeight(container: Container) -> Double {
+            return container.height
         }
     
         

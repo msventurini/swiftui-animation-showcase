@@ -8,67 +8,98 @@
 import SwiftUI
 import Observation
 import SwiftUIComponentKit
+import SwiftData
+
+
+
+
+
+struct ContainerSectionsView<Content: View>: View {
+    var content: Content
+
+
+    init(@ViewBuilder content: () -> Content) {
+        self.content = content()
+    }
+
+
+    var body: some View {
+        ConsoleFrameLayout {
+            Group(subviews: content) { subviews in
+                ForEach(subviews: subviews) { subview in
+                    subview
+//                        .strokeBorder()
+                        //                            .containerValue(\.relativeOriginX, section.originX)
+                        //                            .containerValue(\.relativeOriginY, section.originY)
+                        //                            .containerValue(\.drawingOrder, section.drawingOrderNumber)
+                        //                            .frame(width: section.width, height: section.height)
+                        
+                }
+            }
+        }
+    }
+}
 
 struct ContainerSelectionView: View {
-//    @Environment(ContainerCollection.self) private var containerCollection: ContainerCollection
-//
+    @Environment(\.modelContext) var modelContext
     
-//        @State var containerCollection: ContainerCollection = .init()
+    var consoles: [Container]
+    
+    @State var selected: Container
     
     var body: some View {
-
+        //a
+        
+        
         VStack {
-            
-            Rectangle()
-                .fill(.pink)
-                .overlay {
-                    ConsoleFrameLayout {
-//                        ForEach(containerCollection.selected.sections.sorted(by: { $0.drawingOrderNumber < $1.drawingOrderNumber })) { section in
-//                            
-                            Rectangle()
-                                    .strokeBorder()
-//                                    .containerValue(\.frameWidth, section.width)
-//                                    .containerValue(\.frameHeight, section.heigh)
-//                                    .containerValue(\.frameWidth, section.originX)
-//                                    .containerValue(\.frameHeight, section.originY)
-//                                    .containerValue(\.horizontalSliceProportion, section.horizontalSliceProportion)
-//                                    .containerValue(\.verticalSliceProportion, section.verticalSliceProportion)
-//                                    .containerValue(\.drawingOrder, section.drawingOrderNumber)
-//                                    .frame(width: section.width, height: section.heigh)
-//                            }
-//                                    .tag(section.drawingOrderNumber)
-                            
-                            
-//                        }
-                        
-                    }
+            ContainerSectionsView {
+                 ForEach(selected.sections) { section in
+                        Rectangle()
+                            .strokeBorder(lineWidth: 4)
+                            .containerValue(\.relativeOriginX, section.originX)
+                            .containerValue(\.relativeOriginY, section.originY)
+                            .containerValue(\.drawingOrder, section.drawingOrderNumber)
+                         .containerValue(\.frameWidth, section.containerWidth)
+                         .containerValue(\.frameHeight, section.containerHeight)
+                         .containerValue(\.horizontalProportionToContainer, section.widthRatioToContainer)
+                         .containerValue(\.verticalProportionToContainer, section.heightRatioToContainer)
+                     
+                            .frame(width: section.width, height: section.height)
+                       
+                     
+                     
                 }
+            }
+//            .frame(width: selected.width, height: selected.height)
+//            .background(.red)
             
-//            
-//            
-//            HStack {
-//                ForEach(containerCollection.containers) { container in
-//                    
-//                    Button {
-//                        withAnimation(.bouncy(extraBounce: 0.15)) {
-//                            containerCollection.selected = container
-//                        }
-//                        
-//                    } label: {
-//                        Text(container.containerName)
-//                    }
-//                    .buttonStyle(.bordered)
-//                }
-//            }
+            
+            
+            ForEach(consoles) { consoleItem in
+                
+                Button {
+                    withAnimation {
+                        selected = consoleItem
+                    }
+                    
+                } label: {
+                    Text(consoleItem.containerName)
+                }
+                
+            }
         }
+        .task {
+            selected = consoles.first!
+        }
+            
+            
+        
     }
 }
 
 
 //#Preview(traits: .modifier(ContainerPreviewModifier())) {
-#Preview {
-    ContainerSelectionView()
+#Preview(traits: .modifier(ContainerPreviewModifier())) {
+    GameBoyTransition()
 }
-
-
 

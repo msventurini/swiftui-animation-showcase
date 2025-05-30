@@ -47,11 +47,11 @@ extension ContainerValues {
 }
 
 extension ContainerValues {
-    @Entry var horizontalSliceProportion: Double = 0
+    @Entry var horizontalProportionToContainer: Double? = nil
 }
 
 extension ContainerValues {
-    @Entry var verticalSliceProportion: Double = 0
+    @Entry var verticalProportionToContainer: Double? = nil
 }
 
 extension ContainerValues {
