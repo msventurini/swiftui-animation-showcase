@@ -14,7 +14,7 @@ struct ContainerView: View {
     
     var body: some View {
         ConsoleFrameLayout {
-            ContainerSectionsView(sectionCollection: console.sections)
+            ContainerSectionsView(sectionCollection: console.sections.sorted(by: { $0.drawingOrderNumber < $1.drawingOrderNumber }))
                 .containerValue(\.frameWidth, console.width)
                 .containerValue(\.frameHeight, console.height)
         }

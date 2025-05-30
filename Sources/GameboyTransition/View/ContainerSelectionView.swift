@@ -17,16 +17,26 @@ struct ContainerSelectionView: View {
         
     var body: some View {
 
-        ToolbarPickerNavigationView(collection: consoles) { console in
+        EmptyToolbarNavigationView(collection: consoles) { console in
             
                 ContainerView(console: console)
             
             
         } bottomToolbar: { selectedConsole, collection in
             
-            ToolbarInlinePicker(selected: selectedConsole, collection: consoles) { consoleModel in
-                Text(consoleModel.containerName)
+            ForEach(collection) { consoleItem in
+                
+                Button {
+//                    selectedConsole = consoleItem
+                } label: {
+                    Text(consoleItem.containerName)
+                }
+                
             }
+            
+//            ToolbarInlinePicker(selected: selectedConsole, collection: consoles) { consoleModel in
+//                Text(consoleModel.containerName)
+//            }
             
         }
         

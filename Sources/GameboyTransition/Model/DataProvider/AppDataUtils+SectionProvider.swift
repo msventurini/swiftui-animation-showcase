@@ -67,8 +67,8 @@ extension AppDataUtils {
             case (.gameboyAdvance, .consoleScreen): 0.4
             case (.gameboyAdvance, .controllerRight): 0.3
                 
-            case (.nintendoSwitch, .consoleScreen): 0.2
-            case (.nintendoSwitch, .controllerLeft): 0.6
+            case (.nintendoSwitch, .consoleScreen): 0.6
+            case (.nintendoSwitch, .controllerLeft): 0.2
             case (.nintendoSwitch, .controllerRight): 0.2
             }
         }
