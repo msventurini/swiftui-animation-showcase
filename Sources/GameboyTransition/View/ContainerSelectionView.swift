@@ -17,23 +17,15 @@ import SwiftData
 struct ContainerSectionsView<Content: View>: View {
     var content: Content
 
-
     init(@ViewBuilder content: () -> Content) {
         self.content = content()
     }
-
 
     var body: some View {
         ConsoleFrameLayout {
             Group(subviews: content) { subviews in
                 ForEach(subviews: subviews) { subview in
                     subview
-//                        .strokeBorder()
-                        //                            .containerValue(\.relativeOriginX, section.originX)
-                        //                            .containerValue(\.relativeOriginY, section.originY)
-                        //                            .containerValue(\.drawingOrder, section.drawingOrderNumber)
-                        //                            .frame(width: section.width, height: section.height)
-                        
                 }
             }
         }
@@ -48,33 +40,24 @@ struct ContainerSelectionView: View {
     @State var selected: Container
     
     var body: some View {
-        //a
-        
         
         VStack {
-            ContainerSectionsView {
+            ConsoleFrameLayout {
                  ForEach(selected.sections) { section in
                         Rectangle()
                             .strokeBorder(lineWidth: 4)
-                            .containerValue(\.relativeOriginX, section.originX)
-                            .containerValue(\.relativeOriginY, section.originY)
-                            .containerValue(\.drawingOrder, section.drawingOrderNumber)
+                            .overlay {
+                                Text(section.id.description)
+                            }
                          .containerValue(\.frameWidth, section.containerWidth)
                          .containerValue(\.frameHeight, section.containerHeight)
-                         .containerValue(\.horizontalProportionToContainer, section.widthRatioToContainer)
-                         .containerValue(\.verticalProportionToContainer, section.heightRatioToContainer)
-                     
+
+                         .containerValue(\.centerDistanceX, section.centerDistanceX)
+                         .containerValue(\.centerDistanceY, section.centerDistanceY)
                             .frame(width: section.width, height: section.height)
-                       
-                     
-                     
+        
                 }
             }
-//            .frame(width: selected.width, height: selected.height)
-//            .background(.red)
-            
-            
-            
             ForEach(consoles) { consoleItem in
                 
                 Button {
@@ -89,7 +72,10 @@ struct ContainerSelectionView: View {
             }
         }
         .task {
-            selected = consoles.first!
+            withAnimation {
+                
+                selected = consoles.first!
+            }
         }
             
             

@@ -58,4 +58,11 @@ extension ContainerValues {
     @Entry var drawingOrder: Int = 1000
 }
 
+extension ContainerValues {
+    @Entry var centerDistanceX: Double? = nil
+}
+
+extension ContainerValues {
+    @Entry var centerDistanceY: Double? = nil
+}
 

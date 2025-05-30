@@ -12,49 +12,25 @@ import SwiftData
 import SwiftUIComponentKit
 
 struct ConsoleFrameLayout: Layout {
-    
-    
-    
-    
     func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
-        
-//        let fullSize: CGSize
-//        let filledLinesSize: CGSize
-//        let currentLineFilledSize
-//        
         return proposal.replacingUnspecifiedDimensions()
-//        return .init(width: 148, height: 90)
     }
     
     func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
-                
-        var offset = CGSize(width: 0, height: 0)
         
-        for (index, subview) in subviews.enumerated() {
-//            
-//            let horizontalSliceProportion = subview.containerValues.horizontalSliceProportion
-//            let horizontalSliceOrigin: CGRectEdge = .minXEdge
-//            let horizontalSliceSize = horizontalSliceProportion * bounds.width
-//            
-//            let verticalOrigin: CGRectEdge = .minYEdge
-//            let verticalSliceProportion = subview.containerValues.verticalSliceProportion
-//            let verticalSliceSize = verticalSliceProportion * bounds.height
-//            
-//            if horizontalSliceProportion > 0 {
-//                let (slice, remainder) = currentSlice.divided(atDistance: horizontalSliceSize, from: horizontalSliceOrigin)
-//                
-//                currentSlice = remainder
-//                
-//                subview.place(at: slice.origin, anchor: .zero, proposal: .init(width: slice.width, height: slice.height))
-//            }
-//            
-//            if verticalSliceProportion > 0 {
-//                let (slice, remainder) = currentSlice.divided(atDistance: verticalSliceSize, from: verticalOrigin)
-//                
-//                currentSlice = remainder
-//                
-            subview.place(at: CGPoint(x: bounds.midX, y: bounds.midY), anchor: .center, proposal: .unspecified)
-//            }
+        
+        for (_, subview) in subviews.enumerated() {
+            
+            guard
+                let horizontalDistance = subview.containerValues.centerDistanceX,
+                let verticalDistance = subview.containerValues.centerDistanceY
+            else {
+                print("erro")
+                return
+            }
+            
+            subview.place(at: CGPoint(x: bounds.midX + horizontalDistance, y: bounds.midY + verticalDistance), anchor: .center, proposal: .unspecified)
+
         }
         
         

@@ -144,7 +144,7 @@ extension AppDataUtils {
         public func widthProportion(container: Container) -> Double {
             switch (container.containerID, self) {
             case (.gameboyDMG, .consoleScreen): 1.0
-            case (.gameboyDMG, .controllerLeft): -0.5
+            case (.gameboyDMG, .controllerLeft): 0.5
             case (.gameboyDMG, .controllerRight): 0.5
                 
             case (.gameboyAdvance, .controllerLeft): 0.3
@@ -160,8 +160,8 @@ extension AppDataUtils {
         public func heightProportion(container: Container) -> Double {
             switch (container.containerID, self) {
             case (.gameboyDMG, .consoleScreen): 0.5
-            case (.gameboyDMG, .controllerLeft): -0.5
-            case (.gameboyDMG, .controllerRight): -0.5
+            case (.gameboyDMG, .controllerLeft): 0.5
+            case (.gameboyDMG, .controllerRight): 0.5
                 
             case (.gameboyAdvance, .controllerLeft): 1.0
             case (.gameboyAdvance, .consoleScreen): 1.0
@@ -203,12 +203,17 @@ extension AppDataUtils {
             case (.gameboyDMG, .controllerLeft): 1
             case (.gameboyDMG, .controllerRight): 2
                 
-            case (.gameboyAdvance, .consoleScreen): 1
-            case (.gameboyAdvance, .controllerLeft): 0
+            case (.gameboyAdvance, .consoleScreen): 0
+            case (.gameboyAdvance, .controllerLeft): 1
             case (.gameboyAdvance, .controllerRight): 2
                 
-            case (.nintendoSwitch, .consoleScreen): 1
-            case (.nintendoSwitch, .controllerLeft): 0
+                
+//            case (.gameboyAdvance, .consoleScreen): 1
+//            case (.gameboyAdvance, .controllerLeft): 0
+//            case (.gameboyAdvance, .controllerRight): 2
+                
+            case (.nintendoSwitch, .consoleScreen): 0
+            case (.nintendoSwitch, .controllerLeft): 1
             case (.nintendoSwitch, .controllerRight): 2
                 
             }
