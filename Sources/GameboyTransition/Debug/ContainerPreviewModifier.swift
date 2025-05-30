@@ -10,15 +10,13 @@ import SwiftData
 
 struct ContainerPreviewModifier: PreviewModifier {
 
-    static func makeSharedContext() async throws -> ModelContainer {
-        let modelContainer = AppDataUtils.container
-        return modelContainer
-        
+    static func makeSharedContext() async throws -> ContainerCollection {
+        let containerCollection: ContainerCollection = .init()
+        return containerCollection
     }
 
-    func body(content: Content, context: ModelContainer) -> some View {
+    func body(content: Content, context: ContainerCollection) -> some View {
         content
-            .modelContainer(context)
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .environment(context)
     }
 }

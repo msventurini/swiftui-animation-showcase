@@ -8,9 +8,14 @@
 
 import SwiftUI
 import Observation
-import SwiftData
 
-@Model public final class Container {
+
+@Observable public final class Container: Identifiable, Equatable, Hashable {
+    
+    public static func == (lhs: Container, rhs: Container) -> Bool {
+        lhs.containerID == rhs.containerID
+    }
+    
     
     public var containerID: ContainerID
     public var chronologicalNumber: Int
@@ -18,8 +23,8 @@ import SwiftData
     public var width: Double
     public var height: Double
     
-    @Relationship(deleteRule: .cascade, inverse: \ConsoleSection.console)
-    public var sections = [ConsoleSection]()
+//    @Relationship(deleteRule: .cascade, inverse: \ConsoleSection.console)
+    public var sections: [ConsoleSection] = []
     
     public init(containerID: ContainerID, chronologicalNumber: Int,containerName: String, width: Double, height: Double) {
         self.containerID = containerID
@@ -27,5 +32,9 @@ import SwiftData
         self.containerName = containerName
         self.width = width
         self.height = height
+    }
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(ObjectIdentifier(self))
     }
 }

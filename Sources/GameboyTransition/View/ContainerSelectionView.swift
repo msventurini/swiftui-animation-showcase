@@ -7,36 +7,26 @@
 
 import SwiftUI
 import Observation
-import SwiftData
 import SwiftUIComponentKit
 
 struct ContainerSelectionView: View {
-    @Environment(\.modelContext) var modelContext
-    @Query(sort: \Container.chronologicalNumber, order: .forward)
-    private var consoles: [Container]
+    @Environment(ContainerCollection.self) private var containerCollection: ContainerCollection
+
+    
         
     var body: some View {
+        
 
-        EmptyToolbarNavigationView(collection: consoles) { console in
+        ToolbarPickerNavigationView(collection: containerCollection.containers) { console in
             
                 ContainerView(console: console)
             
             
         } bottomToolbar: { selectedConsole, collection in
             
-            ForEach(collection) { consoleItem in
-                
-                Button {
-//                    selectedConsole = consoleItem
-                } label: {
-                    Text(consoleItem.containerName)
-                }
-                
+            ToolbarInlinePicker(selected: selectedConsole, collection: collection) { consoleModel in
+                Text(consoleModel.containerName)
             }
-            
-//            ToolbarInlinePicker(selected: selectedConsole, collection: consoles) { consoleModel in
-//                Text(consoleModel.containerName)
-//            }
             
         }
         

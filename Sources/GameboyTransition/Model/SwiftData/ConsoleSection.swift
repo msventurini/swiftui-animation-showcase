@@ -7,10 +7,9 @@
 
 import SwiftUI
 import Observation
-import SwiftData
 import AnimationFoundation
 
-@Model public class ConsoleSection {
+@Observable public class ConsoleSection: Identifiable, Equatable, Hashable {
 
     public var drawingOrderNumber: Int
     public var sectionName: String
@@ -35,5 +34,13 @@ import AnimationFoundation
         self.codableSliceOriginPosition = originPosition
         self.sizeProportion = sizeProportion
     }
+    
+    public static func == (lhs: ConsoleSection, rhs: ConsoleSection) -> Bool {
+        lhs.drawingOrderNumber == rhs.drawingOrderNumber
+    }
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(ObjectIdentifier(self))
+    }
+    
 }
-

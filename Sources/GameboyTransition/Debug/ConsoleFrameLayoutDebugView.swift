@@ -13,7 +13,7 @@ import SwiftUIComponentKit
 
 struct ConsoleFrameLayoutDebugView: View {
     
-    let console: AppDataUtils.ContainerProvider
+    let console: AppDataUtils.ContainerData
     
     @State private var viewWidth: Double = 0.0
     @State private var viewHeight: Double = 0.0

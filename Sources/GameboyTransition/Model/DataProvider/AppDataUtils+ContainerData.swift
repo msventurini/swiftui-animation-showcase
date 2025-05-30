@@ -11,7 +11,7 @@ import SwiftUI
 
 
 extension AppDataUtils {
-    public enum ContainerProvider: Int, Hashable, Identifiable, CaseIterable {
+    public enum ContainerData: Int, Hashable, Identifiable, CaseIterable {
         
         public var id: Int {
             return self.rawValue
@@ -33,7 +33,7 @@ extension AppDataUtils {
             self.description
         }
         
-        var swiftDataModel: Container {
+        var observableModel: Container {
             return Container(
                 containerID: self.containerID,
                 chronologicalNumber: self.chronologicalNumber,
@@ -42,6 +42,16 @@ extension AppDataUtils {
                 height: self.height
             )
         }
+        
+//        var swiftDataModel: Container {
+//            return Container(
+//                containerID: self.containerID,
+//                chronologicalNumber: self.chronologicalNumber,
+//                containerName: self.name,
+//                width: self.width,
+//                height: self.height
+//            )
+//        }
         
         var containerID: ContainerID {
             switch self {
@@ -52,7 +62,7 @@ extension AppDataUtils {
         }
         
         static var allContainerModels: [Container] {
-            return ContainerProvider
+            return ContainerData
                 .allCases
                 .map({ Container(
                     containerID: $0.containerID,
@@ -83,7 +93,7 @@ extension AppDataUtils {
             }
         }
 
-        var sections: [SectionProvider] {
+        var sections: [SectionData] {
             switch self {
             case .gameboyDMG: [.consoleScreen, .controllerLeft, .controllerRight]
             case .gameboyAdvance: [.controllerLeft, .consoleScreen, .controllerRight]

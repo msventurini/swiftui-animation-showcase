@@ -12,7 +12,7 @@ import AnimationFoundation
 
 extension AppDataUtils {
     
-    enum SectionProvider: Int, Identifiable, Hashable, Codable, CaseIterable {
+    enum SectionData: Int, Identifiable, Hashable, Codable, CaseIterable {
         
         public var id: Int {
             return rawValue
@@ -30,7 +30,16 @@ extension AppDataUtils {
             }
         }
         
-        func swiftDataModelFor(container: Container) -> ConsoleSection {
+//        func swiftDataModelFor(container: Container) -> ConsoleSection {
+//            return .init(
+//                orderNumber: self.getDrawOrderNumber(at: container),
+//                sectionName: self.name,
+//                color: self.getColor(console: container),
+//                originPosition: self.sliceOriginPosition(console: container),
+//                sizeProportion: self.sizeProportion(console: container))
+//        }
+//        
+        func observableModelFor(container: Container) -> ConsoleSection {
             return .init(
                 orderNumber: self.getDrawOrderNumber(at: container),
                 sectionName: self.name,

@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-public enum ContainerID: Int, Hashable, Identifiable, CaseIterable, Codable {
+public enum ContainerID: Int, Hashable, Identifiable, CaseIterable, Codable, Sendable {
     
     public var id: Int {
         return self.rawValue

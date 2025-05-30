@@ -9,8 +9,15 @@ import SwiftUI
 import SwiftData
 
 struct GameBoyTransition: View {
+    
+    @State var containerCollection: ContainerCollection = .init()
+    
     var body: some View {
         ContainerSelectionView()
-            .modelContainer(AppDataUtils.container)
+            .environment(containerCollection)
     }
+}
+
+#Preview(traits: .modifier(ContainerPreviewModifier())) {
+    GameBoyTransition()
 }
