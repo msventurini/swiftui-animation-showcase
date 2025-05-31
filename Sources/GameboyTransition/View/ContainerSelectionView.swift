@@ -25,18 +25,21 @@ struct ContainerSelectionView: View {
             if let selected {
             
             ConsoleFrameLayout {
-                ForEach(selected.sections) { section in
-                    Rectangle()
-                        .strokeBorder(lineWidth: 4)
-                        .overlay {
-                            Text(section.id.description)
-                        }
-                        .containerValue(\.frameWidth, section.containerWidth)
-                        .containerValue(\.frameHeight, section.containerHeight)
-                    
-                        .containerValue(\.centerDistanceX, section.centerDistanceX)
-                        .containerValue(\.centerDistanceY, section.centerDistanceY)
-                        .frame(width: section.width, height: section.height)
+                ForEach(selected.sections.sorted(by: { section1, section2 in
+                    section1.id < section2.id
+                })) { section in
+                    ContainerView(selected: selected)
+//                    Rectangle()
+//                        .strokeBorder(lineWidth: 4)
+//                        .overlay {
+//                            Text(section.id.description)
+//                        }
+//                        .containerValue(\.frameWidth, section.containerWidth)
+//                        .containerValue(\.frameHeight, section.containerHeight)
+//                    
+//                        .containerValue(\.centerDistanceX, section.centerDistanceX)
+//                        .containerValue(\.centerDistanceY, section.centerDistanceY)
+//                        .frame(width: section.width, height: section.height)
                 }
                 }
             }
