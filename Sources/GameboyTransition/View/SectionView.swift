@@ -22,8 +22,10 @@ struct SectionView: View {
     }
     
     var body: some View {
-        Rectangle()
-            .strokeBorder(lineWidth: 4)
+        
+        
+        RightControllerShape()
+//            .strokeBorder(lineWidth: 4)
             .overlay {
                 Text(section.id.description)
             }

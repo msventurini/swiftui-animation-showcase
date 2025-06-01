@@ -17,7 +17,7 @@ struct GameBoyTransition: View {
     }
     
     var body: some View {
-        ContainerSelectionView(selected: containerCollection[0])
+        ContainerSelectionView(selected: containerCollection[1])
     }
 }
 

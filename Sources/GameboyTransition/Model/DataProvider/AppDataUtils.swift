@@ -23,8 +23,6 @@ public struct AppDataUtils {
                     .sections
                     .map { section in
                         let teste = section.observableModelFor(container: containerModel)
-//                        print("\(teste.id) - \(teste.width)")
-                        print("\(section.name) - \(section.rawValue)")
                         return teste
                         
                     }
@@ -45,3 +43,5 @@ struct ConsoleFrameTesting: View {
         }
     }
 }
+
+

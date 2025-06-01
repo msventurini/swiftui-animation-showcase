@@ -131,9 +131,9 @@ extension AppDataUtils {
             case (.gameboyDMG, .controllerLeft): 0.5
             case (.gameboyDMG, .controllerRight): 0.5
             
-            case (.gameboyAdvance, .consoleScreen): 0.4
-            case (.gameboyAdvance, .controllerLeft): 0.3
-            case (.gameboyAdvance, .controllerRight): 0.3
+            case (.gameboyAdvance, .consoleScreen): 0.6
+            case (.gameboyAdvance, .controllerLeft): 0.2
+            case (.gameboyAdvance, .controllerRight): 0.2
                 
             case (.nintendoSwitch, .consoleScreen): 0.7
             case (.nintendoSwitch, .controllerLeft): 0.15

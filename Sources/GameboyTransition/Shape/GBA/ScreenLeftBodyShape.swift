@@ -14,62 +14,60 @@ struct ScreenLeftBodyShape: Shape {
         let width = rect.size.width
         let height = rect.size.height
         
-    
-        //topleading
-        path.addRelativeArc(
-            center: CGPoint(x: 0.0*width, y: 0.04*height),
-            radius: 0 * width,
-            startAngle: Angle(degrees: 0),
-            delta: Angle(degrees: 0)
-        )
-
-        //topcenter
-        path.addRelativeArc(
-            center: CGPoint(x: 0.3*width, y: 0.23*height),
-            radius: 0.45 * width,
-            startAngle: Angle(degrees: 240),
-            delta: Angle(degrees: 30)
+        path.addArc(
+            center: CGPoint(x: rect.minX + 8, y: 22),
+            radius: 22,
+            startAngle: Angle(degrees: 210),
+            endAngle: Angle(degrees: 270),
+            clockwise: false)
+        
+        
+        path.addArc(
+            center: CGPoint(x: rect.maxX - 8, y: 22),
+            radius: 22,
+            startAngle: Angle(degrees: 270), endAngle: Angle(degrees: 330),
+            clockwise: false)
+        
+        path.addArc(
+            center: CGPoint(x: rect.maxX - 72, y: rect.maxY - 160),
+            radius: 160,
+            startAngle: Angle(degrees: 30),
+            endAngle: Angle(degrees: 90),
+            clockwise: false
         )
         
-        //toptrailing
-        path.addRelativeArc(
-            center: (CGPoint(x: width, y: 0)),
-            radius: 0,
-            startAngle: Angle(degrees: 0),
-            delta: Angle(degrees: 0)
-        )
-
-        
-        //bottomTrailing
-        path.addRelativeArc(
-            center: CGPoint(x: width, y: height),
-            radius: 0 * height,
-            startAngle: Angle(degrees: 0),
-            delta: Angle(degrees: 0)
-        )
-
-        //bottomCenter
-        path.addRelativeArc(
-            center: CGPoint(x: 0.60*width, y: 0.5*height),
-            radius: 0.95 * width,
+        path.addArc(
+            center: CGPoint(x: rect.minX + 72, y: rect.maxY - 160),
+            radius: 160,
             startAngle: Angle(degrees: 90),
-            delta: Angle(degrees: 20)
-        )
-
-        //BottomLeading
-        path.addRelativeArc(
-            center: CGPoint(x: 0.0*width, y: 0.92*height),
-            radius: 0 * width,
-            startAngle: Angle(degrees: 0),
-            delta: Angle(degrees: 0)
+            endAngle: Angle(degrees: 150),
+            clockwise: false
         )
         
         
         path.closeSubpath()
         return path
     }
+    
 }
 
 #Preview {
-    ScreenLeftBodyShape()
+    HStack(spacing: 80) {
+        LeftControllerShape()
+        
+            .frame(width: 74)
+        
+        ScreenLeftBodyShape()
+//            .frame(width: 111)
+        
+//        ScreenRightBodyShape()
+            .frame(width: 222)
+        
+        RightControllerShape()
+            .frame(width: 74)
+    }
+    .frame(height: 213)
+    
+    
+    
 }
