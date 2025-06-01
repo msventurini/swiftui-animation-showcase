@@ -13,9 +13,9 @@ struct ContainerView: View {
     @Binding var selected: Container
         
     var body: some View {
-
+        
             ConsoleFrameLayout {
-                ForEach(selected.sections.shuffled()) { section in
+                ForEach(selected.sections) { section in
                    SectionView(section: section)
                         .containerValue(\.centerDistanceX, section.centerDistanceX)
                         .containerValue(\.centerDistanceY, section.centerDistanceY)

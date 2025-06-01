@@ -19,8 +19,8 @@ struct ConsoleFrameLayout: Layout {
     func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
         
         
-        for (_, subview) in subviews.enumerated() {
-            
+        for (index, subview) in subviews.enumerated() {
+            print(index)
             guard
                 let horizontalDistance = subview.containerValues.centerDistanceX,
                 let verticalDistance = subview.containerValues.centerDistanceY

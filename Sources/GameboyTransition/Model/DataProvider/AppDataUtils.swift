@@ -26,7 +26,7 @@ public struct AppDataUtils {
                         return section.observableModelFor(container: containerModel)
   
                     }
-                containerModel.sections = sections
+                containerModel.sections = sections.sorted(by: { $0.id < $1.id })
                 
                 
              return containerModel
