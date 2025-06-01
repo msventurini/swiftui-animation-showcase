@@ -8,9 +8,8 @@
 import SwiftUI
 import Observation
 import AnimationFoundation
-import SwiftData
 
-@Model public class ConsoleSection: Identifiable, Equatable, Hashable {
+@Observable public class ConsoleSection: Identifiable, Equatable, Hashable {
 
     public var id: Int
     

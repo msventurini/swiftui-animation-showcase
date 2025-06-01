@@ -8,9 +8,9 @@
 
 import SwiftUI
 import Observation
-import SwiftData
+//import SwiftData
 
-@Model public final class Container: Identifiable, Equatable, Hashable {
+@Observable public final class Container: Identifiable, Equatable, Hashable {
     
     public static func == (lhs: Container, rhs: Container) -> Bool {
         lhs.containerID == rhs.containerID
@@ -23,7 +23,7 @@ import SwiftData
     public var width: Double
     public var height: Double
     
-    @Relationship(deleteRule: .cascade, inverse: \ConsoleSection.console)
+//    @Relationship(deleteRule: .cascade, inverse: \ConsoleSection.console)
     public var sections: [ConsoleSection] = []
     
     public init(containerID: ContainerID, chronologicalNumber: Int,containerName: String, width: Double, height: Double) {

@@ -6,37 +6,35 @@
 //
 
 import SwiftUI
-import SwiftData
+import Observation
 
 struct ContainerView: View {
-    
-    @Environment(\.modelContext) var modelContext
-    @Query(sort: \ConsoleSection.id, order: .forward)
-    var sections: [ConsoleSection]
-        
-    var selected: Container? = nil
+
+    @Binding var selected: Container
     
         
     var body: some View {
-        
-        if let selected {
-            List(selected.sections) { section in
-                HStack {
-                    Text(section.sectionName)
-                    Text(section.console?.containerName ?? " - ")
-                }
+        ConsoleFrameLayout {
+            ForEach(selected.sections.sorted(by: { section1, section2 in
+                section1.id < section2.id
+            })) { section in
+                Rectangle()
+                    .strokeBorder(lineWidth: 4)
+                    .overlay {
+                        Text(section.id.description)
+                    }
+                    .containerValue(\.frameWidth, section.containerWidth)
+                    .containerValue(\.frameHeight, section.containerHeight)
                 
-                
+                    .containerValue(\.centerDistanceX, section.centerDistanceX)
+                    .containerValue(\.centerDistanceY, section.centerDistanceY)
+                    .frame(width: section.width, height: section.height)
             }
         }
-        
-       
-        
     }
-    
 }
 
 
-#Preview(traits: .modifier(ContainerPreviewModifier())) {
-    ContainerView()
-}
+//#Preview(traits: .modifier(ContainerPreviewModifier())) {
+//    ContainerView()
+//}

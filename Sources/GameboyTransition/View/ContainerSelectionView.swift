@@ -8,42 +8,22 @@
 import SwiftUI
 import Observation
 import SwiftUIComponentKit
-import SwiftData
+//import SwiftData
 
 struct ContainerSelectionView: View {
-    @Environment(\.modelContext) var modelContext
-    @Query(sort: \Container.chronologicalNumber, order: .forward)
 
-    var consoles: [Container]
-        
-    @State private var selected: Container? = nil
-        
+    @Environment(\.containerCollection) private var containerCollection
+
+    @State var selected: Container
+    
     var body: some View {
         
         VStack {
+            Text(selected.containerName)
+
+            ContainerView(selected: $selected)
             
-            if let selected {
-            
-            ConsoleFrameLayout {
-                ForEach(selected.sections.sorted(by: { section1, section2 in
-                    section1.id < section2.id
-                })) { section in
-                    ContainerView(selected: selected)
-//                    Rectangle()
-//                        .strokeBorder(lineWidth: 4)
-//                        .overlay {
-//                            Text(section.id.description)
-//                        }
-//                        .containerValue(\.frameWidth, section.containerWidth)
-//                        .containerValue(\.frameHeight, section.containerHeight)
-//                    
-//                        .containerValue(\.centerDistanceX, section.centerDistanceX)
-//                        .containerValue(\.centerDistanceY, section.centerDistanceY)
-//                        .frame(width: section.width, height: section.height)
-                }
-                }
-            }
-            ForEach(consoles) { consoleItem in
+            ForEach(containerCollection) { consoleItem in
                 
                 Button {
                     withAnimation {
@@ -56,12 +36,12 @@ struct ContainerSelectionView: View {
                 
             }
         }
-        .task {
-            withAnimation {
-                
-                selected = consoles.first!
-            }
-        }
+        //        .task {
+        //            withAnimation {
+        //
+        //                selected = consoles.first!
+        //            }
+        //        }
     }
 }
 

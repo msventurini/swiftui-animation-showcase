@@ -6,23 +6,26 @@
 //
 
 import SwiftUI
-import SwiftData
+import Observation
 
 struct GameBoyTransition: View {
-    @Environment(\.modelContext) var modelContext
-    @Query(sort: \Container.chronologicalNumber, order: .forward)
+    @Environment(\.containerCollection) private var containerCollection
 
-    var consoles: [Container]
+//    @State var containerCollection: ContainerCollection = .init()
+    
+    init() {
         
-    @State private var selected: Container? = nil
-
+    }
+    
     var body: some View {
-        ContainerSelectionView()
-            .modelContainer(AppDataUtils.container)
+//        ContainerSelectionView(selected: containerCollection.consoleCollection.first)
+        ContainerSelectionView(selected: containerCollection.first!)
+//            .environment(containerCollection)
+//            .modelContainer(AppDataUtils.container)
         
     }
 }
-
-#Preview(traits: .modifier(ContainerPreviewModifier())) {
-    GameBoyTransition()
-}
+//
+//#Preview(traits: .modifier(ContainerPreviewModifier())) {
+//    GameBoyTransition()
+//}

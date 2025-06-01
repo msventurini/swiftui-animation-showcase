@@ -39,9 +39,9 @@ struct ConsoleFrameLayout: Layout {
     
 }
 
-#Preview(traits: .modifier(ContainerPreviewModifier())) {
-    GameBoyTransition()
-}
+//#Preview(traits: .modifier(ContainerPreviewModifier())) {
+//    GameBoyTransition()
+//}
 
 //
 //guard
