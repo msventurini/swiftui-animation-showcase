@@ -10,7 +10,12 @@ import SwiftUI
 import Observation
 //import SwiftData
 
-@Observable public final class Container: Identifiable, Equatable, Hashable {
+public struct Container: Identifiable, Equatable, Hashable {
+    
+    public var id: Int {
+        return containerID.id
+    }
+    
     
     public static func == (lhs: Container, rhs: Container) -> Bool {
         lhs.containerID == rhs.containerID
@@ -33,8 +38,5 @@ import Observation
         self.width = width
         self.height = height
     }
-    
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(ObjectIdentifier(self))
-    }
+
 }

@@ -19,13 +19,13 @@ import Observation
             .allCases
             .map { containerData in
                 
-                let containerModel = containerData.swiftDataModel
+                let containerModel = containerData.observableModel
                 containerData
                     .sections
                     .forEach { section in
                         
-                        let sectionModel = section.swiftDataModelFor(container: containerModel)
-                        sectionModel.console = containerModel
+                        let sectionModel = section.observableModelFor(container: containerModel)
+                        
   
                     }
              return containerModel

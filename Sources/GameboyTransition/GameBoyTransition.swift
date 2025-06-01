@@ -19,7 +19,8 @@ struct GameBoyTransition: View {
     
     var body: some View {
 //        ContainerSelectionView(selected: containerCollection.consoleCollection.first)
-        ContainerSelectionView(selected: containerCollection.first!)
+//        ContainerSelectionView(selected: containerCollection.first!)
+        ContainerSelectionView(selected: containerCollection[1])
 //            .environment(containerCollection)
 //            .modelContainer(AppDataUtils.container)
         

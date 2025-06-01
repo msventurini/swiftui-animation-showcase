@@ -9,17 +9,12 @@ import SwiftUI
 import Observation
 import AnimationFoundation
 
-@Observable public class ConsoleSection: Identifiable, Equatable, Hashable {
+public struct ConsoleSection: Identifiable, Equatable, Hashable {
 
     public var id: Int
+//    public var id: Int
+//    public var console: Container?
     
-    public var drawingOrderNumber: Int
-    public var sectionName: String
-
-    public var console: Container?
-    
-    public var originX: Double
-    public var originY: Double
     
     public var widthRatioToContainer: Double
     public var heightRatioToContainer: Double
@@ -36,14 +31,9 @@ import AnimationFoundation
     public var centerDistanceX: Double
     public var centerDistanceY: Double
 
-    init(id: Int, drawingOrderNumber: Int, sectionName: String, originX: Double, originY: Double, widthRatioToContainer: Double, heightRatioToContainer: Double, containerWidth: Double, containerHeight: Double, /*centerPointX: Double, centerPointY: Double,*/ console: Container? = nil) {
+    init(id: Int, originX: Double, originY: Double, widthRatioToContainer: Double, heightRatioToContainer: Double, containerWidth: Double, containerHeight: Double) {
+        
         self.id = id
-        
-        self.drawingOrderNumber = drawingOrderNumber
-        self.sectionName = sectionName
-        
-        self.originX = originX
-        self.originY = originY
         
         self.widthRatioToContainer = widthRatioToContainer
         self.heightRatioToContainer = heightRatioToContainer
@@ -52,7 +42,6 @@ import AnimationFoundation
         self.containerHeight = containerWidth
         self.width = containerWidth * widthRatioToContainer
         self.height = containerHeight * heightRatioToContainer
-        self.console = console
         
         let centerX = (originX + (widthRatioToContainer * 0.5)) - 0.5
         let centerY = (originY + (heightRatioToContainer * 0.5)) - 0.5
@@ -64,12 +53,8 @@ import AnimationFoundation
         
     }
     
-    public static func == (lhs: ConsoleSection, rhs: ConsoleSection) -> Bool {
-        lhs.id == rhs.id
-    }
-    
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(ObjectIdentifier(self))
-    }
+//    public static func == (lhs: ConsoleSection, rhs: ConsoleSection) -> Bool {
+//        lhs.id == rhs.id
+//    }
     
 }

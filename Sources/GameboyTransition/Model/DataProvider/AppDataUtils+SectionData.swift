@@ -25,17 +25,15 @@ extension AppDataUtils {
         var name: String {
             switch self {
             case .consoleScreen: "Console Screen"
-            case .controllerRight: "Control lerRight"
-            case .controllerLeft: "Control lerLeft"
+            case .controllerRight: "Controller Right"
+            case .controllerLeft: "Controller Left"
             }
         }
         
-        func swiftDataModelFor(container: Container) -> ConsoleSection {
+        func observableModelFor(container: Container) -> ConsoleSection {
             
             return .init(
                 id: self.id,
-                drawingOrderNumber: self.getDrawOrderNumber(at: container),
-                sectionName: self.name,
                 originX: self.originX(container: container),
                 originY: self.originY(container: container),
                 widthRatioToContainer: self.widthProportion(container: container),

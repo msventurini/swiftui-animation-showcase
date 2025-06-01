@@ -15,3 +15,7 @@ import SwiftUI
 extension EnvironmentValues {
     @Entry var containerCollection: [Container] = AppDataUtils.getContainerCollection()
 }
+
+extension EnvironmentValues {
+    @Entry var selectedContainer: Container? = nil
+}
