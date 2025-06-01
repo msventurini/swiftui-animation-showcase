@@ -12,10 +12,7 @@ import AnimationFoundation
 public struct ConsoleSection: Identifiable, Equatable, Hashable {
 
     public var id: Int
-//    public var id: Int
-//    public var console: Container?
-    
-    
+
     public var widthRatioToContainer: Double
     public var heightRatioToContainer: Double
 

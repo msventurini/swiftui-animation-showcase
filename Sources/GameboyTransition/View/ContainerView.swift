@@ -15,7 +15,7 @@ struct ContainerView: View {
     var body: some View {
 
             ConsoleFrameLayout {
-                ForEach(selected.sections) { section in
+                ForEach(selected.sections.shuffled()) { section in
                    SectionView(section: section)
                         .containerValue(\.centerDistanceX, section.centerDistanceX)
                         .containerValue(\.centerDistanceY, section.centerDistanceY)
@@ -44,6 +44,7 @@ struct SectionView: View {
                 Text(section.id.description)
             }
             .frame(width: section.width, height: section.height)
+            .frame(height: 200)
             
     }
     

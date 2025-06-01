@@ -8,7 +8,6 @@
 
 import SwiftUI
 import Observation
-//import SwiftData
 
 public struct Container: Identifiable, Equatable, Hashable {
     
@@ -16,11 +15,9 @@ public struct Container: Identifiable, Equatable, Hashable {
         return containerID.id
     }
     
-    
     public static func == (lhs: Container, rhs: Container) -> Bool {
         lhs.containerID == rhs.containerID
     }
-    
     
     public var containerID: ContainerID
     public var chronologicalNumber: Int
@@ -28,7 +25,6 @@ public struct Container: Identifiable, Equatable, Hashable {
     public var width: Double
     public var height: Double
     
-//    @Relationship(deleteRule: .cascade, inverse: \ConsoleSection.console)
     public var sections: [ConsoleSection] = []
     
     public init(containerID: ContainerID, chronologicalNumber: Int,containerName: String, width: Double, height: Double) {
