@@ -22,11 +22,13 @@ public struct AppDataUtils {
                 let sections = containerData
                     .sections
                     .map { section in
+                        let teste = section.observableModelFor(container: containerModel)
+//                        print("\(teste.id) - \(teste.width)")
+                        print("\(section.name) - \(section.rawValue)")
+                        return teste
                         
-                        return section.observableModelFor(container: containerModel)
-  
                     }
-                containerModel.sections = sections.sorted(by: { $0.id < $1.id })
+                containerModel.sections = sections//.sorted(by: { $0.id < $1.id })
                 
                 
              return containerModel

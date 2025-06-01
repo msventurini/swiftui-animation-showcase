@@ -28,7 +28,7 @@ struct SectionView: View {
                 Text(section.id.description)
             }
             .frame(width: section.width, height: section.height)
-            .frame(height: 200)
+
             
     }
     

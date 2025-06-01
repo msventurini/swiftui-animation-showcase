@@ -9,24 +9,18 @@ import SwiftUI
 import Observation
 
 struct GameBoyTransition: View {
+    
     @Environment(\.containerCollection) private var containerCollection
-
-//    @State var containerCollection: ContainerCollection = .init()
     
     init() {
         
     }
     
     var body: some View {
-//        ContainerSelectionView(selected: containerCollection.consoleCollection.first)
-//        ContainerSelectionView(selected: containerCollection.first!)
-        ContainerSelectionView(selected: containerCollection[2])
-//            .environment(containerCollection)
-//            .modelContainer(AppDataUtils.container)
-        
+        ContainerSelectionView(selected: containerCollection[0])
     }
 }
-//
-//#Preview(traits: .modifier(ContainerPreviewModifier())) {
-//    GameBoyTransition()
-//}
+
+#Preview(traits: .modifier(ContainerPreviewModifier())) {
+    GameBoyTransition()
+}

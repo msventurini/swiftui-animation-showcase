@@ -95,3 +95,50 @@ extension AnimatablePosition: VectorArithmetic {
     
     
 }
+
+struct TestAnimatablePosition: Shape {
+    
+    
+    
+    var currentOrigin: AnimatablePosition = .zero
+    
+    var animatableData: AnimatablePosition {
+        get { currentOrigin }
+        set { currentOrigin = newValue }
+    }
+    
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+
+        path.move(to: currentOrigin.cgPoint)
+        
+        path.addLine(to: .init(x: rect.maxX, y: rect.minY))
+        path.addLine(to: .init(x: rect.maxX, y: rect.maxY))
+        path.addLine(to: .init(x: rect.minX, y: rect.maxY))
+        
+        return path
+
+    }
+    
+}
+
+#Preview {
+    
+    @Previewable @State var isTapped: Bool = false
+    
+    var originValue: AnimatablePosition {
+        isTapped ? .init(x: 20, y: 20) : .init(x: 0, y: 0) //.init(x: 20, y: 20) : .init(x: 0, y: 0)
+    }
+    
+    TestAnimatablePosition(currentOrigin: originValue)
+        .frame(width: 300, height: 300)
+        .onTapGesture {
+            withAnimation {
+                isTapped.toggle()
+            }
+        }
+    
+    
+    
+    
+}

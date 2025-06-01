@@ -19,8 +19,9 @@ extension AppDataUtils {
         }
         
         case consoleScreen = 0
-        case controllerRight = 1
-        case controllerLeft = 2
+        
+        case controllerLeft = 1
+        case controllerRight = 2
         
         var name: String {
             switch self {
@@ -103,10 +104,10 @@ extension AppDataUtils {
             case (.gameboyAdvance, .controllerLeft): .zero
             case (.gameboyAdvance, .consoleScreen): 0.3
             case (.gameboyAdvance, .controllerRight): 0.7
-                
-            case (.nintendoSwitch, .consoleScreen): .zero
-            case (.nintendoSwitch, .controllerLeft):  0.2
-            case (.nintendoSwitch, .controllerRight): 0.8
+            
+            case (.nintendoSwitch, .controllerLeft):    .zero
+            case (.nintendoSwitch, .consoleScreen):     0.15
+            case (.nintendoSwitch, .controllerRight): 0.85
             }
         }
         
@@ -129,14 +130,14 @@ extension AppDataUtils {
             case (.gameboyDMG, .consoleScreen): 1.0
             case (.gameboyDMG, .controllerLeft): 0.5
             case (.gameboyDMG, .controllerRight): 0.5
-                
-            case (.gameboyAdvance, .controllerLeft): 0.3
+            
             case (.gameboyAdvance, .consoleScreen): 0.4
+            case (.gameboyAdvance, .controllerLeft): 0.3
             case (.gameboyAdvance, .controllerRight): 0.3
                 
-            case (.nintendoSwitch, .consoleScreen): 0.2
-            case (.nintendoSwitch, .controllerLeft): 0.6
-            case (.nintendoSwitch, .controllerRight): 0.2
+            case (.nintendoSwitch, .consoleScreen): 0.7
+            case (.nintendoSwitch, .controllerLeft): 0.15
+            case (.nintendoSwitch, .controllerRight): 0.15
             }
         }
 

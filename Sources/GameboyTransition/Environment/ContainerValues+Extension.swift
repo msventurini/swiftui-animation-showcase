@@ -9,14 +9,6 @@ import SwiftUI
 import AnimationFoundation
 
 extension ContainerValues {
-    @Entry var sectionIdentifier: String = ""
-}
-
-extension ContainerValues {
-    @Entry var frameWidth: Double? = nil
-}
-
-extension ContainerValues {
     @Entry var centerDistanceX: Double? = nil
 }
 

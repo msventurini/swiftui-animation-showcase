@@ -20,12 +20,18 @@ struct ConsoleFrameLayout: Layout {
         
         
         for (index, subview) in subviews.enumerated() {
-            print(index)
+            
             guard
-                let horizontalDistance = subview.containerValues.centerDistanceX,
+                let horizontalDistance = subview.containerValues.centerDistanceX
+            else {
+                print("erro - \(index) - center distance x")
+                return
+            }
+            
+            guard
                 let verticalDistance = subview.containerValues.centerDistanceY
             else {
-                print("erro")
+                print("erro - \(index) - center distance y")
                 return
             }
             
