@@ -49,9 +49,4 @@ public struct ConsoleSection: Identifiable, Equatable, Hashable {
         self.centerDistanceY = centerY * containerHeight
         
     }
-    
-//    public static func == (lhs: ConsoleSection, rhs: ConsoleSection) -> Bool {
-//        lhs.id == rhs.id
-//    }
-    
 }

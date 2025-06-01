@@ -8,7 +8,6 @@
 import SwiftUI
 import Observation
 import SwiftUIComponentKit
-//import SwiftData
 
 struct ContainerSelectionView: View {
     

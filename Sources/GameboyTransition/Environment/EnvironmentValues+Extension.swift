@@ -7,11 +7,6 @@
 
 import SwiftUI
 
-//extension EnvironmentValues {
-//    @Entry var
-//}
-//@Entry var sectionIdentifier: String = ""
-
 extension EnvironmentValues {
     @Entry var containerCollection: [Container] = AppDataUtils.getContainerCollection()
 }

@@ -7,9 +7,6 @@
 
 import SwiftUI
 
-
-
-
 extension AppDataUtils {
     public enum ContainerData: Int, Hashable, Identifiable, CaseIterable {
         
@@ -100,8 +97,6 @@ extension AppDataUtils {
             case .nintendoSwitch: [.controllerLeft, .consoleScreen, .controllerRight]
             }
         }
-
-
     }
     
 }
