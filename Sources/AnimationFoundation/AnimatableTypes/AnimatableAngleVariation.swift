@@ -68,6 +68,7 @@ extension AnimatableAngleVariation: VectorArithmetic {
     
     public var magnitudeSquared: Double {
         self.startAngle.animatableData.magnitudeSquared + self.endAngle.animatableData
+//        AnimatableAngleVariation.normalizeAngleValue(angleValue: self.startAngle.degrees.magnitudeSquared + self.endAngle.degrees.magnitudeSquared)
     }
     
     

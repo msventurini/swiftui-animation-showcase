@@ -19,9 +19,18 @@ struct TesteMorphingShape: View {
     
     let zeroShape: AnimatableShapeCoordinateMultipliers = .zero
     
-    var angleTeste: AnimatableAngleVariation = .init(startAngle: Angle(degrees: 180), endAngle: Angle(degrees: 240))
+    let leftControllerAngles: AnimatableShapeAngleValues = .init(
+        topLeadingAngleValues: .init(startAngle: Angle(degrees: 180), endAngle: Angle(degrees: 240)),
+        topTrailingAngleValues: .init(startAngle: Angle(degrees: 50), endAngle: Angle(degrees: 50)),
+        
+        bottomTrailingAngleValues: .init(startAngle: Angle(degrees: 0), endAngle: Angle(degrees: 0)),
+        bottomLeadingAngleValues: .init(startAngle: Angle(degrees: 100), endAngle: Angle(degrees: 180)))
     
-    let zeroAngle: AnimatableAngleVariation = .zero
+    let zeroAngles: AnimatableShapeAngleValues = .zero
+    
+
+    
+//    let zeroAngle: AnimatableAngleVariation = .zero
     
     @State var isTapped: Bool = false
     
@@ -29,9 +38,9 @@ struct TesteMorphingShape: View {
         isTapped ? leftControllerShape : zeroShape
     }
     
-    var currentAngle: AnimatableAngleVariation {
+    var currentAngle: AnimatableShapeAngleValues {
         
-        isTapped ? angleTeste : zeroAngle
+        isTapped ? leftControllerAngles : zeroAngles
         
     }
     
@@ -39,7 +48,7 @@ struct TesteMorphingShape: View {
     var body: some View {
         
         VStack {
-            GenericShape(animatableCoordinateMultipliers: currentShape, topLeadingAngle: currentAngle)
+            GenericShape(animatableCoordinateMultipliers: currentShape, angles: currentAngle)
             
             Button {
                 withAnimation {
@@ -59,7 +68,7 @@ struct GenericShape: Shape {
     
     var animatableCoordinateMultipliers: AnimatableShapeCoordinateMultipliers
 
-    var topLeadingAngle: AnimatableAngleVariation
+    var angles: AnimatableShapeAngleValues
 
     
 //    var animatableData: AnimatableShapeCoordinateMultipliers {
@@ -67,14 +76,14 @@ struct GenericShape: Shape {
 //        set { animatableCoordinateMultipliers = newValue }
 //    }
     
-    var animatableData: AnimatablePair<AnimatableShapeCoordinateMultipliers, AnimatableAngleVariation> {
+    var animatableData: AnimatablePair<AnimatableShapeCoordinateMultipliers, AnimatableShapeAngleValues> {
         get {
-           AnimatablePair(animatableCoordinateMultipliers, topLeadingAngle)
+           AnimatablePair(animatableCoordinateMultipliers, angles)
         }
 
         set {
             animatableCoordinateMultipliers = newValue.first
-            topLeadingAngle = newValue.second
+            angles = newValue.second
         }
     }
     
@@ -95,8 +104,8 @@ struct GenericShape: Shape {
             ),
             
             radius: rect.size.width * 0.22,
-            startAngle: topLeadingAngle.startAngle,
-            endAngle: topLeadingAngle.endAngle,
+            startAngle: angles.topLeadingAngleValues.startAngle,
+            endAngle: angles.topLeadingAngleValues.endAngle,
             clockwise: false)
         
         path.addArc(
@@ -107,8 +116,8 @@ struct GenericShape: Shape {
                 y: (rect.minY +
                     (rect.size.height * animatableCoordinateMultipliers.topTrailingMultipliers.y))),
             radius: 0,
-            startAngle: Angle(degrees: 50),
-            endAngle: Angle(degrees: 50),
+            startAngle: angles.topTrailingAngleValues.startAngle,
+            endAngle: angles.topTrailingAngleValues.endAngle,
             clockwise: false)
         
         
@@ -119,8 +128,8 @@ struct GenericShape: Shape {
                 y: (rect.maxY +
                     (rect.size.height * animatableCoordinateMultipliers.bottomTrailingMultipliers.y))),
             radius: 0,
-            startAngle: Angle(degrees: 0),
-            endAngle: Angle(degrees: 0),
+            startAngle: angles.bottomTrailingAngleValues.startAngle,
+            endAngle: angles.bottomTrailingAngleValues.endAngle,
             clockwise: false
         )
             
@@ -134,8 +143,8 @@ struct GenericShape: Shape {
                     (rect.size.height *
                      animatableCoordinateMultipliers.bottomLeadingMultipliers.y))),
             radius: rect.size.width * 0.5,
-            startAngle: Angle(degrees: 100),
-            endAngle: Angle(degrees: 180),
+            startAngle: angles.bottomLeadingAngleValues.startAngle,
+            endAngle: angles.bottomLeadingAngleValues.endAngle,
             clockwise: false
         )
         
