@@ -127,7 +127,7 @@ struct TestAnimatablePosition: Shape {
     @Previewable @State var isTapped: Bool = false
     
     var originValue: AnimatablePosition {
-        isTapped ? .init(x: 20, y: 20) : .init(x: 0, y: 0) //.init(x: 20, y: 20) : .init(x: 0, y: 0)
+        isTapped ? .init(x: 20, y: 120) : .init(x: 0, y: 0) //.init(x: 20, y: 20) : .init(x: 0, y: 0)
     }
     
     TestAnimatablePosition(currentOrigin: originValue)
