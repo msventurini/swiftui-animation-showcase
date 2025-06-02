@@ -19,17 +19,27 @@ struct TesteMorphingShape: View {
     
     let zeroShape: AnimatableShapeCoordinateMultipliers = .zero
     
+    var angleTeste: AnimatableAngleVariation = .init(startAngle: Angle(degrees: 180), endAngle: Angle(degrees: 240))
+    
+    let zeroAngle: AnimatableAngleVariation = .zero
+    
     @State var isTapped: Bool = false
     
     var currentShape: AnimatableShapeCoordinateMultipliers {
         isTapped ? leftControllerShape : zeroShape
     }
     
+    var currentAngle: AnimatableAngleVariation {
+        
+        isTapped ? angleTeste : zeroAngle
+        
+    }
+    
     
     var body: some View {
         
         VStack {
-            GenericShape(animatableCoordinateMultipliers: currentShape)
+            GenericShape(animatableCoordinateMultipliers: currentShape, topLeadingAngle: currentAngle)
             
             Button {
                 withAnimation {
@@ -48,10 +58,24 @@ struct TesteMorphingShape: View {
 struct GenericShape: Shape {
     
     var animatableCoordinateMultipliers: AnimatableShapeCoordinateMultipliers
+
+    var topLeadingAngle: AnimatableAngleVariation
+
     
-    var animatableData: AnimatableShapeCoordinateMultipliers {
-        get { animatableCoordinateMultipliers }
-        set { animatableCoordinateMultipliers = newValue }
+//    var animatableData: AnimatableShapeCoordinateMultipliers {
+//        get { animatableCoordinateMultipliers }
+//        set { animatableCoordinateMultipliers = newValue }
+//    }
+    
+    var animatableData: AnimatablePair<AnimatableShapeCoordinateMultipliers, AnimatableAngleVariation> {
+        get {
+           AnimatablePair(animatableCoordinateMultipliers, topLeadingAngle)
+        }
+
+        set {
+            animatableCoordinateMultipliers = newValue.first
+            topLeadingAngle = newValue.second
+        }
     }
     
    
@@ -71,8 +95,8 @@ struct GenericShape: Shape {
             ),
             
             radius: rect.size.width * 0.22,
-            startAngle: Angle(degrees: 180),
-            endAngle: Angle(degrees: 240),
+            startAngle: topLeadingAngle.startAngle,
+            endAngle: topLeadingAngle.endAngle,
             clockwise: false)
         
         path.addArc(
@@ -252,6 +276,8 @@ struct ScreenLeftBodyShape: Shape {
 
 #Preview {
     TesteMorphingShape()
+        .frame(width: 29.6 ,height: 82)
+
 }
 
 #Preview {

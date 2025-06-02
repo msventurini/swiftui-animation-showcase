@@ -23,11 +23,7 @@ let package = Package(
             name: LibNamed.swiftUIAnimationShowcase,
             type: .dynamic,
             targets: [DefaultTargetNamed.swiftUIAnimationShowcase]),
-        .library(
-            name: LibNamed.kirbyJumping,
-            type: .dynamic,
-            targets: [DefaultTargetNamed.kirbyJumping]),
-        
+  
         .library(
             name: LibNamed.gameboyTransition,
             type: .dynamic, //botar o framework guarda chuva como dynamic de novo depois pra ver bug
@@ -56,11 +52,9 @@ let package = Package(
         .target(
             name: DefaultTargetNamed.swiftUIAnimationShowcase,
             dependencies: [
-                .target(name: DefaultTargetNamed.kirbyJumping),
                 .target(name: DefaultTargetNamed.gameboyTransition)
             ]
         ),
-        .target(name: DefaultTargetNamed.kirbyJumping),
         
         
         .target(
@@ -90,7 +84,6 @@ enum Pkg {
     enum Product {
         enum Library {
             enum Named {
-                static let kirbyJumping: String = "KirbyJumpingAnimation"
                 static let gameboyTransition: String = "GameboyTransition"
                 static let swiftUIAnimationShowcase: String = "SwiftUIAnimationShowcase"
                 static let testingPlayground: String = "TestingPlayground"
@@ -103,7 +96,6 @@ enum Pkg {
         
         enum DefaultType {
             enum Named {
-                static let kirbyJumping: String = "KirbyJumpingAnimation"
                 static let gameboyTransition: String = "GameboyTransition"
                 static let swiftUIAnimationShowcase: String = "SwiftUIAnimationShowcase"
                 static let testingPlayground: String = "TestingPlayground"

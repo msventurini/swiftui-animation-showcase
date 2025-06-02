@@ -60,13 +60,8 @@ extension AnimatableShapeCoordinateMultipliers: VectorArithmetic {
     }
     
     public var magnitudeSquared: Double {
-        
-        return self.topLeadingMultipliers.magnitudeSquared
-        
-        
+        return (self.topLeadingMultipliers.magnitudeSquared + self.topTrailingMultipliers.magnitudeSquared + self.bottomLeadingMultipliers.magnitudeSquared + self.bottomTrailingMultipliers.magnitudeSquared)
     }
-    
-    
 }
 
 struct TesteShape: Shape, Animatable {
@@ -103,7 +98,7 @@ struct TestingShapeAnimation: View {
     var coordinates: AnimatableShapeCoordinateMultipliers {
         isTapped ? .init(topLeadingCoordinates: .init(x: 10, y: 10), topTrailingCoordinates: .init(x: 40, y: 5), bottomTrailingCoordinates: .init(x: 30, y: 120), bottomLeadingCoordinates: .init(x: 60, y: 90)) : .zero
     }
-    
+        
     var body: some View {
         
         VStack {
