@@ -7,84 +7,145 @@
 
 
 import SwiftUI
+import AnimationFoundation
 
-enum ShapeData {
+struct TesteMorphingShape: View {
     
-    case screenBody
-    case leftController
-    case rightController
+    let leftControllerShape: AnimatableShapeCoordinateMultipliers = .init(
+        topLeadingCoordinates: .init(x: 0.32, y: 0.22),
+        topTrailingCoordinates: .init(x: 0, y: 0.04),
+        bottomTrailingCoordinates: .init(x: 0, y: -0.09),
+        bottomLeadingCoordinates: .init(x: 0.5, y: -0.30))
     
+    let zeroShape: AnimatableShapeCoordinateMultipliers = .zero
     
+    @State var isTapped: Bool = false
     
-}
-
-struct PathArcData {
-    
-    
-    
-    
-    
-}
-
-
-struct SectionShape: Shape {
-    
-    
-    
-    func path(in rect: CGRect) -> Path {
-        var path = Path()
-        
-        
-        
-        
-        
-        return path
-        
-        
+    var currentShape: AnimatableShapeCoordinateMultipliers {
+        isTapped ? leftControllerShape : zeroShape
     }
     
     
-    
-    
+    var body: some View {
+        
+        VStack {
+            GenericShape(animatableCoordinateMultipliers: currentShape)
+            
+            Button {
+                withAnimation {
+                    isTapped.toggle()
+                }
+            } label: {
+                Text("aaa")
+            }
+            
+        }
+        
+        
+    }
 }
 
-
-// 370 x 205
-// 144 x 80
-
-// 205 * 0.4 = 82
-// 160 * 0.4 = 64
-// 74 * 0.4 = 29.6
-// 64 * 0.4 = 25.6
-// 44 * 0.4 = 17.6
-// 38 * 0.4 = 15.2
-// 24 * 0.4 = 9.6
-// 22 * 0.4 = 8.8
-// 18 * 0.4 = 7.2
-// 16 * 0.4 = 6.4
-// 8  * 0.4 = 3.2
-
-struct LeftControllerShape: Shape {
+struct GenericShape: Shape {
+    
+    var animatableCoordinateMultipliers: AnimatableShapeCoordinateMultipliers
+    
+    var animatableData: AnimatableShapeCoordinateMultipliers {
+        get { animatableCoordinateMultipliers }
+        set { animatableCoordinateMultipliers = newValue }
+    }
+    
+   
+    
     func path(in rect: CGRect) -> Path {
         var path = Path()
         
         path.addArc(
-
-            center: CGPoint(x: rect.minX + 9.6, y: rect.minY + 17.6),
-            radius: 6.4,
+            
+            center: CGPoint(
+                x: (rect.minX +
+                    (rect.size.width *
+                     animatableCoordinateMultipliers.topLeadingMultipliers.x)),
+                y: (rect.minY +
+                    (rect.size.height *
+                     animatableCoordinateMultipliers.topLeadingMultipliers.y))
+            ),
+            
+            radius: rect.size.width * 0.22,
             startAngle: Angle(degrees: 180),
             endAngle: Angle(degrees: 240),
             clockwise: false)
         
         path.addArc(
-            center: CGPoint(x: rect.maxX, y: rect.minY + 3.2),
+            center: CGPoint(
+                x: (rect.maxX +
+                    (rect.size.width *
+                     animatableCoordinateMultipliers.topTrailingMultipliers.x)),
+                y: (rect.minY +
+                    (rect.size.height * animatableCoordinateMultipliers.topTrailingMultipliers.y))),
+            radius: 0,
+            startAngle: Angle(degrees: 50),
+            endAngle: Angle(degrees: 50),
+            clockwise: false)
+        
+        
+        path.addArc(
+            center: CGPoint(
+                x: (rect.maxX +
+                    (rect.size.width * animatableCoordinateMultipliers.bottomTrailingMultipliers.x)),
+                y: (rect.maxY +
+                    (rect.size.height * animatableCoordinateMultipliers.bottomTrailingMultipliers.y))),
+            radius: 0,
+            startAngle: Angle(degrees: 0),
+            endAngle: Angle(degrees: 0),
+            clockwise: false
+        )
+            
+        
+        path.addArc(
+            center: CGPoint(
+                x: (rect.minX +
+                    (rect.size.width *
+                     animatableCoordinateMultipliers.bottomLeadingMultipliers.x)),
+                y: (rect.maxY +
+                    (rect.size.height *
+                     animatableCoordinateMultipliers.bottomLeadingMultipliers.y))),
+            radius: rect.size.width * 0.5,
+            startAngle: Angle(degrees: 100),
+            endAngle: Angle(degrees: 180),
+            clockwise: false
+        )
+        
+        path.closeSubpath()
+        return path
+    }
+}
+
+struct LeftControllerShape: Shape {
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        
+        
+        path.addArc(
+            
+            center: CGPoint(
+                x: (rect.minX + rect.size.width * 0.32),
+                y: (rect.minY + rect.size.height * 0.22)
+            ),
+            
+            radius: rect.size.width * 0.22,
+            startAngle: Angle(degrees: 180),
+            endAngle: Angle(degrees: 240),
+            clockwise: false)
+        
+        path.addArc(
+            center: CGPoint(x: rect.maxX, y: rect.minY + (rect.size.height * 0.04)),
             radius: 0,
             startAngle: Angle(degrees: 50),
             endAngle: Angle(degrees: 50),
             clockwise: false)
         
         path.addArc(
-            center: CGPoint(x: rect.maxX, y: rect.maxY - 7.2),
+            center: CGPoint(x: rect.maxX, y: rect.maxY - (rect.size.height * 0.09)),
             radius: 0,
             startAngle: Angle(degrees: 0),
             endAngle: Angle(degrees: 0),
@@ -92,9 +153,8 @@ struct LeftControllerShape: Shape {
         )
         
         path.addArc(
-            center: CGPoint(x: rect.midX, y: rect.maxY - 25.6),
-//            radius: 38,
-            radius: 15.2,
+            center: CGPoint(x: rect.midX, y: rect.maxY - (0.30 * rect.size.height)),
+            radius: rect.size.width * 0.5,
             startAngle: Angle(degrees: 100),
             endAngle: Angle(degrees: 180),
             clockwise: false
@@ -110,35 +170,39 @@ struct RightControllerShape: Shape {
         var path = Path()
         
         path.addArc(
-            center: CGPoint(x: rect.minX, y: rect.minY + 8),
+            center: CGPoint(x: rect.minX, y: rect.minY + 3.2),
             radius: 0,
             startAngle: Angle(degrees: 50),
             endAngle: Angle(degrees: 50),
             clockwise: false)
         
-        
         path.addArc(
-            center: CGPoint(x: rect.maxX - 24, y: rect.minY + 44),
-            radius: 16,
+            center: CGPoint(x: rect.maxX - 9.6, y: rect.minY + 17.6),
+            radius: 6.4,
             startAngle: Angle(degrees: 300),
             endAngle: Angle(degrees: 360),
             clockwise: false)
         
         path.addArc(
-            center: CGPoint(x: rect.midX, y: rect.maxY - 64),
-            radius: 38,
+            center: CGPoint(x: rect.midX, y: rect.maxY - 25.6),
+            radius: 15.2,
             startAngle: Angle(degrees: 0),
             endAngle: Angle(degrees: 80),
             clockwise: false
         )
         
         path.addArc(
-            center: CGPoint(x: rect.minX, y: rect.maxY - 18),
+            center: CGPoint(x: rect.minX, y: rect.maxY - 7.2),
             radius: 0,
             startAngle: Angle(degrees: 0),
             endAngle: Angle(degrees: 80),
             clockwise: false
         )
+        
+        
+        
+        
+        
         
         path.closeSubpath()
         return path
@@ -187,42 +251,126 @@ struct ScreenLeftBodyShape: Shape {
 }
 
 #Preview {
-    HStack(spacing: 0) {
-        LeftControllerShape()
-            .fill(.indigo)
-            .frame(width: 29.6)
-            .onGeometryChange(for: CGSize.self) { geometry in
-                return geometry.size
-            } action: { newValue in
-                print("left: \(newValue.width)x\(newValue.height)")
-            }
-        ScreenLeftBodyShape()
-            .fill(.indigo)
-            .frame(width: 88.8)
-            .onGeometryChange(for: CGSize.self) { geometry in
-                return geometry.size
-            } action: { newValue in
-                print("screen: \(newValue.width)x\(newValue.height)")
-            }
-        
-        RightControllerShape()
-            .fill(.indigo)
-            .frame(width: 29.6)
-            .onGeometryChange(for: CGSize.self) { geometry in
-                return geometry.size
-            } action: { newValue in
-                print("right: \(newValue.width)x\(newValue.height)")
-            }
-        
-    }
-    .frame(height: 82)
-    .background(.red)
-    .onGeometryChange(for: CGSize.self) { geometry in
-        return geometry.size
-    } action: { newValue in
-        print("total: \(newValue.width)x\(newValue.height)")
-    }
+    TesteMorphingShape()
+}
+
+#Preview {
+
+        HStack(spacing: 0) {
+            LeftControllerShape()
+                .fill(.indigo)
+                .frame(width: 29.6)
+                .onGeometryChange(for: CGSize.self) { geometry in
+                    return geometry.size
+                } action: { newValue in
+                    print("left: \(newValue.width)x\(newValue.height)")
+                }
+            ScreenLeftBodyShape()
+                .fill(.indigo)
+                .frame(width: 88.8)
+                .onGeometryChange(for: CGSize.self) { geometry in
+                    return geometry.size
+                } action: { newValue in
+                    print("screen: \(newValue.width)x\(newValue.height)")
+                }
+    
+            RightControllerShape()
+                .fill(.indigo)
+                .frame(width: 29.6)
+                .onGeometryChange(for: CGSize.self) { geometry in
+                    return geometry.size
+                } action: { newValue in
+                    print("right: \(newValue.width)x\(newValue.height)")
+                }
+    
+        }
+        .frame(height: 82)
+        .background(.red)
+        .onGeometryChange(for: CGSize.self) { geometry in
+            return geometry.size
+        } action: { newValue in
+            print("total: \(newValue.width)x\(newValue.height)")
+        }
     
     
     
 }
+
+
+//
+//struct GenericShape: Shape {
+//    
+//    var fourArcShapeCoordinates: AnimatableShapeCoordinateMultipliers
+//    
+//    
+//    
+//    var animatableData: AnimatableShapeCoordinateMultipliers {
+//        get { fourArcShapeCoordinates }
+//        set { fourArcShapeCoordinates = newValue }
+//    }
+//    
+//   
+//    
+//    func path(in rect: CGRect) -> Path {
+//        var path = Path()
+//        
+//        path.addArc(
+//            
+//            center: CGPoint(
+//                x: (rect.minX +
+//                    (rect.size.width *
+//                     leftControllerShape.topLeadingMultipliers.x)),
+//                y: (rect.minY +
+//                    (rect.size.height *
+//                    leftControllerShape.topLeadingMultipliers.y))
+//            ),
+//            
+//            radius: rect.size.width * 0.22,
+//            startAngle: Angle(degrees: 180),
+//            endAngle: Angle(degrees: 240),
+//            clockwise: false)
+//        
+//        path.addArc(
+//            center: CGPoint(
+//                x: (rect.maxX +
+//                    (rect.size.width *
+//                     leftControllerShape.topTrailingMultipliers.x)),
+//                y: (rect.minY +
+//                    (rect.size.height * leftControllerShape.topTrailingMultipliers.y))),
+//            radius: 0,
+//            startAngle: Angle(degrees: 50),
+//            endAngle: Angle(degrees: 50),
+//            clockwise: false)
+//        
+//        
+//        path.addArc(
+//            center: CGPoint(
+//                x: (rect.maxX +
+//                    (rect.size.width * leftControllerShape.bottomTrailingMultipliers.x)),
+//                y: (rect.maxY +
+//                    (rect.size.height * leftControllerShape.bottomTrailingMultipliers.y))),
+//            radius: 0,
+//            startAngle: Angle(degrees: 0),
+//            endAngle: Angle(degrees: 0),
+//            clockwise: false
+//        )
+//            
+//        
+//        path.addArc(
+//            center: CGPoint(
+//                x: (rect.minX +
+//                    (rect.size.width *
+//                     leftControllerShape.bottomLeadingMultipliers.x)),
+//                y: (rect.maxY +
+//                    (rect.size.height *
+//                     leftControllerShape.bottomLeadingMultipliers.y))),
+//            radius: rect.size.width * 0.5,
+//            startAngle: Angle(degrees: 100),
+//            endAngle: Angle(degrees: 180),
+//            clockwise: false
+//        )
+//        
+//        path.closeSubpath()
+//        return path
+//    }
+//}

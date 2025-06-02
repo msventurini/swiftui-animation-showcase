@@ -18,7 +18,7 @@ public struct AnimatablePosition {
     }
     
     public init(x: Double, y: Double) {
-        self.x = y
+        self.x = x
         self.y = y
     }
     
