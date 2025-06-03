@@ -91,7 +91,7 @@ extension AnimatableShapeModel {
         )
     }
     
-    func allVertices() -> [VertexData] {
+    func allVertices(in rect: CGRect) -> [VertexData] {
         AnimatableShapeModel.Vertex
             .allCases
             .sorted(by: { $0.id < $1.id })

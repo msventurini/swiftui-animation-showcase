@@ -12,10 +12,12 @@ struct AnimatableAngleVariation: Sendable, Animatable {
     
     public var startAngle: Angle
     public var endAngle: Angle
+    public var delta: Angle
     
     public init(startAngle: Angle, endAngle: Angle) {
         self.startAngle = startAngle
         self.endAngle = endAngle
+        self.delta = endAngle - startAngle
     }
     
     var animatableData: AnimatablePair<
@@ -33,6 +35,7 @@ struct AnimatableAngleVariation: Sendable, Animatable {
         set {
             startAngle.animatableData = newValue.first
             endAngle.animatableData = newValue.second
+            delta.animatableData = newValue.second - newValue.first
         }
     }
     
