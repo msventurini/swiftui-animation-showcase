@@ -108,7 +108,7 @@ struct TestingShapeAnimation: View {
                 withAnimation {
                     isTapped.toggle()
                 }
-                print(coordinates)
+//                print(coordinates)
             } label: {
                 Text("aaa")
             }

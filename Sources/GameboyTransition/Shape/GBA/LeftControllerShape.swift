@@ -151,37 +151,37 @@ struct ScreenLeftBodyShape: Shape {
             LeftControllerShape()
                 .fill(.indigo)
                 .frame(width: 29.6)
-                .onGeometryChange(for: CGSize.self) { geometry in
-                    return geometry.size
-                } action: { newValue in
-                    print("left: \(newValue.width)x\(newValue.height)")
-                }
+//                .onGeometryChange(for: CGSize.self) { geometry in
+//                    return geometry.size
+//                } action: { newValue in
+//                    print("left: \(newValue.width)x\(newValue.height)")
+//                }
             ScreenLeftBodyShape()
                 .fill(.indigo)
                 .frame(width: 88.8)
-                .onGeometryChange(for: CGSize.self) { geometry in
-                    return geometry.size
-                } action: { newValue in
-                    print("screen: \(newValue.width)x\(newValue.height)")
-                }
+//                .onGeometryChange(for: CGSize.self) { geometry in
+//                    return geometry.size
+//                } action: { newValue in
+//                    print("screen: \(newValue.width)x\(newValue.height)")
+//                }
     
             RightControllerShape()
                 .fill(.indigo)
                 .frame(width: 29.6)
-                .onGeometryChange(for: CGSize.self) { geometry in
-                    return geometry.size
-                } action: { newValue in
-                    print("right: \(newValue.width)x\(newValue.height)")
-                }
+//                .onGeometryChange(for: CGSize.self) { geometry in
+//                    return geometry.size
+//                } action: { newValue in
+//                    print("right: \(newValue.width)x\(newValue.height)")
+//                }
     
         }
         .frame(height: 82)
         .background(.red)
-        .onGeometryChange(for: CGSize.self) { geometry in
-            return geometry.size
-        } action: { newValue in
-            print("total: \(newValue.width)x\(newValue.height)")
-        }
+//        .onGeometryChange(for: CGSize.self) { geometry in
+//            return geometry.size
+//        } action: { newValue in
+//            print("total: \(newValue.width)x\(newValue.height)")
+//        }
     
     
     
