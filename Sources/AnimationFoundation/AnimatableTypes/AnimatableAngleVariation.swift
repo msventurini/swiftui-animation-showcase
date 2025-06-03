@@ -8,17 +8,19 @@
 import SwiftUI
 
 
-public struct AnimatableAngleVariation: Sendable, Animatable {
+struct AnimatableAngleVariation: Sendable, Animatable {
     
     public var startAngle: Angle
     public var endAngle: Angle
+    public var delta: Angle
     
     public init(startAngle: Angle, endAngle: Angle) {
         self.startAngle = startAngle
         self.endAngle = endAngle
+        self.delta = endAngle - startAngle
     }
     
-    public var animatableData: AnimatablePair<
+    var animatableData: AnimatablePair<
         Angle.AnimatableData,
         Angle.AnimatableData
     >
@@ -33,8 +35,9 @@ public struct AnimatableAngleVariation: Sendable, Animatable {
         set {
             startAngle.animatableData = newValue.first
             endAngle.animatableData = newValue.second
+            delta.animatableData = newValue.second - newValue.first
         }
     }
     
-    public static let zero: AnimatableAngleVariation = .init(startAngle: .zero, endAngle: .zero)
+    static let zero: AnimatableAngleVariation = .init(startAngle: .zero, endAngle: .zero)
 }

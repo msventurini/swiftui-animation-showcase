@@ -139,11 +139,11 @@ struct ScreenLeftBodyShape: Shape {
     
 }
 
-#Preview {
-    TesteMorphingShape()
-        .frame(width: 29.6 ,height: 82)
-
-}
+//#Preview {
+//    TesteMorphingShape()
+//        .frame(width: 29.6 ,height: 82)
+//
+//}
 
 #Preview {
 

@@ -1,0 +1,35 @@
+//
+//  AnimatableShapeModel.swift
+//  swiftui-animation-showcase
+//
+//  Created by Matheus Silveira Venturini on 02/06/25.
+//
+
+import SwiftUI
+
+struct AnimatableShapeModel: Sendable {
+    var coordinates: AnimatableShapePropotionalCoordinates
+    var cornerRadii: RectangleCornerRadii
+    var angleValues: AnimatableShapeAngleValues
+   
+    init(
+        coordinates: AnimatableShapePropotionalCoordinates,
+        cornerRadii: RectangleCornerRadii,
+        angleValues: AnimatableShapeAngleValues,
+    ) {
+        self.coordinates = coordinates
+        self.cornerRadii = cornerRadii
+        self.angleValues = angleValues
+    }
+    
+    public static let zero: AnimatableShapeModel = .init(
+        coordinates: AnimatableShapePropotionalCoordinates.zero,
+        cornerRadii: .init(
+            topLeading: .zero,
+            bottomLeading: .zero,
+            bottomTrailing: .zero,
+            topTrailing: .zero),
+        angleValues: AnimatableShapeAngleValues.zero
+    )
+    
+}
