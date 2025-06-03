@@ -101,9 +101,9 @@ struct GenericShape: Shape {
             endAngle: shapeModel.angleValues.bottomLeadingAngleValues.endAngle,
             clockwise: false
         )
-        print("fourth-bottomTrailing: \(fourthArcCenter), radius: \(fourthRadius)")
-        print("third-startAngle: \(shapeModel.angleValues.bottomLeadingAngleValues.startAngle.degrees)")
-        print("third-endAngle: \(shapeModel.angleValues.bottomLeadingAngleValues.endAngle.degrees)")
+        print("fourth-bottomLeading: \(fourthArcCenter), radius: \(fourthRadius)")
+        print("fourth-startAngle: \(shapeModel.angleValues.bottomLeadingAngleValues.startAngle.degrees)")
+        print("fourth-endAngle: \(shapeModel.angleValues.bottomLeadingAngleValues.endAngle.degrees)")
 
         path.closeSubpath()
         return path
