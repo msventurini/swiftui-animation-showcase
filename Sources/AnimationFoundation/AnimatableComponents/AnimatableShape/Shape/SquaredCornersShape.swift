@@ -36,6 +36,13 @@ struct SquaredCornersShape: Shape {
     
     func path(in rect: CGRect) -> Path {
         
+        AnimatableShapeModel
+            .MathUtils
+            .cgPointRelativeToArc(
+                locatedAt: AnimatableShapeModel.MathUtils.CurveRelativePosition.afterCurve,
+                atCoordinates: shapeModel.coordinates.topLeading
+            )
+        
         let topLeadingCurveBegin = CGPoint(
             x: shapeModel.coordinates.topLeading.x + cos(shapeModel.angleValues.topLeadingAngleValues.startAngle.radians) * shapeModel.cornerRadii.topLeading,
             y: shapeModel.coordinates.topLeading.y - sin(shapeModel.angleValues.topLeadingAngleValues.startAngle.radians) * shapeModel.cornerRadii.topLeading
