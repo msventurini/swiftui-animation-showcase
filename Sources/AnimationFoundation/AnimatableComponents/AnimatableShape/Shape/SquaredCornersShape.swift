@@ -36,22 +36,15 @@ struct SquaredCornersShape: Shape {
     
     func path(in rect: CGRect) -> Path {
         
-        AnimatableShapeModel
-            .MathUtils
-            .cgPointRelativeToArc(
-                locatedAt: AnimatableShapeModel.MathUtils.CurveRelativePosition.afterCurve,
-                atCoordinates: shapeModel.coordinates.topLeading
-            )
+//        MathUtils
+//            .cgPointRelativeToArc(
+//                located: AnimatableShapeModel.MathUtils.CurveRelativePosition.afterCurve,
+//                atCoordinates: shapeModel.coordinates.topLeading
+//            )
         
-        let topLeadingCurveBegin = CGPoint(
-            x: shapeModel.coordinates.topLeading.x + cos(shapeModel.angleValues.topLeadingAngleValues.startAngle.radians) * shapeModel.cornerRadii.topLeading,
-            y: shapeModel.coordinates.topLeading.y - sin(shapeModel.angleValues.topLeadingAngleValues.startAngle.radians) * shapeModel.cornerRadii.topLeading
-        )
+        let topLeadingCurveBegin = MathUtils.cgPointRelativeToArc(located: .beforeCurve, atCoordinates: shapeModel.coordinates.topLeading, withRadius: shapeModel.cornerRadii.topLeading, withAngles: shapeModel.angleValues.topLeadingAngleValues)
         
-        let topLeadingCurveEnd = CGPoint(
-            x: shapeModel.coordinates.topLeading.x + cos(shapeModel.angleValues.topLeadingAngleValues.endAngle.radians) * shapeModel.cornerRadii.topLeading,
-            y: shapeModel.coordinates.topLeading.y - sin(shapeModel.angleValues.topLeadingAngleValues.endAngle.radians)  * shapeModel.cornerRadii.topLeading
-        )
+        let topLeadingCurveEnd = MathUtils.cgPointRelativeToArc(located: .afterCurve, atCoordinates: shapeModel.coordinates.topLeading, withRadius: shapeModel.cornerRadii.topLeading, withAngles: shapeModel.angleValues.topLeadingAngleValues)
         
         let bottomLeadingCurveBegin = CGPoint(
             x: shapeModel.coordinates.bottomLeading.x + cos(shapeModel.angleValues.bottomLeadingAngleValues.startAngle.radians) * shapeModel.cornerRadii.bottomLeading,

@@ -135,7 +135,7 @@ struct TesteNewMorphingShape: View {
                     .frame(width: 29.6, height: 82.0)
                     .background(.indigo)
                 
-                ShapeWithArcCorners(shapeModel: currentShapeModel3)
+                ArcCornersShape(shapeModel: currentShapeModel3)
                     .frame(width: 29.6, height: 82.0)
                     .background(.indigo)
                 

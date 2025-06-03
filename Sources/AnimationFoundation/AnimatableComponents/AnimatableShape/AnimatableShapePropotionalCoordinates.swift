@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct AnimatableShapePropotionalCoordinates: Sendable, Animatable {
+public struct AnimatableShapePropotionalCoordinates: Sendable, Animatable {
     
     var topLeading: CGPoint
     var topTrailing: CGPoint
     var bottomLeading: CGPoint
     var bottomTrailing: CGPoint
     
-    var animatableData: AnimatablePair<
+    public var animatableData: AnimatablePair<
         AnimatablePair<CGPoint.AnimatableData, CGPoint.AnimatableData>,
         AnimatablePair<CGPoint.AnimatableData, CGPoint.AnimatableData>>
     {
@@ -39,7 +39,14 @@ struct AnimatableShapePropotionalCoordinates: Sendable, Animatable {
         }
     }
     
-    static let zero: AnimatableShapePropotionalCoordinates = .init(topLeading: .zero, topTrailing: .zero, bottomLeading: .zero, bottomTrailing: .zero)
+    public init(topLeading: CGPoint, topTrailing: CGPoint, bottomLeading: CGPoint, bottomTrailing: CGPoint) {
+        self.topLeading = topLeading
+        self.topTrailing = topTrailing
+        self.bottomLeading = bottomLeading
+        self.bottomTrailing = bottomTrailing
+    }
+    
+    public static let zero: AnimatableShapePropotionalCoordinates = .init(topLeading: .zero, topTrailing: .zero, bottomLeading: .zero, bottomTrailing: .zero)
     
     
 }

@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct AnimatableShapeAngleValues: Sendable, Animatable {
+public struct AnimatableShapeAngleValues: Sendable, Animatable {
     
     var topLeadingAngleValues: AnimatableAngleVariation
     var topTrailingAngleValues: AnimatableAngleVariation
     var bottomTrailingAngleValues: AnimatableAngleVariation
     var bottomLeadingAngleValues: AnimatableAngleVariation
     
-    var animatableData: AnimatablePair<
+    public var animatableData: AnimatablePair<
         AnimatablePair<
             AnimatableAngleVariation.AnimatableData,
             AnimatableAngleVariation.AnimatableData

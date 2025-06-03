@@ -8,7 +8,7 @@
 import SwiftUI
 
 
-struct AnimatableAngleVariation: Sendable, Animatable {
+public struct AnimatableAngleVariation: Sendable, Animatable {
     
     public var startAngle: Angle
     public var endAngle: Angle
@@ -20,7 +20,7 @@ struct AnimatableAngleVariation: Sendable, Animatable {
         self.delta = endAngle - startAngle
     }
     
-    var animatableData: AnimatablePair<
+    public var animatableData: AnimatablePair<
         Angle.AnimatableData,
         Angle.AnimatableData
     >

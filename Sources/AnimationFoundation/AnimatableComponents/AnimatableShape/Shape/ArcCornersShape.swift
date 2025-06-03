@@ -8,22 +8,25 @@
 
 import SwiftUI
 
-struct ShapeWithArcCorners: Shape {
+public struct ArcCornersShape: Shape {
     
-    var shapeModel: AnimatableShapeModel
+    public var shapeModel: AnimatableShapeModel
     
-    init(shapeModel: AnimatableShapeModel) {
+    public init(shapeModel: AnimatableShapeModel) {
         self.shapeModel = shapeModel
     }
     
-    func path(in rect: CGRect) -> Path {
+    public func path(in rect: CGRect) -> Path {
         
         var path = Path()
         
-        let topLeadingCurveBegin = CGPoint(
-            x: shapeModel.coordinates.topLeading.x + cos(shapeModel.angleValues.topLeadingAngleValues.startAngle.radians) * shapeModel.cornerRadii.topLeading,
-            y: shapeModel.coordinates.topLeading.y - sin(shapeModel.angleValues.topLeadingAngleValues.startAngle.radians) * shapeModel.cornerRadii.topLeading
-        )
+        
+        let topLeadingCurveBegin = MathUtils.cgPointRelativeToArc(located: .beforeCurve, atCoordinates: shapeModel.coordinates.topLeading, withRadius: shapeModel.cornerRadii.topLeading, withAngles: shapeModel.angleValues.topLeadingAngleValues)
+
+//        let topLeadingCurveBegin = CGPoint(
+//            x: shapeModel.coordinates.topLeading.x + cos(shapeModel.angleValues.topLeadingAngleValues.startAngle.radians) * shapeModel.cornerRadii.topLeading,
+//            y: shapeModel.coordinates.topLeading.y - sin(shapeModel.angleValues.topLeadingAngleValues.startAngle.radians) * shapeModel.cornerRadii.topLeading
+//        )
         
         path.move(to: topLeadingCurveBegin)
         
@@ -47,8 +50,8 @@ struct ShapeWithArcCorners: Shape {
     
 }
 
-extension ShapeWithArcCorners: Animatable {
-    var animatableData: AnimatableShapeModel.AnimatableData {
+extension ArcCornersShape: Animatable {
+    public var animatableData: AnimatableShapeModel.AnimatableData {
         
         get {
             shapeModel.animatableData

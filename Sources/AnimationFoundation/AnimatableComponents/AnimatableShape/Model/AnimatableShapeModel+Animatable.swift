@@ -8,7 +8,8 @@
 import SwiftUI
 
 extension AnimatableShapeModel: Animatable {
-    var animatableData: AnimatablePair<
+    
+    public var animatableData: AnimatablePair<
         AnimatablePair<
             AnimatableShapePropotionalCoordinates.AnimatableData,
             RectangleCornerRadii.AnimatableData

@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-struct AnimatableShapeModel: Sendable {
+public struct AnimatableShapeModel: Sendable {
     var coordinates: AnimatableShapePropotionalCoordinates
     var cornerRadii: RectangleCornerRadii
     var angleValues: AnimatableShapeAngleValues
    
-    init(
+    public init(
         coordinates: AnimatableShapePropotionalCoordinates,
         cornerRadii: RectangleCornerRadii,
         angleValues: AnimatableShapeAngleValues,
