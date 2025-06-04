@@ -11,15 +11,18 @@ public struct AnimatableShapeModel: Sendable {
     var coordinates: AnimatableShapePropotionalCoordinates
     var cornerRadii: RectangleCornerRadii
     var angleValues: AnimatableShapeAngleValues
+    var referenceSize: CGSize
    
     public init(
         coordinates: AnimatableShapePropotionalCoordinates,
         cornerRadii: RectangleCornerRadii,
         angleValues: AnimatableShapeAngleValues,
+        referenceSize: CGSize
     ) {
         self.coordinates = coordinates
         self.cornerRadii = cornerRadii
         self.angleValues = angleValues
+        self.referenceSize = referenceSize
     }
     
     public static let zero: AnimatableShapeModel = .init(
@@ -29,7 +32,8 @@ public struct AnimatableShapeModel: Sendable {
             bottomLeading: .zero,
             bottomTrailing: .zero,
             topTrailing: .zero),
-        angleValues: AnimatableShapeAngleValues.zero
+        angleValues: AnimatableShapeAngleValues.zero,
+        referenceSize: .zero
     )
     
 }

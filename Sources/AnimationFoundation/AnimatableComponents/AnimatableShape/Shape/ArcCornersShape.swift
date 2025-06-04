@@ -8,44 +8,6 @@
 
 import SwiftUI
 
-public struct ArcCornersShapeV2: Shape {
-    
-    public var shapeModel: AnimatableShapeModel
-    
-    public init(shapeModel: AnimatableShapeModel) {
-        self.shapeModel = shapeModel
-    }
-    
-    public func path(in rect: CGRect) -> Path {
-        
-        var path = Path()
-        
-        let topLeadingCurveBegin = MathUtils
-            .cgPointRelativeToArc(
-                located: .beforeCurve,
-                atCoordinates: shapeModel.coordinates.topLeading,
-                withRadius: shapeModel.cornerRadii.topLeading,
-                withAngles: shapeModel.angleValues.topLeadingAngleValues)
-        
-        path.move(to: topLeadingCurveBegin)
-        
-        shapeModel
-            .allVertices(in: rect)
-            .forEach { vertex in
-                
-                    path.addRelativeArc(
-                        center: vertex.coordinates,
-                        radius: vertex.cornerRadius,
-                        startAngle: vertex.angleValues.startAngle,
-                        delta: vertex.angleValues.delta)
-                    print(vertex.cornerRadius)
-                
-            }
-        
-        path.closeSubpath()
-        return path
-    }
-}
 
 public struct ArcCornersShape: Shape {
     
@@ -87,11 +49,15 @@ public struct ArcCornersShape: Shape {
         
         shapePath.closeSubpath()
         
+        let widthProportion = rect.width / shapeRect.width
+        let heightProportion = rect.height / shapeRect.height
         
+        var path = shapePath.applying(.init(scaleX: widthProportion, y: heightProportion))
         
+        print(widthProportion)
         
-//        return path
-        return shapePath
+        return path
+//        return shapePath
     }
 }
 
@@ -130,8 +96,7 @@ struct TesteNewMorphingShape2: View {
             topTrailingAngleValues: .init(startAngle: Angle(degrees: 0), endAngle: Angle(degrees: 0)),
             
             bottomTrailingAngleValues: .init(startAngle: Angle(degrees: 0), endAngle: Angle(degrees: 0)),
-            bottomLeadingAngleValues: .init(startAngle: Angle(degrees: 100), endAngle: Angle(degrees: 180)))
-        
+            bottomLeadingAngleValues: .init(startAngle: Angle(degrees: 100), endAngle: Angle(degrees: 180))), referenceSize: CGSize(width: 29.6, height: 82.0)
     )
     
     let shapeModel2: AnimatableShapeModel = .init(
@@ -152,10 +117,10 @@ struct TesteNewMorphingShape2: View {
             topTrailingAngleValues: .init(startAngle: Angle(degrees: 0), endAngle: Angle(degrees: 0)),
             
             bottomTrailingAngleValues: .init(startAngle: Angle(degrees: 0), endAngle: Angle(degrees: 0)),
-            bottomLeadingAngleValues: .init(startAngle: Angle(degrees: 180), endAngle: Angle(degrees: 269)))
-        
+            bottomLeadingAngleValues: .init(startAngle: Angle(degrees: 180), endAngle: Angle(degrees: 269))), referenceSize: CGSize(width: 29.6, height: 82.0)
     )
     
+
     let shapeModel3: AnimatableShapeModel = .init(
         coordinates: .init(
             topLeading: .init(x: 9.5, y: 18.04),
@@ -174,7 +139,8 @@ struct TesteNewMorphingShape2: View {
             topTrailingAngleValues: .init(startAngle: Angle(degrees: 0), endAngle: Angle(degrees: 0)),
             
             bottomTrailingAngleValues: .init(startAngle: Angle(degrees: 10), endAngle: Angle(degrees: 40)),
-            bottomLeadingAngleValues: .init(startAngle: Angle(degrees: 100), endAngle: Angle(degrees: 180)))
+            bottomLeadingAngleValues: .init(startAngle: Angle(degrees: 100), endAngle: Angle(degrees: 180))),
+        referenceSize: CGSize(width: 29.6, height: 82.0)
         
     )
     
@@ -197,7 +163,8 @@ struct TesteNewMorphingShape2: View {
             topTrailingAngleValues: .init(startAngle: Angle(degrees: 0), endAngle: Angle(degrees: 0)),
             
             bottomTrailingAngleValues: .init(startAngle: Angle(degrees: 10), endAngle: Angle(degrees: 40)),
-            bottomLeadingAngleValues: .init(startAngle: Angle(degrees: 100), endAngle: Angle(degrees: 180)))
+            bottomLeadingAngleValues: .init(startAngle: Angle(degrees: 100), endAngle: Angle(degrees: 180))),
+        referenceSize: CGSize(width: 29.6, height: 82.0)
     )
     
     let zeroModel: AnimatableShapeModel = .zero
