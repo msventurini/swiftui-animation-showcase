@@ -13,22 +13,22 @@ struct GBAShapeData: ShapeDataProvider {
     
     static let screenShapeData: AnimatableShapeModel = .init(
         coordinates: .init(
-            topLeading: .init(x: 6, y: 8),
-            topTrailing: .init(x: -6, y: 8),
+            topLeading: .init(x: 12, y: 20),
+            topTrailing: .init(x: -12, y: 20),
             bottomLeading: .init(x: 24, y: -40),
             bottomTrailing: .init(x: -24, y: -40)),
         cornerRadii: .init(
-            topLeading: 8,
+            topLeading: 20,
             bottomLeading: 40,
             bottomTrailing: 40,
-            topTrailing: 8),
+            topTrailing: 20),
         angleValues: .init(
             topLeading: .init(
-                startAngle: Angle(degrees: 180),
+                startAngle: Angle(degrees: 240),
                 endAngle: Angle(degrees: 270)),
             topTrailing: .init(
                 startAngle: Angle(degrees: 270),
-                endAngle: Angle(degrees: 360)),
+                endAngle: Angle(degrees: 300)),
             bottomTrailing: .init(
                 startAngle: Angle(degrees: 50),
                 endAngle: Angle(degrees: 90)),
@@ -79,24 +79,25 @@ struct GBAShapeDataDebug: View {
                 .stroke(.black, lineWidth: 1)
 
                 .aspectRatio(30/82.0 ,contentMode: .fit)
-                .opacity(0.25)
+                .opacity(0.05)
         
             ArcCornersShape(shapeModel: GBAShapeData.screenShapeData)
                 .fill(.indigo)
                 .stroke(.black, lineWidth: 1)
 
                 .aspectRatio(88/82 ,contentMode: .fit)
-                .opacity(0.05)
+                .opacity(0.15)
             
             ArcCornersShape(shapeModel: GBAShapeData.rightControllerShapeData)
                 .fill(.indigo)
                 .stroke(.black, lineWidth: 1)
 
                 .aspectRatio(30/82.0 ,contentMode: .fit)
-                .opacity(0.25)
+                .opacity(0.05)
             
         }
         .frame(width: 148, height: 82)
+        .background(.red.opacity(0.2))
         
         
         
