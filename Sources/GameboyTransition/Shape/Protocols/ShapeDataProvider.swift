@@ -10,7 +10,8 @@ import AnimationFoundation
 
 protocol ShapeDataProvider {
     
-    static var screenShapeData: AnimatableShapeModel { get }
+    static var leftScreenShapeData: AnimatableShapeModel { get }
+    static var rightScreenShapeData: AnimatableShapeModel { get }
     static var leftControllerShapeData: AnimatableShapeModel { get }
     static var rightControllerShapeData: AnimatableShapeModel { get }
     

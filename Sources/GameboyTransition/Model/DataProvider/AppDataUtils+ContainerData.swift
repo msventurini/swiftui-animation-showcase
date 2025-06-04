@@ -92,9 +92,9 @@ extension AppDataUtils {
 
         var sections: [SectionData] {
             switch self {
-            case .gameboyDMG:     [.controllerLeft, .consoleScreen, .controllerRight]
-            case .gameboyAdvance: [.controllerLeft, .consoleScreen, .controllerRight]
-            case .nintendoSwitch: [.controllerLeft, .consoleScreen, .controllerRight]
+            case .gameboyDMG:     [.controllerLeft, .screenLeft, .screenRight, .controllerRight]
+            case .gameboyAdvance: [.controllerLeft, .screenLeft, .screenRight, .controllerRight]
+            case .nintendoSwitch: [.controllerLeft, .screenLeft, .screenRight, .controllerRight]
             }
         }
     }

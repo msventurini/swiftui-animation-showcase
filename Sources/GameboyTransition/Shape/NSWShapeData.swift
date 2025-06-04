@@ -10,39 +10,35 @@ import AnimationFoundation
 
 struct NSWShapeData: ShapeDataProvider {
     
-    static let screenShapeData: AnimatableShapeModel = .init(
+    static let leftScreenShapeData: AnimatableShapeModel = .init(
         coordinates: .init(
-            topLeading: .init(x: 0, y: 0),
-            topTrailing: .init(x: 0, y: 0)
+            topLeading: .init(x: 0, y: 0)
         ),
         cornerRadii: .init(
-            topLeading: 6,
-            topTrailing: 6
+            topLeading: 6
         ),
         angleValues: .init(
             topLeading: .init(
                 startAngle: Angle(degrees: 90),
                 endAngle: Angle(degrees: 0)
-            ),
-            topTrailing: .init(
-                startAngle: Angle(degrees: 180),
-                endAngle: Angle(degrees: 90)
             )
         ),
         geometryValues: .init(
-            referenceSize: CGSize(width: 168, height: 102),
+            referenceSize: CGSize(width: 84, height: 102),
             horizontalScale: 1
         )
     )
     
+    static let rightScreenShapeData: AnimatableShapeModel = .init(horizontalInverseOf: NSWShapeData.leftScreenShapeData)
+    
     static let leftControllerShapeData: AnimatableShapeModel = .init(
         coordinates: .init(
-            topLeading: .init(x: 22, y: 22),
-            bottomLeading:  .init(x: 22, y: -22)
+            topLeading: .init(x: 20, y: 20),
+            bottomLeading:  .init(x: 20, y: -20)
         ),
         cornerRadii: .init(
-            topLeading: 22,
-            bottomLeading: 22
+            topLeading: 20,
+            bottomLeading: 20
         ),
         angleValues: .init(
             topLeading: .init(
@@ -75,11 +71,12 @@ struct NSWShapeDataDebug: View {
                 .frame(width: 36.0, height: 102.0)
 //                .aspectRatio(36.0/102 ,contentMode: .fit)
         
-            ArcCornersShape(shapeModel: NSWShapeData.screenShapeData)
+            ArcCornersShape(shapeModel: NSWShapeData.leftScreenShapeData)
                 .fill(.black)
-//                .aspectRatio(168/102 ,contentMode: .fit)
-                .frame(width: 168, height: 102.0)
-
+                .frame(width: 84, height: 102.0)
+            ArcCornersShape(shapeModel: NSWShapeData.rightScreenShapeData)
+                .fill(.black)
+                .frame(width: 84, height: 102.0)
             
             ArcCornersShape(shapeModel: NSWShapeData.rightControllerShapeData)
                 .fill(.red)

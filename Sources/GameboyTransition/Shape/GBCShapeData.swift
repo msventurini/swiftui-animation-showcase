@@ -10,23 +10,21 @@ import AnimationFoundation
 
 struct GBCShapeData: ShapeDataProvider {
     
-    static let screenShapeData: AnimatableShapeModel = .init(
+    static let leftScreenShapeData: AnimatableShapeModel = .init(
         coordinates: .init(
             topLeading: .init(x: 4, y: 4),
-            topTrailing: .init(x: -4, y: 4),
         ),
-        cornerRadii: .init(
-            topLeading: 4,
-            topTrailing: 4),
+        cornerRadii: .init(topLeading: 4),
         angleValues: .init(
             topLeading: .init(
                 startAngle: Angle(degrees: 180),
                 endAngle: Angle(degrees: 270)),
-            topTrailing: .init(
-                startAngle: Angle(degrees: 270),
-                endAngle: Angle(degrees: 360))
+            
         ),
-        geometryValues: .init(referenceSize: CGSize(width: 76, height: 64), horizontalScale: 1))
+        geometryValues: .init(referenceSize: CGSize(width: 38, height: 64), horizontalScale: 1))
+    
+    static let rightScreenShapeData: AnimatableShapeModel = .init(
+        horizontalInverseOf: GBCShapeData.leftScreenShapeData)
     
     static let leftControllerShapeData: AnimatableShapeModel = .init(
         coordinates: .init(
@@ -56,8 +54,12 @@ struct GBCShapeDataDebug: View {
     var body: some View {
         
         VStack(spacing: 0) {
-            ArcCornersShape(shapeModel: GBCShapeData.screenShapeData)
-                .fill(.gray)
+            
+            HStack(spacing: 0) {
+                ArcCornersShape(shapeModel: GBCShapeData.leftScreenShapeData)
+                ArcCornersShape(shapeModel: GBCShapeData.rightScreenShapeData)
+                    .fill(.gray)
+            }
             
             HStack(spacing: 0) {
                 ArcCornersShape(shapeModel: GBCShapeData.leftControllerShapeData)
