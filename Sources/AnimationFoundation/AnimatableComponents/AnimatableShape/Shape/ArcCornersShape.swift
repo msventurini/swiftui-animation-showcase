@@ -21,9 +21,7 @@ public struct ArcCornersShape: Shape {
         
         var shapePath = Path()
         
-        var shapeRect = CGRect(
-            origin: rect.origin,
-            size: CGSize(width: 29.6, height: 82.0))
+        let shapeRect = CGRect(origin: rect.origin, size: shapeModel.referenceSize)
         
         let topLeadingCurveBegin = MathUtils
             .cgPointRelativeToArc(
@@ -52,12 +50,10 @@ public struct ArcCornersShape: Shape {
         let widthProportion = rect.width / shapeRect.width
         let heightProportion = rect.height / shapeRect.height
         
-        var path = shapePath.applying(.init(scaleX: widthProportion, y: heightProportion))
-        
-        print(widthProportion)
-        
+        let path = shapePath.applying(.init(scaleX: widthProportion, y: heightProportion))
+                
         return path
-//        return shapePath
+
     }
 }
 
