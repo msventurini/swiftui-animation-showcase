@@ -45,65 +45,6 @@ extension AppDataUtils {
             )
         }
         
-        public func sliceOriginPosition(console: Container) -> CodableRectEdge {
-            
-            switch (console.containerID, self) {
-            case (.gameboyDMG, .screenLeft): .minY
-            case (.gameboyDMG, .screenRight): .minX
-            case (.gameboyDMG, .controllerLeft): .minX
-            case (.gameboyDMG, .controllerRight): .minX
-                
-            case (.gameboyAdvance, .controllerLeft): .minX
-            case (.gameboyAdvance, .screenLeft): .minX
-            case (.gameboyAdvance, .screenRight): .minX
-            case (.gameboyAdvance, .controllerRight): .minX
-                
-            case (.nintendoSwitch, .screenLeft): .minX
-            case (.nintendoSwitch, .screenRight): .minX
-            case (.nintendoSwitch, .controllerLeft):  .minX
-            case (.nintendoSwitch, .controllerRight): .minX
-            }
-        }
-        
-        public func horizontalSliceProportion(console: Container) -> Double {
-            
-            switch (console.containerID, self) {
-            case (.gameboyDMG, .screenLeft): 0.5
-            case (.gameboyDMG, .screenRight): 0
-            case (.gameboyDMG, .controllerLeft): 0.5
-            case (.gameboyDMG, .controllerRight): 0.5
-                
-            case (.gameboyAdvance, .controllerLeft): 0.2
-            case (.gameboyAdvance, .screenLeft): 0.3
-            case (.gameboyAdvance, .screenRight): 0.3
-            case (.gameboyAdvance, .controllerRight): 0.2
-                
-            case (.nintendoSwitch, .screenLeft): 0.35
-            case (.nintendoSwitch, .screenRight):  0.35
-            case (.nintendoSwitch, .controllerLeft):  0.15
-            case (.nintendoSwitch, .controllerRight): 0.15
-            }
-        }
-        
-        public func verticalSliceProportion(console: Container) -> Double {
-            
-            switch (console.containerID, self) {
-            case (.gameboyDMG, .screenLeft): 0.5
-            case (.gameboyDMG, .screenRight): 0
-            case (.gameboyDMG, .controllerLeft): 0
-            case (.gameboyDMG, .controllerRight): 0
-                
-            case (.gameboyAdvance, .controllerLeft): 0
-            case (.gameboyAdvance, .screenLeft): 0
-            case (.gameboyAdvance, .screenRight): 0
-            case (.gameboyAdvance, .controllerRight): 0
-                
-            case (.nintendoSwitch, .screenLeft): 0
-            case (.nintendoSwitch, .screenRight): 0
-            case (.nintendoSwitch, .controllerLeft):  0
-            case (.nintendoSwitch, .controllerRight): 0
-            }
-        }
        
         public func originX(container: Container) -> Double {
             switch (container.containerID, self) {
@@ -119,34 +60,22 @@ extension AppDataUtils {
             
             case (.nintendoSwitch, .controllerLeft):    .zero
             case (.nintendoSwitch, .screenLeft):     0.15
-            case (.nintendoSwitch, .screenRight):     0.40
+            case (.nintendoSwitch, .screenRight):     0.50
             case (.nintendoSwitch, .controllerRight): 0.85
             }
         }
         
         public func originY(container: Container) -> Double {
             switch (container.containerID, self) {
-            case (.gameboyDMG, .screenLeft): .zero
-            case (.gameboyDMG, .screenRight): .zero
-            case (.gameboyDMG, .controllerLeft): 0.5
-            case (.gameboyDMG, .controllerRight): 0.5 
-            case (.gameboyAdvance, .controllerLeft): .zero 
-            case (.gameboyAdvance, .screenLeft): .zero
-            case (.gameboyAdvance, .screenRight): .zero
-            case (.gameboyAdvance, .controllerRight): .zero
-            case (.nintendoSwitch, .screenLeft): .zero
-            case (.nintendoSwitch, .screenRight): .zero
-            case (.nintendoSwitch, .controllerLeft): .zero
-            case (.nintendoSwitch, .controllerRight): .zero 
+            case (.gameboyDMG, .screenLeft), (.gameboyDMG, .screenRight): .zero
+            case (.gameboyDMG, .controllerLeft), (.gameboyDMG, .controllerRight): 0.5
+            case (.gameboyAdvance, _), (.nintendoSwitch, _): .zero
             }
         }
         
         public func widthProportion(container: Container) -> Double {
             switch (container.containerID, self) {
-            case (.gameboyDMG, .screenLeft): 0.4
-            case (.gameboyDMG, .screenRight): 0.4
-            case (.gameboyDMG, .controllerLeft): 0.5
-            case (.gameboyDMG, .controllerRight): 0.5
+            case (.gameboyDMG, _): 0.5
             
             case (.gameboyAdvance, .screenLeft): 0.3
             case (.gameboyAdvance, .screenRight): 0.3
@@ -162,20 +91,9 @@ extension AppDataUtils {
 
         public func heightProportion(container: Container) -> Double {
             switch (container.containerID, self) {
-            case (.gameboyDMG, .screenLeft): 0.5
-            case (.gameboyDMG, .screenRight): 0.5
-            case (.gameboyDMG, .controllerLeft): 0.5
-            case (.gameboyDMG, .controllerRight): 0.5
-                
-            case (.gameboyAdvance, .controllerLeft): 1.0
-            case (.gameboyAdvance, .screenLeft): 1.0
-            case (.gameboyAdvance, .screenRight): 1.0
-            case (.gameboyAdvance, .controllerRight): 1.0
-                
-            case (.nintendoSwitch, .screenLeft): 1.0
-            case (.nintendoSwitch, .screenRight): 1.0
-            case (.nintendoSwitch, .controllerLeft): 1.0
-            case (.nintendoSwitch, .controllerRight): 1.0
+            case (.gameboyDMG, _): 0.5    
+            case (.gameboyAdvance, _): 1.0
+            case (.nintendoSwitch, _): 1.0
             }
         }
         
@@ -200,28 +118,5 @@ extension AppDataUtils {
             }
         }
         
-        public func getDrawOrderNumber(
-            at container: Container
-        ) -> Int {
-            
-            switch (container.containerID, self) {
-                
-            case (.gameboyDMG, .screenLeft): 0
-            case (.gameboyDMG, .screenRight): 1
-            case (.gameboyDMG, .controllerLeft): 2
-            case (.gameboyDMG, .controllerRight): 3
-                
-            case (.gameboyAdvance, .screenLeft): 0
-            case (.gameboyAdvance, .screenRight): 1
-            case (.gameboyAdvance, .controllerLeft): 2
-            case (.gameboyAdvance, .controllerRight): 3
-                
-            case (.nintendoSwitch, .screenLeft): 0
-            case (.nintendoSwitch, .screenRight): 1
-            case (.nintendoSwitch, .controllerLeft): 2
-            case (.nintendoSwitch, .controllerRight): 3
-                
-            }
-        }
     }
 }
