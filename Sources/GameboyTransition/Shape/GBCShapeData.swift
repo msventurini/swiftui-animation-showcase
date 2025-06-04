@@ -24,7 +24,7 @@ struct GBCShapeData: ShapeSectionProvider {
     
     var leftScreenShapeData: AnimatableShapeModel {
         .init(
-            id: .leftScreen, coordinates: .init(
+            coordinates: .init(
             topLeading: .init(x: 4, y: 4),
         ),
         cornerRadii: .init(topLeading: 4),
@@ -37,12 +37,12 @@ struct GBCShapeData: ShapeSectionProvider {
         geometryValues: .init(referenceSize: CGSize(width: 38, height: 64), horizontalScale: 1))
     }
     var rightScreenShapeData: AnimatableShapeModel { .init(
-        id: .rightScreen, horizontalInverseOf: self.leftScreenShapeData)
+        horizontalInverseOf: self.leftScreenShapeData)
     }
     
     var leftControllerShapeData: AnimatableShapeModel {
         .init(
-            id: .leftController,
+            
             coordinates: .init(
                 bottomLeading: .init(x: 6, y: -16),
                 bottomTrailing: .init(x: 0, y: -64)
@@ -61,7 +61,7 @@ struct GBCShapeData: ShapeSectionProvider {
     }
     var rightControllerShapeData: AnimatableShapeModel {
         .init(
-            id: .rightController,
+            
             horizontalInverseOf: self.leftControllerShapeData
     )
     }

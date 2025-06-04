@@ -18,19 +18,13 @@ struct ShapeData: ShapeSectionProvider, Identifiable, Hashable {
     let rightScreenShapeData: AnimatableShapeModel
     let leftControllerShapeData: AnimatableShapeModel
     let rightControllerShapeData: AnimatableShapeModel
-    
-    let width: CGFloat
-    
-    let height: CGFloat
-    
-    init(id: SectionedShapeLegacy ,leftScreenShapeData: AnimatableShapeModel, rightScreenShapeData: AnimatableShapeModel, leftControllerShapeData: AnimatableShapeModel, rightControllerShapeData: AnimatableShapeModel, width: CGFloat, height: CGFloat) {
+
+    init(id: SectionedShapeLegacy ,leftScreenShapeData: AnimatableShapeModel, rightScreenShapeData: AnimatableShapeModel, leftControllerShapeData: AnimatableShapeModel, rightControllerShapeData: AnimatableShapeModel) {
         self.id = id
         self.leftScreenShapeData = leftScreenShapeData
         self.rightScreenShapeData = rightScreenShapeData
         self.leftControllerShapeData = leftControllerShapeData
         self.rightControllerShapeData = rightControllerShapeData
-        self.width = width
-        self.height = height
     }
     
     init<D: ShapeSectionProvider>(shapeProvider: D) {
@@ -39,8 +33,6 @@ struct ShapeData: ShapeSectionProvider, Identifiable, Hashable {
         self.rightScreenShapeData = shapeProvider.rightScreenShapeData
         self.leftControllerShapeData = shapeProvider.leftControllerShapeData
         self.rightControllerShapeData = shapeProvider.rightControllerShapeData
-        self.width = shapeProvider.width
-        self.height = shapeProvider.height
     }
     
     init(shapeEnum: SectionedShapeLegacy) {
@@ -50,8 +42,7 @@ struct ShapeData: ShapeSectionProvider, Identifiable, Hashable {
         self.rightScreenShapeData = shape.rightScreenShapeData
         self.leftControllerShapeData = shape.leftControllerShapeData
         self.rightControllerShapeData = shape.rightControllerShapeData
-        self.width = shape.width
-        self.height = shape.height
+
         
     }
     

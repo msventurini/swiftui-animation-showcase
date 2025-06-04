@@ -19,7 +19,7 @@ struct NSWShapeData: ShapeSectionProvider {
     }
     
     var leftScreenShapeData: AnimatableShapeModel { .init(
-        id: .leftScreen,
+        
         coordinates: .init(
             topLeading: .init(x: 0, y: 0)
         ),
@@ -39,11 +39,10 @@ struct NSWShapeData: ShapeSectionProvider {
     )
     }
     var rightScreenShapeData: AnimatableShapeModel { .init(
-        id: .rightScreen,
         horizontalInverseOf: self.leftScreenShapeData)
     }
     var leftControllerShapeData: AnimatableShapeModel { .init(
-        id: .leftController, coordinates: .init(
+        coordinates: .init(
             topLeading: .init(x: 20, y: 20),
             bottomLeading:  .init(x: 20, y: -20)
         ),
@@ -67,7 +66,7 @@ struct NSWShapeData: ShapeSectionProvider {
     )
     }
     
-    var rightControllerShapeData: AnimatableShapeModel { .init(id: .rightController, horizontalInverseOf: self.leftControllerShapeData)
+    var rightControllerShapeData: AnimatableShapeModel { .init(horizontalInverseOf: self.leftControllerShapeData)
     }
 
 }

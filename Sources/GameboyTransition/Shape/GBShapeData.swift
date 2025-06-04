@@ -128,7 +128,7 @@ struct GBShapeData: ShapeSectionProvider {
         .gb
     }
     var leftScreenShapeData: AnimatableShapeModel { .init(
-        id: .leftScreen,
+        
         coordinates: .init(
             topLeading: .init(x: 8, y: 8),
         ),
@@ -142,10 +142,10 @@ struct GBShapeData: ShapeSectionProvider {
     }
     
     var rightScreenShapeData: AnimatableShapeModel { .init(
-        id: .rightScreen, horizontalInverseOf: leftScreenShapeData)
+        horizontalInverseOf: leftScreenShapeData)
     }
     var leftControllerShapeData: AnimatableShapeModel { .init(
-        id: .leftController, coordinates: .init(
+        coordinates: .init(
             bottomLeading: .init(x: 8, y: -8),
         ),
         cornerRadii: .init(
@@ -157,7 +157,7 @@ struct GBShapeData: ShapeSectionProvider {
     )
     }
     var rightControllerShapeData: AnimatableShapeModel { .init(
-        id: .rightController, horizontalInverseOf: self.leftControllerShapeData,
+        horizontalInverseOf: self.leftControllerShapeData,
         changingCoordinatesTo: .init(
             bottomLeading: .init(x: 32, y: -32)
         ),
