@@ -7,22 +7,32 @@
 
 import SwiftUI
 
+public struct AnimatableShapeGeometryValues: Sendable {
+    var referenceSize: CGSize
+
+    public init(referenceSize: CGSize) {
+        self.referenceSize = referenceSize
+    }
+    
+}
+
+
 public struct AnimatableShapeModel: Sendable {
     var coordinates: AnimatableShapePropotionalCoordinates
     var cornerRadii: RectangleCornerRadii
     var angleValues: AnimatableShapeAngleValues
-    var referenceSize: CGSize
-   
+    var geometryValues: AnimatableShapeGeometryValues
+    
     public init(
         coordinates: AnimatableShapePropotionalCoordinates,
         cornerRadii: RectangleCornerRadii,
         angleValues: AnimatableShapeAngleValues,
-        referenceSize: CGSize
+        geometryValues: AnimatableShapeGeometryValues
     ) {
         self.coordinates = coordinates
         self.cornerRadii = cornerRadii
         self.angleValues = angleValues
-        self.referenceSize = referenceSize
+        self.geometryValues = geometryValues
     }
     
     public static let zero: AnimatableShapeModel = .init(
@@ -33,7 +43,7 @@ public struct AnimatableShapeModel: Sendable {
             bottomTrailing: .zero,
             topTrailing: .zero),
         angleValues: AnimatableShapeAngleValues.zero,
-        referenceSize: .zero
+        geometryValues: .init(referenceSize: .zero)
     )
     
 }
