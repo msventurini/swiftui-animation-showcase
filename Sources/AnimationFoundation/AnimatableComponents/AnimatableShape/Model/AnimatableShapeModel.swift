@@ -61,6 +61,40 @@ public struct AnimatableShapeModel: Sendable {
         self.geometryValues = geometryValues
     }
     
+    public init(
+        horizontalInverseOf shapeModel: AnimatableShapeModel,
+        changingCoordinatesTo coordinates: AnimatableShapePropotionalCoordinates? = nil,
+        changingCornerRadiiTo cornerRadii: RectangleCornerRadii? = nil,
+        changingAngleValuesTo angleValues: AnimatableShapeAngleValues? = nil
+    ) {
+        
+        if let coordinates {
+            self.coordinates = coordinates
+        } else {
+            self.coordinates = shapeModel.coordinates
+        }
+        
+        if let cornerRadii {
+            self.cornerRadii = cornerRadii
+        } else {
+            self.cornerRadii = shapeModel.cornerRadii
+        }
+        
+        if let angleValues {
+            self.angleValues = angleValues
+        } else {
+            self.angleValues = shapeModel.angleValues
+        }
+        
+        
+        self.geometryValues = .init(
+            referenceSize: shapeModel.geometryValues.referenceSize,
+            horizontalScale: shapeModel.geometryValues.horizontalScale * -1
+        )
+    }
+    
+    
+    
     public static let zero: AnimatableShapeModel = .init(
         coordinates: AnimatableShapePropotionalCoordinates.zero,
         cornerRadii: .init(

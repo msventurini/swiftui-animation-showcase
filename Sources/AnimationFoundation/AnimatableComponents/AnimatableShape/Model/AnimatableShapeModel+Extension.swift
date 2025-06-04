@@ -43,10 +43,10 @@ extension AnimatableShapeModel {
         
     func getAngleValuesfor(_ vertex: AnimatableShapeModel.Vertex) -> AnimatableAngleVariation {
         switch vertex {
-        case .topLeading: self.angleValues.topLeadingAngleValues
-        case .topTrailing: self.angleValues.topTrailingAngleValues
-        case .bottomLeading: self.angleValues.bottomLeadingAngleValues
-        case .bottomTrailing: self.angleValues.bottomTrailingAngleValues
+        case .topLeading: self.angleValues.topLeading
+        case .topTrailing: self.angleValues.topTrailing
+        case .bottomLeading: self.angleValues.bottomLeading
+        case .bottomTrailing: self.angleValues.bottomTrailing
         }
     }
     

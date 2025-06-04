@@ -26,11 +26,10 @@ struct TesteMorphingShape: View {
             topTrailing: 0.0
         ),
         angleValues: .init(
-            topLeadingAngleValues: .init(startAngle: Angle(degrees: 180), endAngle: Angle(degrees: 240)),
-            topTrailingAngleValues: .init(startAngle: Angle(degrees: 50), endAngle: Angle(degrees: 50)),
-            
-            bottomTrailingAngleValues: .init(startAngle: Angle(degrees: 0), endAngle: Angle(degrees: 0)),
-            bottomLeadingAngleValues: .init(startAngle: Angle(degrees: 100), endAngle: Angle(degrees: 180))),
+            topLeading: .init(startAngle: Angle(degrees: 180), endAngle: Angle(degrees: 240)),
+            topTrailing: .init(startAngle: Angle(degrees: 50), endAngle: Angle(degrees: 50)),
+            bottomTrailing: .init(startAngle: Angle(degrees: 0), endAngle: Angle(degrees: 0)),
+            bottomLeading: .init(startAngle: Angle(degrees: 100), endAngle: Angle(degrees: 180))),
         geometryValues: AnimatableShapeGeometryValues(referenceSize:  CGSize(width: 29.6, height: 82.0))
         
     )

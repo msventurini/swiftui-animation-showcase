@@ -44,13 +44,13 @@ struct GenericShape: Shape {
             center: firstArcCenter,
             
             radius: firstRadius,
-            startAngle: shapeModel.angleValues.topLeadingAngleValues.startAngle,
-            endAngle: shapeModel.angleValues.topLeadingAngleValues.endAngle,
+            startAngle: shapeModel.angleValues.topLeading.startAngle,
+            endAngle: shapeModel.angleValues.topLeading.endAngle,
             clockwise: false)
         
         print("first-topLeading: \(firstArcCenter), radius: \(firstRadius)")
-        print("first-startAngle: \(shapeModel.angleValues.topLeadingAngleValues.startAngle.degrees)")
-        print("first-endAngle: \(shapeModel.angleValues.topLeadingAngleValues.endAngle.degrees)")
+        print("first-startAngle: \(shapeModel.angleValues.topLeading.startAngle.degrees)")
+        print("first-endAngle: \(shapeModel.angleValues.topLeading.endAngle.degrees)")
         
         let secondArcCenter = CGPoint(
             x: rect.maxX + rect.size.width * shapeModel.coordinates.topTrailing.x,
@@ -62,13 +62,13 @@ struct GenericShape: Shape {
         path.addArc(
             center: secondArcCenter,
             radius: secondRadius,
-            startAngle: shapeModel.angleValues.topTrailingAngleValues.startAngle,
-            endAngle: shapeModel.angleValues.topTrailingAngleValues.endAngle,
+            startAngle: shapeModel.angleValues.topTrailing.startAngle,
+            endAngle: shapeModel.angleValues.topTrailing.endAngle,
             clockwise: false)
         
         print("second-topTrailing: \(secondArcCenter), radius: \(secondRadius)")
-        print("second-startAngle: \(shapeModel.angleValues.topTrailingAngleValues.startAngle.degrees)")
-        print("second-endAngle: \(shapeModel.angleValues.topTrailingAngleValues.endAngle.degrees)")
+        print("second-startAngle: \(shapeModel.angleValues.topTrailing.startAngle.degrees)")
+        print("second-endAngle: \(shapeModel.angleValues.topTrailing.endAngle.degrees)")
         let thirdArcCenter = CGPoint(
             x: rect.maxX + rect.size.width * shapeModel.coordinates.bottomTrailing.x,
             y: rect.maxY + rect.size.height * shapeModel.coordinates.bottomTrailing.y)
@@ -78,14 +78,14 @@ struct GenericShape: Shape {
         path.addArc(
             center: thirdArcCenter,
             radius: thirdRadius,
-            startAngle: shapeModel.angleValues.bottomTrailingAngleValues.startAngle,
-            endAngle: shapeModel.angleValues.bottomTrailingAngleValues.endAngle,
+            startAngle: shapeModel.angleValues.bottomTrailing.startAngle,
+            endAngle: shapeModel.angleValues.bottomTrailing.endAngle,
             clockwise: false
         )
         
         print("third-bottomTrailing: \(thirdArcCenter), radius: \(thirdRadius)")
-        print("third-startAngle: \(shapeModel.angleValues.bottomTrailingAngleValues.startAngle.degrees)")
-        print("third-endAngle: \(shapeModel.angleValues.bottomTrailingAngleValues.endAngle.degrees)")
+        print("third-startAngle: \(shapeModel.angleValues.bottomTrailing.startAngle.degrees)")
+        print("third-endAngle: \(shapeModel.angleValues.bottomTrailing.endAngle.degrees)")
         
         
 
@@ -97,13 +97,13 @@ struct GenericShape: Shape {
         path.addArc(
             center: fourthArcCenter,
             radius: fourthRadius,
-            startAngle: shapeModel.angleValues.bottomLeadingAngleValues.startAngle,
-            endAngle: shapeModel.angleValues.bottomLeadingAngleValues.endAngle,
+            startAngle: shapeModel.angleValues.bottomLeading.startAngle,
+            endAngle: shapeModel.angleValues.bottomLeading.endAngle,
             clockwise: false
         )
         print("fourth-bottomLeading: \(fourthArcCenter), radius: \(fourthRadius)")
-        print("fourth-startAngle: \(shapeModel.angleValues.bottomLeadingAngleValues.startAngle.degrees)")
-        print("fourth-endAngle: \(shapeModel.angleValues.bottomLeadingAngleValues.endAngle.degrees)")
+        print("fourth-startAngle: \(shapeModel.angleValues.bottomLeading.startAngle.degrees)")
+        print("fourth-endAngle: \(shapeModel.angleValues.bottomLeading.endAngle.degrees)")
 
         path.closeSubpath()
         return path

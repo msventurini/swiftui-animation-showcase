@@ -23,12 +23,14 @@ public struct ArcCornersShape: Shape {
         
         let shapeRect = CGRect(origin: rect.origin, size: shapeModel.geometryValues.referenceSize)
         
+        
+        
         let topLeadingCurveBegin = MathUtils
             .cgPointRelativeToArc(
                 located: .beforeCurve,
                 atCoordinates: shapeModel.coordinates.topLeading,
                 withRadius: shapeModel.cornerRadii.topLeading,
-                withAngles: shapeModel.angleValues.topLeadingAngleValues)
+                withAngles: shapeModel.angleValues.topLeading)
         
         shapePath.move(to: topLeadingCurveBegin)
         
@@ -97,11 +99,10 @@ struct TesteNewMorphingShape2: View {
             topTrailing: 0.0
         ),
         angleValues: .init(
-            topLeadingAngleValues: .init(startAngle: Angle(degrees: 180), endAngle: Angle(degrees: 240)),
-            topTrailingAngleValues: .init(startAngle: Angle(degrees: 0), endAngle: Angle(degrees: 0)),
-            
-            bottomTrailingAngleValues: .init(startAngle: Angle(degrees: 0), endAngle: Angle(degrees: 0)),
-            bottomLeadingAngleValues: .init(startAngle: Angle(degrees: 100), endAngle: Angle(degrees: 180))), geometryValues: AnimatableShapeGeometryValues(referenceSize:  CGSize(width: 29.6, height: 82.0))
+            topLeading: .init(startAngle: Angle(degrees: 180), endAngle: Angle(degrees: 240)),
+            topTrailing: .init(startAngle: Angle(degrees: 0), endAngle: Angle(degrees: 0)),
+            bottomTrailing: .init(startAngle: Angle(degrees: 0), endAngle: Angle(degrees: 0)),
+            bottomLeading: .init(startAngle: Angle(degrees: 100), endAngle: Angle(degrees: 180))), geometryValues: AnimatableShapeGeometryValues(referenceSize:  CGSize(width: 29.6, height: 82.0))
     )
     
     let shapeModel2: AnimatableShapeModel = .init(
@@ -118,11 +119,10 @@ struct TesteNewMorphingShape2: View {
             topTrailing: 0
         ),
         angleValues: .init(
-            topLeadingAngleValues: .init(startAngle: Angle(degrees: 120), endAngle: Angle(degrees: 180)),
-            topTrailingAngleValues: .init(startAngle: Angle(degrees: 0), endAngle: Angle(degrees: 0)),
-            
-            bottomTrailingAngleValues: .init(startAngle: Angle(degrees: 0), endAngle: Angle(degrees: 0)),
-            bottomLeadingAngleValues: .init(startAngle: Angle(degrees: 180), endAngle: Angle(degrees: 269))), geometryValues: AnimatableShapeGeometryValues(referenceSize:  CGSize(width: 29.6, height: 82.0))
+            topLeading: .init(startAngle: Angle(degrees: 120), endAngle: Angle(degrees: 180)),
+            topTrailing: .init(startAngle: Angle(degrees: 0), endAngle: Angle(degrees: 0)),
+            bottomTrailing: .init(startAngle: Angle(degrees: 0), endAngle: Angle(degrees: 0)),
+            bottomLeading: .init(startAngle: Angle(degrees: 180), endAngle: Angle(degrees: 269))), geometryValues: AnimatableShapeGeometryValues(referenceSize:  CGSize(width: 29.6, height: 82.0))
     )
     
 
@@ -140,11 +140,10 @@ struct TesteNewMorphingShape2: View {
             topTrailing: 0
         ),
         angleValues: .init(
-            topLeadingAngleValues: .init(startAngle: Angle(degrees: 180), endAngle: Angle(degrees: 240)),
-            topTrailingAngleValues: .init(startAngle: Angle(degrees: 0), endAngle: Angle(degrees: 0)),
-            
-            bottomTrailingAngleValues: .init(startAngle: Angle(degrees: 10), endAngle: Angle(degrees: 40)),
-            bottomLeadingAngleValues: .init(startAngle: Angle(degrees: 100), endAngle: Angle(degrees: 180))),
+            topLeading: .init(startAngle: Angle(degrees: 180), endAngle: Angle(degrees: 240)),
+            topTrailing: .init(startAngle: Angle(degrees: 0), endAngle: Angle(degrees: 0)),
+            bottomTrailing: .init(startAngle: Angle(degrees: 10), endAngle: Angle(degrees: 40)),
+            bottomLeading: .init(startAngle: Angle(degrees: 100), endAngle: Angle(degrees: 180))),
         geometryValues: AnimatableShapeGeometryValues(referenceSize:  CGSize(width: 29.6, height: 82.0), horizontalScale: -1)
         
     )
@@ -163,11 +162,10 @@ struct TesteNewMorphingShape2: View {
             topTrailing: 0
         ),
         angleValues: .init(
-            topLeadingAngleValues: .init(startAngle: Angle(degrees: 180), endAngle: Angle(degrees: 240)),
-            topTrailingAngleValues: .init(startAngle: Angle(degrees: 0), endAngle: Angle(degrees: 0)),
-            
-            bottomTrailingAngleValues: .init(startAngle: Angle(degrees: 10), endAngle: Angle(degrees: 40)),
-            bottomLeadingAngleValues: .init(startAngle: Angle(degrees: 100), endAngle: Angle(degrees: 180))),
+            topLeading: .init(startAngle: Angle(degrees: 180), endAngle: Angle(degrees: 240)),
+            topTrailing: .init(startAngle: Angle(degrees: 0), endAngle: Angle(degrees: 0)),
+            bottomTrailing: .init(startAngle: Angle(degrees: 10), endAngle: Angle(degrees: 40)),
+            bottomLeading: .init(startAngle: Angle(degrees: 100), endAngle: Angle(degrees: 180))),
         geometryValues: AnimatableShapeGeometryValues(referenceSize:  CGSize(width: 29.6, height: 82.0), horizontalScale: 1)
     )
     

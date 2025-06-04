@@ -42,38 +42,38 @@ struct SquaredCornersShape: Shape {
 //                atCoordinates: shapeModel.coordinates.topLeading
 //            )
         
-        let topLeadingCurveBegin = MathUtils.cgPointRelativeToArc(located: .beforeCurve, atCoordinates: shapeModel.coordinates.topLeading, withRadius: shapeModel.cornerRadii.topLeading, withAngles: shapeModel.angleValues.topLeadingAngleValues)
+        let topLeadingCurveBegin = MathUtils.cgPointRelativeToArc(located: .beforeCurve, atCoordinates: shapeModel.coordinates.topLeading, withRadius: shapeModel.cornerRadii.topLeading, withAngles: shapeModel.angleValues.topLeading)
         
-        let topLeadingCurveEnd = MathUtils.cgPointRelativeToArc(located: .afterCurve, atCoordinates: shapeModel.coordinates.topLeading, withRadius: shapeModel.cornerRadii.topLeading, withAngles: shapeModel.angleValues.topLeadingAngleValues)
+        let topLeadingCurveEnd = MathUtils.cgPointRelativeToArc(located: .afterCurve, atCoordinates: shapeModel.coordinates.topLeading, withRadius: shapeModel.cornerRadii.topLeading, withAngles: shapeModel.angleValues.topLeading)
         
         let bottomLeadingCurveBegin = CGPoint(
-            x: shapeModel.coordinates.bottomLeading.x + cos(shapeModel.angleValues.bottomLeadingAngleValues.startAngle.radians) * shapeModel.cornerRadii.bottomLeading,
-            y: shapeModel.coordinates.bottomLeading.y - sin(shapeModel.angleValues.bottomLeadingAngleValues.startAngle.radians) * shapeModel.cornerRadii.bottomLeading
+            x: shapeModel.coordinates.bottomLeading.x + cos(shapeModel.angleValues.bottomLeading.startAngle.radians) * shapeModel.cornerRadii.bottomLeading,
+            y: shapeModel.coordinates.bottomLeading.y - sin(shapeModel.angleValues.bottomLeading.startAngle.radians) * shapeModel.cornerRadii.bottomLeading
         )
         //
         let bottomLeadingCurveEnd = CGPoint(
-            x: shapeModel.coordinates.bottomLeading.x + cos(shapeModel.angleValues.bottomLeadingAngleValues.endAngle.radians) * shapeModel.cornerRadii.bottomLeading,
-            y: shapeModel.coordinates.bottomLeading.y - sin(shapeModel.angleValues.bottomLeadingAngleValues.endAngle.radians)  * shapeModel.cornerRadii.bottomLeading
+            x: shapeModel.coordinates.bottomLeading.x + cos(shapeModel.angleValues.bottomLeading.endAngle.radians) * shapeModel.cornerRadii.bottomLeading,
+            y: shapeModel.coordinates.bottomLeading.y - sin(shapeModel.angleValues.bottomLeading.endAngle.radians)  * shapeModel.cornerRadii.bottomLeading
         )
         
         let bottomTrailingCurveBegin = CGPoint(
-            x: shapeModel.coordinates.bottomTrailing.x + cos(shapeModel.angleValues.bottomTrailingAngleValues.startAngle.radians) * shapeModel.cornerRadii.bottomTrailing,
-            y: shapeModel.coordinates.bottomTrailing.y - sin(shapeModel.angleValues.bottomTrailingAngleValues.startAngle.radians) * shapeModel.cornerRadii.bottomTrailing
+            x: shapeModel.coordinates.bottomTrailing.x + cos(shapeModel.angleValues.bottomTrailing.startAngle.radians) * shapeModel.cornerRadii.bottomTrailing,
+            y: shapeModel.coordinates.bottomTrailing.y - sin(shapeModel.angleValues.bottomTrailing.startAngle.radians) * shapeModel.cornerRadii.bottomTrailing
         )
         
         let bottomTrailingCurveEnd = CGPoint(
-            x: shapeModel.coordinates.bottomTrailing.x + cos(shapeModel.angleValues.bottomTrailingAngleValues.endAngle.radians) * shapeModel.cornerRadii.bottomTrailing,
-            y: shapeModel.coordinates.bottomTrailing.y - sin(shapeModel.angleValues.bottomTrailingAngleValues.endAngle.radians)  * shapeModel.cornerRadii.bottomTrailing
+            x: shapeModel.coordinates.bottomTrailing.x + cos(shapeModel.angleValues.bottomTrailing.endAngle.radians) * shapeModel.cornerRadii.bottomTrailing,
+            y: shapeModel.coordinates.bottomTrailing.y - sin(shapeModel.angleValues.bottomTrailing.endAngle.radians)  * shapeModel.cornerRadii.bottomTrailing
         )
         
         let topTrailingCurveBegin = CGPoint(
-            x: shapeModel.coordinates.topTrailing.x + cos(shapeModel.angleValues.topTrailingAngleValues.startAngle.radians) * shapeModel.cornerRadii.topTrailing,
-            y: shapeModel.coordinates.topTrailing.y - sin(shapeModel.angleValues.topTrailingAngleValues.startAngle.radians) * shapeModel.cornerRadii.topTrailing
+            x: shapeModel.coordinates.topTrailing.x + cos(shapeModel.angleValues.topTrailing.startAngle.radians) * shapeModel.cornerRadii.topTrailing,
+            y: shapeModel.coordinates.topTrailing.y - sin(shapeModel.angleValues.topTrailing.startAngle.radians) * shapeModel.cornerRadii.topTrailing
         )
         //
         let topTrailingCurveEnd = CGPoint(
-            x: shapeModel.coordinates.topTrailing.x + cos(shapeModel.angleValues.topTrailingAngleValues.endAngle.radians) * shapeModel.cornerRadii.topTrailing,
-            y: shapeModel.coordinates.topTrailing.y - sin(shapeModel.angleValues.topTrailingAngleValues.endAngle.radians)  * shapeModel.cornerRadii.topTrailing
+            x: shapeModel.coordinates.topTrailing.x + cos(shapeModel.angleValues.topTrailing.endAngle.radians) * shapeModel.cornerRadii.topTrailing,
+            y: shapeModel.coordinates.topTrailing.y - sin(shapeModel.angleValues.topTrailing.endAngle.radians)  * shapeModel.cornerRadii.topTrailing
         )
         
         
@@ -121,11 +121,10 @@ struct SquaredCornersShapeDemo: View {
             topTrailing: 0
         ),
         angleValues: .init(
-            topLeadingAngleValues: .init(startAngle: Angle(degrees: 120), endAngle: Angle(degrees: 180)),
-            topTrailingAngleValues: .init(startAngle: Angle(degrees: 0), endAngle: Angle(degrees: 0)),
-            
-            bottomTrailingAngleValues: .init(startAngle: Angle(degrees: 0), endAngle: Angle(degrees: 0)),
-            bottomLeadingAngleValues: .init(startAngle: Angle(degrees: 180), endAngle: Angle(degrees: 269))), geometryValues: AnimatableShapeGeometryValues(referenceSize:  CGSize(width: 29.6, height: 82.0))
+            topLeading: .init(startAngle: Angle(degrees: 120), endAngle: Angle(degrees: 180)),
+            topTrailing: .init(startAngle: Angle(degrees: 0), endAngle: Angle(degrees: 0)),
+            bottomTrailing: .init(startAngle: Angle(degrees: 0), endAngle: Angle(degrees: 0)),
+            bottomLeading: .init(startAngle: Angle(degrees: 180), endAngle: Angle(degrees: 269))), geometryValues: AnimatableShapeGeometryValues(referenceSize:  CGSize(width: 29.6, height: 82.0))
         
     )
     

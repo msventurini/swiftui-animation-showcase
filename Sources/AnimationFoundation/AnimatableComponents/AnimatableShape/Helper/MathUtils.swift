@@ -14,6 +14,16 @@ enum ArcRelativePosition {
 
 struct MathUtils {
     
+    static func cgPointRelativeToArc(atCoordinates coordinates: CGPoint, withRadius radius: CGFloat, withAngles angles: AnimatableAngleVariation) -> CGPoint {
+        
+        switch angles.isDeltaNegative {
+        case true:
+            cgPointAfterArc(atCoordinates: coordinates, withRadius: radius, withAngles: angles)
+        case false:
+            cgPointBeforeArc(atCoordinates: coordinates, withRadius: radius, withAngles: angles)
+        }
+    }
+    
     static func cgPointRelativeToArc(located curve: ArcRelativePosition, atCoordinates coordinates: CGPoint, withRadius radius: CGFloat, withAngles angles: AnimatableAngleVariation) -> CGPoint {
         
         switch curve {

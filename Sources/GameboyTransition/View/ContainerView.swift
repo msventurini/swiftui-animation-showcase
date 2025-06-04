@@ -16,13 +16,6 @@ struct ContainerView: View {
         
             ConsoleFrameLayout {
                 ForEach(selected.sections) { section in
-//                    Rectangle()
-//                        .stroke()
-//                        .frame(width: section.width, height: section.height)
-//                        .overlay {
-//                            Text(section.id.description)
-//                        }
-                        
                    SectionView(section: section)
                         .containerValue(\.centerDistanceX, section.centerDistanceX)
                         .containerValue(\.centerDistanceY, section.centerDistanceY)
@@ -37,6 +30,5 @@ struct ContainerView: View {
 
 
 #Preview(traits: .modifier(ContainerPreviewModifier())) {
-//    ContainerView()
     GameBoyTransition()
 }

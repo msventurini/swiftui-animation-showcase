@@ -23,8 +23,9 @@ struct SectionView: View {
     
     var body: some View {
         
+        Rectangle()
         
-        RightControllerShape()
+//        ArcCornersShape(shapeModel: <#T##AnimatableShapeModel#>, )
 //            .strokeBorder(lineWidth: 4)
             .overlay {
                 Text(section.id.description)

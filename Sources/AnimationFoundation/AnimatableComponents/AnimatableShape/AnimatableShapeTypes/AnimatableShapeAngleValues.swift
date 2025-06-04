@@ -9,10 +9,10 @@ import SwiftUI
 
 public struct AnimatableShapeAngleValues: Sendable, Animatable {
     
-    var topLeadingAngleValues: AnimatableAngleVariation
-    var topTrailingAngleValues: AnimatableAngleVariation
-    var bottomTrailingAngleValues: AnimatableAngleVariation
-    var bottomLeadingAngleValues: AnimatableAngleVariation
+    var topLeading: AnimatableAngleVariation
+    var topTrailing: AnimatableAngleVariation
+    var bottomTrailing: AnimatableAngleVariation
+    var bottomLeading: AnimatableAngleVariation
     
     public var animatableData: AnimatablePair<
         AnimatablePair<
@@ -27,31 +27,35 @@ public struct AnimatableShapeAngleValues: Sendable, Animatable {
         get {
            AnimatablePair(
             AnimatablePair(
-                topLeadingAngleValues.animatableData,
-                topTrailingAngleValues.animatableData
+                topLeading.animatableData,
+                topTrailing.animatableData
             ),
             AnimatablePair(
-                bottomTrailingAngleValues.animatableData,
-                bottomLeadingAngleValues.animatableData
+                bottomTrailing.animatableData,
+                bottomLeading.animatableData
             )
            )
         }
 
         set {
-            topLeadingAngleValues.animatableData = newValue.first.first
-            topTrailingAngleValues.animatableData = newValue.first.second
-            bottomTrailingAngleValues.animatableData = newValue.second.first
-            bottomLeadingAngleValues.animatableData = newValue.second.second
+            topLeading.animatableData = newValue.first.first
+            topTrailing.animatableData = newValue.first.second
+            bottomTrailing.animatableData = newValue.second.first
+            bottomLeading.animatableData = newValue.second.second
         }
     }
     
-    static let zero = AnimatableShapeAngleValues(topLeadingAngleValues: .zero, topTrailingAngleValues: .zero, bottomTrailingAngleValues: .zero, bottomLeadingAngleValues: .zero)
+    static let zero = AnimatableShapeAngleValues(topLeading: .init(), topTrailing: .init(), bottomTrailing: .init(), bottomLeading: .init())
     
-    public init(topLeadingAngleValues: AnimatableAngleVariation, topTrailingAngleValues: AnimatableAngleVariation, bottomTrailingAngleValues: AnimatableAngleVariation, bottomLeadingAngleValues: AnimatableAngleVariation) {
-        self.topLeadingAngleValues = topLeadingAngleValues
-        self.topTrailingAngleValues = topTrailingAngleValues
-        self.bottomTrailingAngleValues = bottomTrailingAngleValues
-        self.bottomLeadingAngleValues = bottomLeadingAngleValues
+    public init(
+        topLeading: AnimatableAngleVariation = .init(),
+        topTrailing: AnimatableAngleVariation = .init(),
+        bottomTrailing: AnimatableAngleVariation = .init(),
+        bottomLeading: AnimatableAngleVariation = .init()) {
+        self.topLeading = topLeading
+        self.topTrailing = topTrailing
+        self.bottomTrailing = bottomTrailing
+        self.bottomLeading = bottomLeading
     }
     
     

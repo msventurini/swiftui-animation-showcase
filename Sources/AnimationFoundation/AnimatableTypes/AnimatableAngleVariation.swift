@@ -14,7 +14,11 @@ public struct AnimatableAngleVariation: Sendable, Animatable {
     public var endAngle: Angle
     public var delta: Angle
     
-    public init(startAngle: Angle, endAngle: Angle) {
+    public var isDeltaNegative: Bool {
+        return (delta.degrees < 0) ? true : false
+    }
+    
+    public init(startAngle: Angle = .zero, endAngle: Angle = .zero) {
         self.startAngle = startAngle
         self.endAngle = endAngle
         self.delta = endAngle - startAngle
@@ -39,5 +43,5 @@ public struct AnimatableAngleVariation: Sendable, Animatable {
         }
     }
     
-    static let zero: AnimatableAngleVariation = .init(startAngle: .zero, endAngle: .zero)
+//    static let zero: AnimatableAngleVariation = .init(startAngle: .zero, endAngle: .zero)
 }

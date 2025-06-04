@@ -39,14 +39,14 @@ public struct AnimatableShapePropotionalCoordinates: Sendable, Animatable {
         }
     }
     
-    public init(topLeading: CGPoint, topTrailing: CGPoint, bottomLeading: CGPoint, bottomTrailing: CGPoint) {
+    public init(topLeading: CGPoint = .zero, topTrailing: CGPoint = .zero, bottomLeading: CGPoint = .zero, bottomTrailing: CGPoint = .zero) {
         self.topLeading = topLeading
         self.topTrailing = topTrailing
         self.bottomLeading = bottomLeading
         self.bottomTrailing = bottomTrailing
     }
     
-    public static let zero: AnimatableShapePropotionalCoordinates = .init(topLeading: .zero, topTrailing: .zero, bottomLeading: .zero, bottomTrailing: .zero)
+    public static let zero: AnimatableShapePropotionalCoordinates = .init()
     
     
 }

@@ -77,7 +77,7 @@ extension AppDataUtils {
         var width: Double {
             switch self {
             case .gameboyDMG: 90
-            case .gameboyAdvance: 144
+            case .gameboyAdvance: 148
             case .nintendoSwitch: 240
             }
         }
