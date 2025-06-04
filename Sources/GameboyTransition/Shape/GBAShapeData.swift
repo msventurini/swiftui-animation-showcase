@@ -40,17 +40,24 @@ struct GBAShapeData: ShapeDataProvider {
     
     static let leftControllerShapeData: AnimatableShapeModel = .init(
         coordinates: .init(
-            topLeading: .init(x: 14, y: 18.04),
-            topTrailing: .init(x: 0, y: 3.28),
+            topLeading: .init(x: 14, y: 14),
+            topTrailing: .init(x: -16, y: -38),
             bottomLeading: .init(x: 26, y: -36),
             bottomTrailing: .init(x: 0, y: -8)
         ),
         cornerRadii: .init(
             topLeading: 8,
-            bottomLeading: 24
+            bottomLeading: 24,
+            topTrailing: 44
         ),
         angleValues: .init(
-            topLeading: .init(startAngle: Angle(degrees: 180), endAngle: Angle(degrees: 240)),
+            topLeading: .init(
+                startAngle: Angle(degrees: 180),
+                endAngle: Angle(degrees: 240)),
+            topTrailing: .init(
+                startAngle: Angle(degrees: 90),
+                endAngle: Angle(degrees: 64)
+            ),
             bottomTrailing: .init(startAngle: Angle(degrees: 10), endAngle: Angle(degrees: 40)),
             bottomLeading: .init(startAngle: Angle(degrees: 100), endAngle: Angle(degrees: 180))),
         geometryValues: AnimatableShapeGeometryValues(referenceSize:  CGSize(width: 30, height: 82.0), horizontalScale: 1)
