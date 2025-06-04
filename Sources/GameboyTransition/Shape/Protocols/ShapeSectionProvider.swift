@@ -10,16 +10,44 @@ import AnimationFoundation
 
 protocol ShapeSectionProvider: Identifiable {
     
-    var id: SectionedShape { get }
+    var id: SectionedShapeLegacy { get }
     
     var leftScreenShapeData: AnimatableShapeModel { get }
     var rightScreenShapeData: AnimatableShapeModel { get }
     var leftControllerShapeData: AnimatableShapeModel { get }
     var rightControllerShapeData: AnimatableShapeModel { get }
     
+
+    
+    
     var allSections: [AnimatableShapeModel] { get }
     
 }
+
+
+
+//
+//init(id: Int, originX: Double, originY: Double, widthRatioToContainer: Double, heightRatioToContainer: Double, containerWidth: Double, containerHeight: Double) {
+//    
+//    self.id = id
+//    
+//    self.widthRatioToContainer = widthRatioToContainer
+//    self.heightRatioToContainer = heightRatioToContainer
+//    
+//    self.containerWidth = containerWidth
+//    self.containerHeight = containerWidth
+//    self.width = containerWidth * widthRatioToContainer
+//    self.height = containerHeight * heightRatioToContainer
+//    
+//    let centerX = (originX + (widthRatioToContainer * 0.5)) - 0.5
+//    let centerY = (originY + (heightRatioToContainer * 0.5)) - 0.5
+//    self.centerPointX = centerX
+//    self.centerPointY = centerY
+//    
+//    self.centerDistanceX = centerX * containerWidth
+//    self.centerDistanceY = centerY * containerHeight
+//    
+//}
 
 
 

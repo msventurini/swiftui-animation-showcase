@@ -10,8 +10,12 @@ import SwiftUI
 import AnimationFoundation
 
 struct GBAShapeData: ShapeSectionProvider {
+    let width: CGFloat = 148
     
-    var id: SectionedShape {
+    let height: CGFloat = 82
+    
+    
+    var id: SectionedShapeLegacy {
         .gba
     }
     

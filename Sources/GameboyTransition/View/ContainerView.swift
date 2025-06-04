@@ -10,19 +10,21 @@ import Observation
 
 struct ContainerView: View {
 
-    @Binding var selected: ShapeData
+    @Environment(\.sectionedShapeCollection) private var shapeCollection
+    @Environment(\.selectedShape) private var selectedShape
         
     var body: some View {
-        
-            ConsoleFrameLayout {
-                ForEach(selected.allSections) { section in
-//                ForEach(selected.sections) { section in
-                    SectionView(sectionModel: section)
-                        .containerValue(\.centerDistanceX, section.centerDistanceX)
+        Rectangle()
+//            .frame(width: selectedShape.shapeData.width, height: selectedShape.shapeData.height)
+//            ConsoleFrameLayout {
+//                ForEach(selectedShape.shapeData.allSections) { section in
+////                ForEach(selected.sections) { section in
+//                    SectionView(sectionModel: section)
+//                        .containerValue(\.centerDistanceX, section.la)
 //                        .containerValue(\.centerDistanceY, section.centerDistanceY)
 
-                }
-            }
+//                }
+//            }
     }
 }
 

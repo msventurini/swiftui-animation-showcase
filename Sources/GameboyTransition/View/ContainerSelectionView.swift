@@ -15,18 +15,19 @@ struct ContainerSelectionView: View {
     @Environment(\.sectionedShapeCollection) private var shapeCollection
     @Environment(\.selectedShape) private var selectedShape
     
-    @State var selected: ShapeData
+    @State var selected: SectionedShapeLegacy
     
     var body: some View {
         
         VStack {
-            ContainerView(selected: $selected)
+            ContainerView()
+                .environment(\.selectedShape, selected)
             
-            ForEach(SectionedShape.allCases) { consoleItem in
+            ForEach(SectionedShapeLegacy.allCases) { consoleItem in
 //
                 Button {
                     withAnimation {
-                        selected = consoleItem.shapeData
+                        selected = consoleItem
                     }
                     
                 } label: {

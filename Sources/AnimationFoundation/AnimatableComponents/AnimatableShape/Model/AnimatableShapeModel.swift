@@ -12,12 +12,54 @@ public struct AnimatableShapeGeometryValues: Sendable {
     var referenceSize: CGSize
     var horizontalScale: Double
     
-    public init(referenceSize: CGSize, horizontalScale: Double = 1) {
+    var widthRatioToContainer: Double
+    var heightRatioToContainer: Double
+    var containerWidth: Double
+    var containerHeight: Double
+    var width: Double
+    var height: Double
+    var centerPointX: Double
+    var centerPointY: Double
+    var centerDistanceX: Double
+    var centerDistanceY: Double
+
+    init(
+        referenceSize: CGSize,
+        horizontalScale: Double,
+        originX: Double,
+        originY: Double,
+        widthRatioToContainer: Double,
+        heightRatioToContainer: Double,
+        containerWidth: Double,
+        containerHeight: Double,
+        width: Double,
+        height: Double,
+    ) {
         self.referenceSize = referenceSize
         self.horizontalScale = horizontalScale
+        self.widthRatioToContainer = widthRatioToContainer
+        self.heightRatioToContainer = heightRatioToContainer
+        self.containerWidth = containerWidth
+        self.containerHeight = containerHeight
+        self.width = width
+        self.height = height
+        
+        self.widthRatioToContainer = widthRatioToContainer
+        self.heightRatioToContainer = heightRatioToContainer
+        
+        self.containerWidth = containerWidth
+        self.containerHeight = containerWidth
+        self.width = containerWidth * widthRatioToContainer
+        self.height = containerHeight * heightRatioToContainer
+        
+        let centerX = (originX + (widthRatioToContainer * 0.5)) - 0.5
+        let centerY = (originY + (heightRatioToContainer * 0.5)) - 0.5
+        self.centerPointX = centerX
+        self.centerPointY = centerY
+        
+        self.centerDistanceX = centerX * containerWidth
+        self.centerDistanceY = centerY * containerHeight
     }
-    
-    
 }
 
 extension AnimatableShapeGeometryValues: Equatable {
@@ -130,19 +172,19 @@ extension AnimatableShapeModel: Hashable {
 }
 
 
-
-public enum ShapeSection: Int, Identifiable, CaseIterable, Hashable, Sendable {
-    
-    public var id: Int {
-        return rawValue
-    }
-    
-    case leftScreen = 0
-    case rightScreen
-    case leftController
-    case rightController
-    
-}
+//
+//public enum ShapeSection: Int, Identifiable, CaseIterable, Hashable, Sendable {
+//    
+//    public var id: Int {
+//        return rawValue
+//    }
+//    
+//    case leftScreen = 0
+//    case rightScreen
+//    case leftController
+//    case rightController
+//    
+//}
 
 
 

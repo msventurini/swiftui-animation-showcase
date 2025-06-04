@@ -8,10 +8,18 @@
 import SwiftUI
 import AnimationFoundation
 
+
+
+
+
 struct GBCShapeData: ShapeSectionProvider {
+    let width: CGFloat = 76
     
-    var id: SectionedShape {
-        SectionedShape.gbc
+    let height: CGFloat = 128
+    
+    
+    var id: SectionedShapeLegacy {
+        .gbc
     }
     
     var leftScreenShapeData: AnimatableShapeModel {

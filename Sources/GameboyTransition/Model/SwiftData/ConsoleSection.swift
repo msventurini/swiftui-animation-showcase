@@ -9,7 +9,7 @@ import SwiftUI
 import Observation
 import AnimationFoundation
 
-public struct ConsoleSection: Identifiable, Equatable, Hashable {
+public struct ConsoleSectionLayoutData: Identifiable, Equatable, Hashable, Sendable {
 
     public var id: Int
 

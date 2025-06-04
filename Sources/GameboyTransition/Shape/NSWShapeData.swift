@@ -9,8 +9,12 @@ import SwiftUI
 import AnimationFoundation
 
 struct NSWShapeData: ShapeSectionProvider {
+    var width: CGFloat = 240
     
-    var id: SectionedShape {
+    var height: CGFloat = 102
+    
+    
+    var id: SectionedShapeLegacy {
         .nsw
     }
     

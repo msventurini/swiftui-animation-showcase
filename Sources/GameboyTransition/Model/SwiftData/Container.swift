@@ -9,13 +9,13 @@
 import SwiftUI
 import Observation
 
-public struct Container: Identifiable, Equatable, Hashable {
+public struct ShapeLayoutDataLegacy: Identifiable, Equatable, Hashable, Sendable {
     
     public var id: Int {
         return containerID.id
     }
     
-    public static func == (lhs: Container, rhs: Container) -> Bool {
+    public static func == (lhs: ShapeLayoutDataLegacy, rhs: ShapeLayoutDataLegacy) -> Bool {
         lhs.containerID == rhs.containerID
     }
     
@@ -25,7 +25,7 @@ public struct Container: Identifiable, Equatable, Hashable {
     public var width: Double
     public var height: Double
     
-    public var sections: [ConsoleSection] = []
+    public var sections: [ConsoleSectionLayoutData] = []
     
     public init(containerID: ContainerID, chronologicalNumber: Int,containerName: String, width: Double, height: Double) {
         self.containerID = containerID

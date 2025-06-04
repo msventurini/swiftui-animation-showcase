@@ -9,10 +9,10 @@ import SwiftUI
 
 extension EnvironmentValues {
 //    @Entry var containerCollection: [Container] = AppDataUtils.getContainerCollection()
-    @Entry var sectionedShapeCollection: [ShapeData] = SectionedShape.allSectionedShapes()
+    @Entry var sectionedShapeCollection: [SectionedShapeCollection] = .init()
 }
 
 extension EnvironmentValues {
 //    @Entry var selectedContainer: Container? = nil
-    @Entry var selectedShape: ShapeData = SectionedShape.defaultSelection()
+    @Entry var selectedShape: SectionedShapeLegacy = .gb
 }
