@@ -9,10 +9,14 @@
 import SwiftUI
 import AnimationFoundation
 
-struct GBAShapeData: ShapeDataProvider {
+struct GBAShapeData: ShapeSectionProvider {
     
-    static let leftScreenShapeData: AnimatableShapeModel = .init(
-        coordinates: .init(
+    var id: SectionedShape {
+        .gba
+    }
+    
+    var leftScreenShapeData: AnimatableShapeModel { .init(
+        id: .leftScreen, coordinates: .init(
             topLeading: .init(x: 12, y: 20),
             bottomLeading: .init(x: 23, y: -60),
         ),
@@ -27,65 +31,71 @@ struct GBAShapeData: ShapeDataProvider {
             bottomLeading: .init(
                 startAngle: Angle(degrees: 90),
                 endAngle: Angle(degrees: 127))),
-
+        
         geometryValues: .init(referenceSize: CGSize(width: 44, height: 82), horizontalScale: 1))
+    }
+    var rightScreenShapeData: AnimatableShapeModel {
+        .init(
+            id: .rightScreen, horizontalInverseOf: self.leftScreenShapeData)
+    }
     
-    static let rightScreenShapeData: AnimatableShapeModel = .init(
-        horizontalInverseOf: GBAShapeData.leftScreenShapeData)
-    
-    static let leftControllerShapeData: AnimatableShapeModel = .init(
-        coordinates: .init(
-            topLeading: .init(x: 14, y: 14),
-            topTrailing: .init(x: -14, y: -38),
-            bottomLeading: .init(x: 26, y: -32),
-            bottomTrailing: .init(x: -21.5, y: 47)
-        ),
-        cornerRadii: .init(
-            topLeading: 8,
-            bottomLeading: 24,
-            bottomTrailing: 56,
-            topTrailing: 44
-        ),
-        angleValues: .init(
-            topLeading: .init(
-                startAngle: Angle(degrees: 180),
-                endAngle: Angle(degrees: 240)),
-            topTrailing: .init(
-                startAngle: Angle(degrees: 90),
-                endAngle: Angle(degrees: 64)
+    var leftControllerShapeData: AnimatableShapeModel {
+        .init(
+            id: .leftController, coordinates: .init(
+                topLeading: .init(x: 14, y: 14),
+                topTrailing: .init(x: -14, y: -38),
+                bottomLeading: .init(x: 26, y: -32),
+                bottomTrailing: .init(x: -21.5, y: 47)
             ),
-            bottomTrailing: .init(startAngle: Angle(degrees: -62), endAngle: Angle(degrees: -78)),
-//            bottomTrailing: .init(startAngle: Angle(degrees: 10), endAngle: Angle(degrees: 40)),
-            bottomLeading: .init(startAngle: Angle(degrees: 115), endAngle: Angle(degrees: 180))),
-        geometryValues: AnimatableShapeGeometryValues(referenceSize:  CGSize(width: 30, height: 82.0), horizontalScale: 1)
-    )
+            cornerRadii: .init(
+                topLeading: 8,
+                bottomLeading: 24,
+                bottomTrailing: 56,
+                topTrailing: 44
+            ),
+            angleValues: .init(
+                topLeading: .init(
+                    startAngle: Angle(degrees: 180),
+                    endAngle: Angle(degrees: 240)),
+                topTrailing: .init(
+                    startAngle: Angle(degrees: 90),
+                    endAngle: Angle(degrees: 64)
+                ),
+                bottomTrailing: .init(startAngle: Angle(degrees: -62), endAngle: Angle(degrees: -78)),
+    //            bottomTrailing: .init(startAngle: Angle(degrees: 10), endAngle: Angle(degrees: 40)),
+                bottomLeading: .init(startAngle: Angle(degrees: 115), endAngle: Angle(degrees: 180))),
+            geometryValues: AnimatableShapeGeometryValues(referenceSize:  CGSize(width: 30, height: 82.0), horizontalScale: 1)
+        )
+        
+    }
     
-    
-    static let rightControllerShapeData: AnimatableShapeModel = .init(horizontalInverseOf: GBAShapeData.leftControllerShapeData)
-
+    var rightControllerShapeData: AnimatableShapeModel { .init(id: .rightController, horizontalInverseOf: self.leftControllerShapeData)
+    }
 }
 
 
 struct GBAShapeDataDebug: View {
     
+    var gbaShape = GBAShapeData()
+    
     var body: some View {
         
         HStack(spacing: 0) {
-            ArcCornersShape(shapeModel: GBAShapeData.leftControllerShapeData)
+            ArcCornersShape(shapeModel: gbaShape.leftControllerShapeData)
                 .fill(.indigo)
 //                .stroke(.black, lineWidth: 1)
 
                 .aspectRatio(30/82.0 ,contentMode: .fit)
 //                .opacity(0.25)
         
-            ArcCornersShape(shapeModel: GBAShapeData.leftScreenShapeData)
+            ArcCornersShape(shapeModel: gbaShape.leftScreenShapeData)
                 .fill(.indigo)
                 .aspectRatio(44/82 ,contentMode: .fit)
-            ArcCornersShape(shapeModel: GBAShapeData.rightScreenShapeData)
+            ArcCornersShape(shapeModel: gbaShape.rightScreenShapeData)
                 .fill(.indigo)
                 .aspectRatio(44/82 ,contentMode: .fit)
             
-            ArcCornersShape(shapeModel: GBAShapeData.rightControllerShapeData)
+            ArcCornersShape(shapeModel: gbaShape.rightControllerShapeData)
                 .fill(.indigo)
 //                .stroke(.black, lineWidth: 1)
 

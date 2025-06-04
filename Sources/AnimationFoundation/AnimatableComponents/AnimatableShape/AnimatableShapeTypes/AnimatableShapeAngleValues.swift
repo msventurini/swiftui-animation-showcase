@@ -62,6 +62,15 @@ public struct AnimatableShapeAngleValues: Sendable, Animatable {
     
 }
 
+extension AnimatableShapeAngleValues: Equatable {
+    
+}
+
+extension AnimatableShapeAngleValues: Hashable {
+    
+}
+
+
 //extension AnimatableShapeAngleValues: AdditiveArithmetic {
 //    
 //    public static func - (lhs: AnimatableShapeAngleValues, rhs: AnimatableShapeAngleValues) -> AnimatableShapeAngleValues {

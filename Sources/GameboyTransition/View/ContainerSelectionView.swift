@@ -8,29 +8,31 @@
 import SwiftUI
 import Observation
 import SwiftUIComponentKit
+import AnimationFoundation
 
 struct ContainerSelectionView: View {
     
-    @Environment(\.containerCollection) private var containerCollection
+    @Environment(\.sectionedShapeCollection) private var shapeCollection
+    @Environment(\.selectedShape) private var selectedShape
     
-    @State var selected: Container
+    @State var selected: ShapeData
     
     var body: some View {
         
         VStack {
             ContainerView(selected: $selected)
             
-            ForEach(containerCollection) { consoleItem in
-                
+            ForEach(SectionedShape.allCases) { consoleItem in
+//
                 Button {
                     withAnimation {
-                        selected = consoleItem
+                        selected = consoleItem.shapeData
                     }
                     
                 } label: {
-                    Text(consoleItem.containerName)
+                    Text(consoleItem.description)
                 }
-                
+//                
             }
         }
     }

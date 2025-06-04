@@ -9,9 +9,13 @@
 import SwiftUI
 import AnimationFoundation
 
-struct GBShapeData: ShapeDataProvider {
+struct GBShapeData: ShapeSectionProvider {
     
-    static let leftScreenShapeData: AnimatableShapeModel = .init(
+    var id: SectionedShape {
+        .gb
+    }
+    var leftScreenShapeData: AnimatableShapeModel { .init(
+        id: .leftScreen,
         coordinates: .init(
             topLeading: .init(x: 8, y: 8),
         ),
@@ -22,12 +26,13 @@ struct GBShapeData: ShapeDataProvider {
                 endAngle: Angle(degrees: 270)),
         ),
         geometryValues: .init(referenceSize: CGSize(width: 45, height: 74), horizontalScale: 1))
+    }
     
-    static let rightScreenShapeData: AnimatableShapeModel = .init(
-        horizontalInverseOf: leftScreenShapeData)
-    
-    static let leftControllerShapeData: AnimatableShapeModel = .init(
-        coordinates: .init(
+    var rightScreenShapeData: AnimatableShapeModel { .init(
+        id: .rightScreen, horizontalInverseOf: leftScreenShapeData)
+    }
+    var leftControllerShapeData: AnimatableShapeModel { .init(
+        id: .leftController, coordinates: .init(
             bottomLeading: .init(x: 8, y: -8),
         ),
         cornerRadii: .init(
@@ -37,9 +42,9 @@ struct GBShapeData: ShapeDataProvider {
             bottomLeading: .init(startAngle: Angle(degrees: 90), endAngle: Angle(degrees: 180))),
         geometryValues: AnimatableShapeGeometryValues(referenceSize:  CGSize(width: 45, height: 74), horizontalScale: 1)
     )
-    
-    static let rightControllerShapeData: AnimatableShapeModel = .init(
-        horizontalInverseOf: GBShapeData.leftControllerShapeData,
+    }
+    var rightControllerShapeData: AnimatableShapeModel { .init(
+        id: .rightController, horizontalInverseOf: self.leftControllerShapeData,
         changingCoordinatesTo: .init(
             bottomLeading: .init(x: 32, y: -32)
         ),
@@ -52,29 +57,32 @@ struct GBShapeData: ShapeDataProvider {
                 endAngle: Angle(degrees: 180))
         )
     )
+    }
 }
 
 
 struct GBShapeDataDebug: View {
+    
+    var gbShape = GBShapeData()
     
     var body: some View {
         
         VStack(spacing: 0) {
             
             HStack(spacing: 0) {
-                ArcCornersShape(shapeModel: GBShapeData.leftScreenShapeData)
+                ArcCornersShape(shapeModel: gbShape.leftScreenShapeData)
                     .fill(.black)
-                ArcCornersShape(shapeModel: GBShapeData.rightScreenShapeData)
+                ArcCornersShape(shapeModel: gbShape.rightScreenShapeData)
                     .fill(.gray)
             }
             
             
             
             HStack(spacing: 0) {
-                ArcCornersShape(shapeModel: GBShapeData.leftControllerShapeData)
+                ArcCornersShape(shapeModel: gbShape.leftControllerShapeData)
                     .fill(.gray)
                 
-                ArcCornersShape(shapeModel: GBShapeData.rightControllerShapeData)
+                ArcCornersShape(shapeModel: gbShape.rightControllerShapeData)
                     .fill(.gray)
                 
             }

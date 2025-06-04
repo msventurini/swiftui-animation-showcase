@@ -10,15 +10,16 @@ import Observation
 
 struct ContainerView: View {
 
-    @Binding var selected: Container
+    @Binding var selected: ShapeData
         
     var body: some View {
         
             ConsoleFrameLayout {
-                ForEach(selected.sections) { section in
-                   SectionView(section: section)
+                ForEach(selected.allSections) { section in
+//                ForEach(selected.sections) { section in
+                    SectionView(sectionModel: section)
                         .containerValue(\.centerDistanceX, section.centerDistanceX)
-                        .containerValue(\.centerDistanceY, section.centerDistanceY)
+//                        .containerValue(\.centerDistanceY, section.centerDistanceY)
 
                 }
             }

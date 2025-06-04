@@ -12,7 +12,7 @@ extension AnimatableShapeModel: Animatable {
     public var animatableData: AnimatablePair<
         AnimatablePair<
             AnimatableShapePropotionalCoordinates.AnimatableData,
-            RectangleCornerRadii.AnimatableData
+            AnimatableCornerRadii.AnimatableData
         >,
         AnimatablePair<
             AnimatableShapeAngleValues.AnimatableData,
@@ -41,7 +41,7 @@ extension AnimatableShapeModel: Animatable {
         }
     }
 }
-
-#Preview {
-    TesteMorphingShape()
-}
+//
+//#Preview {
+//    TesteMorphingShape()
+//}

@@ -10,14 +10,15 @@ import Observation
 
 struct GameBoyTransition: View {
     
-    @Environment(\.containerCollection) private var containerCollection
+    @Environment(\.sectionedShapeCollection) private var shapeCollection
+    @Environment(\.selectedShape) private var selectedShape
     
     init() {
         
     }
     
     var body: some View {
-        ContainerSelectionView(selected: containerCollection[0])
+        ContainerSelectionView(selected: selectedShape)
     }
 }
 

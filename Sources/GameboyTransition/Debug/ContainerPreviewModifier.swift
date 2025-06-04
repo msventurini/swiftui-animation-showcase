@@ -10,13 +10,14 @@ import SwiftData
 
 struct ContainerPreviewModifier: PreviewModifier {
 
-    static func makeSharedContext() async throws -> [Container] {
-        let containerCollection: [Container] = AppDataUtils.getContainerCollection()
+    static func makeSharedContext() async throws -> [ShapeData] {
+//        let containerCollection: [Container] = AppDataUtils.getContainerCollection()
+        let containerCollection: [ShapeData] = SectionedShape.allSectionedShapes()
         return containerCollection
     }
 
-    func body(content: Content, context: [Container]) -> some View {
+    func body(content: Content, context: [ShapeData]) -> some View {
         content
-            .environment(\.containerCollection, context)
+            .environment(\.sectionedShapeCollection, context)
     }
 }

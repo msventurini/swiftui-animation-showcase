@@ -50,3 +50,11 @@ public struct AnimatableShapePropotionalCoordinates: Sendable, Animatable {
     
     
 }
+
+extension AnimatableShapePropotionalCoordinates: Equatable {
+    
+}
+
+extension AnimatableShapePropotionalCoordinates: Hashable {
+    
+}

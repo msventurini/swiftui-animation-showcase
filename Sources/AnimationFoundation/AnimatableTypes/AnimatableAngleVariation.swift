@@ -45,3 +45,11 @@ public struct AnimatableAngleVariation: Sendable, Animatable {
     
 //    static let zero: AnimatableAngleVariation = .init(startAngle: .zero, endAngle: .zero)
 }
+
+extension AnimatableAngleVariation: Equatable {
+    
+}
+
+extension AnimatableAngleVariation: Hashable {
+    
+}

@@ -67,6 +67,6 @@ extension AnimatableShapeModel {
     
 }
 
-#Preview {
-    TesteNewMorphingShape()
-}
+//#Preview {
+//    TesteNewMorphingShape()
+//}
