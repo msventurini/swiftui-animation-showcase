@@ -57,7 +57,11 @@ public struct ArcCornersShape: Shape {
     
     public func path(in rect: CGRect) -> Path {
         
-        var path = Path()
+        var shapePath = Path()
+        
+        var shapeRect = CGRect(
+            origin: rect.origin,
+            size: CGSize(width: 29.6, height: 82.0))
         
         let topLeadingCurveBegin = MathUtils
             .cgPointRelativeToArc(
@@ -66,13 +70,13 @@ public struct ArcCornersShape: Shape {
                 withRadius: shapeModel.cornerRadii.topLeading,
                 withAngles: shapeModel.angleValues.topLeadingAngleValues)
         
-        path.move(to: topLeadingCurveBegin)
+        shapePath.move(to: topLeadingCurveBegin)
         
         shapeModel
-            .allVertices(in: rect)
+            .allVertices(in: shapeRect)
             .forEach { vertex in
                 
-                    path.addRelativeArc(
+                shapePath.addRelativeArc(
                         center: vertex.coordinates,
                         radius: vertex.cornerRadius,
                         startAngle: vertex.angleValues.startAngle,
@@ -81,8 +85,13 @@ public struct ArcCornersShape: Shape {
                 
             }
         
-        path.closeSubpath()
-        return path
+        shapePath.closeSubpath()
+        
+        
+        
+        
+//        return path
+        return shapePath
     }
 }
 
