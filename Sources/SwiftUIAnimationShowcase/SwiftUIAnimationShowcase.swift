@@ -1,2 +1,7 @@
-// The Swift Programming Language
-// https://docs.swift.org/swift-book
+//
+//  SwiftUIAnimationShowcase.swift
+//  swiftui-animation-showcase
+//
+//  Created by Matheus Silveira Venturini on 22/05/25.
+//
+
