@@ -8,6 +8,45 @@
 
 import SwiftUI
 
+public struct ArcCornersShapeV2: Shape {
+    
+    public var shapeModel: AnimatableShapeModel
+    
+    public init(shapeModel: AnimatableShapeModel) {
+        self.shapeModel = shapeModel
+    }
+    
+    public func path(in rect: CGRect) -> Path {
+        
+        var path = Path()
+        
+        let topLeadingCurveBegin = MathUtils
+            .cgPointRelativeToArc(
+                located: .beforeCurve,
+                atCoordinates: shapeModel.coordinates.topLeading,
+                withRadius: shapeModel.cornerRadii.topLeading,
+                withAngles: shapeModel.angleValues.topLeadingAngleValues)
+        
+        path.move(to: topLeadingCurveBegin)
+        
+        shapeModel
+            .allVertices(in: rect)
+            .forEach { vertex in
+                
+                    path.addRelativeArc(
+                        center: vertex.coordinates,
+                        radius: vertex.cornerRadius,
+                        startAngle: vertex.angleValues.startAngle,
+                        delta: vertex.angleValues.delta)
+                    print(vertex.cornerRadius)
+                
+            }
+        
+        path.closeSubpath()
+        return path
+    }
+}
+
 public struct ArcCornersShape: Shape {
     
     public var shapeModel: AnimatableShapeModel
