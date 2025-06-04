@@ -8,15 +8,6 @@
 
 import SwiftUI
 
-
-
-//#Preview {
-//    RightControllerShape()
-//        .frame(width: 74, height: 213)
-//        .background(.red)
-//
-//}
-
 #Preview {
     HStack(spacing: 2) {
         LeftControllerShape()

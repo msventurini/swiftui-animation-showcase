@@ -14,7 +14,10 @@ extension AnimatableShapeModel: Animatable {
             AnimatableShapePropotionalCoordinates.AnimatableData,
             RectangleCornerRadii.AnimatableData
         >,
-        AnimatableShapeAngleValues.AnimatableData
+        AnimatablePair<
+            AnimatableShapeAngleValues.AnimatableData,
+            AnimatableShapeGeometryValues.AnimatableData
+        >
     >
     {
         get {
@@ -23,14 +26,18 @@ extension AnimatableShapeModel: Animatable {
                     coordinates.animatableData,
                     cornerRadii.animatableData
                 ),
-                angleValues.animatableData
+                AnimatablePair(
+                    angleValues.animatableData,
+                    geometryValues.animatableData
+                )
             )
         }
         
         set {
             coordinates.animatableData = newValue.first.first
             cornerRadii.animatableData = newValue.first.second
-            angleValues.animatableData = newValue.second
+            angleValues.animatableData = newValue.second.first
+            geometryValues.animatableData = newValue.second.second
         }
     }
 }
