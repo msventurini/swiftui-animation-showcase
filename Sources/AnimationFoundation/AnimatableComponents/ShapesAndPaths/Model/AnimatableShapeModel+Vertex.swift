@@ -40,6 +40,18 @@ extension AnimatableShapeModel {
                 y: getRectVerticalCoordinates(in: rect))
         }
         
+        func getBeforeVertex() -> Vertex {
+            switch self {
+            case .topLeading:
+                    .bottomLeading
+            case .topTrailing:
+                    .topLeading
+            case .bottomTrailing:
+                    .topTrailing
+            case .bottomLeading:
+                    .bottomTrailing
+            }
+        }
         
         
         struct Info {

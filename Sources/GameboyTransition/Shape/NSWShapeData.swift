@@ -81,25 +81,27 @@ struct NSWShapeDataDebug: View {
         HStack(spacing: 0) {
             ArcCornersShape(shapeModel: nswShape.leftControllerShapeData)
                 .fill(.blue)
-                .frame(width: 36.0, height: 102.0)
-//                .aspectRatio(36.0/102 ,contentMode: .fit)
-        
+                .aspectRatio(36/102, contentMode: .fit)
+
             ArcCornersShape(shapeModel: nswShape.leftScreenShapeData)
                 .fill(.black)
-                .frame(width: 84, height: 102.0)
+                .aspectRatio(84/102, contentMode: .fit)
+
+//                .frame(width: 84, height: 102.0)
             ArcCornersShape(shapeModel: nswShape.rightScreenShapeData)
                 .fill(.black)
-                .frame(width: 84, height: 102.0)
-            
+                .aspectRatio(84/102, contentMode: .fit)
+
             ArcCornersShape(shapeModel: nswShape.rightControllerShapeData)
                 .fill(.red)
-//                .aspectRatio(36.0/102 ,contentMode: .fit)
-                .frame(width: 36.0, height: 102.0)
+                .aspectRatio(36/102, contentMode: .fit)
 
             
         }
-        .frame(width: 240, height: 102)
-        
+        .aspectRatio(240/102, contentMode: .fit)
+        .frame(maxWidth: .infinity)
+        .padding()
+        .aspectRatio(1, contentMode: .fit)
         
     }
     

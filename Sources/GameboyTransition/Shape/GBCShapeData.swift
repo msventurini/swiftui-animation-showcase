@@ -39,7 +39,6 @@ struct GBCShapeData: ShapeSectionProvider {
     var rightScreenShapeData: AnimatableShapeModel { .init(
         horizontalInverseOf: self.leftScreenShapeData)
     }
-    
     var leftControllerShapeData: AnimatableShapeModel {
         .init(
             
@@ -78,29 +77,28 @@ struct GBCShapeDataDebug: View {
             
             HStack(spacing: 0) {
                 ArcCornersShape(shapeModel: gbcShape.leftScreenShapeData)
+                    .fill(Color(uiColor: .cyan))
+
                 ArcCornersShape(shapeModel: gbcShape.rightScreenShapeData)
-                    .fill(.gray)
+                    .fill(Color(uiColor: .cyan))
             }
             
             HStack(spacing: 0) {
                 ArcCornersShape(shapeModel: gbcShape.leftControllerShapeData)
-                    .fill(.gray)
-                
+                    .fill(Color(uiColor: .cyan))
+
                 ArcCornersShape(shapeModel: gbcShape.rightControllerShapeData)
-                    .fill(.gray)
-                
+                    .fill(Color(uiColor: .cyan))
+
             }
         }
         .aspectRatio(76/128, contentMode: .fit)
-        .padding(64)
-//        .frame(width: 76, height: 128)
-        
-        
-        
+        .frame(maxWidth: .infinity)
+        .aspectRatio(1, contentMode: .fit)
     }
-    
-    
 }
+
+
 
 #Preview {
     GBCShapeDataDebug()
