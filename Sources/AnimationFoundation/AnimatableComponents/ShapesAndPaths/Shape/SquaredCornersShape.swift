@@ -8,21 +8,12 @@
 
 import SwiftUI
 
+
+
 struct SquaredCornersShape: Shape {
     
     var shapeModel: AnimatableShapeModel
     
-    var animatableData: AnimatableShapeModel.AnimatableData {
-        
-        get {
-            shapeModel.animatableData
-        }
-        
-        set {
-            shapeModel.animatableData = newValue
-            testeRadius = shapeModel.cornerRadii.topTrailing
-        }
-    }
     
     var testeRadius: Double = 0
     
@@ -32,16 +23,8 @@ struct SquaredCornersShape: Shape {
     }
     
     
-    
-    
     func path(in rect: CGRect) -> Path {
-        
-//        MathUtils
-//            .cgPointRelativeToArc(
-//                located: AnimatableShapeModel.MathUtils.CurveRelativePosition.afterCurve,
-//                atCoordinates: shapeModel.coordinates.topLeading
-//            )
-        
+
         let topLeadingCurveBegin = MathUtils.cgPointRelativeToArc(located: .beforeCurve, atCoordinates: shapeModel.coordinates.topLeading, withRadius: shapeModel.cornerRadii.topLeading, withAngles: shapeModel.angleValues.topLeading)
         
         let topLeadingCurveEnd = MathUtils.cgPointRelativeToArc(located: .afterCurve, atCoordinates: shapeModel.coordinates.topLeading, withRadius: shapeModel.cornerRadii.topLeading, withAngles: shapeModel.angleValues.topLeading)
@@ -101,65 +84,81 @@ struct SquaredCornersShape: Shape {
 
 //
 //
-//struct SquaredCornersShapeDemo: View {
-//    
-//    @State var isTapped: Bool = false
-//    
-//    
-//    
-//    let shapeModel: AnimatableShapeModel = .init(
-//        coordinates: .init(
-//            topLeading: .init(x: 9.5, y: 18.04),
-//            topTrailing: .init(x: 29.6, y: 3.28),
-//            bottomLeading: .init(x: 14.83, y: 57.4),
-//            bottomTrailing: .init(x: 29.6, y: 74.62)
-//        ),
-//        cornerRadii: .init(
-//            topLeading: 6.52,
-//            bottomLeading: 14.8,
-//            bottomTrailing: 0,
-//            topTrailing: 0
-//        ),
-//        angleValues: .init(
-//            topLeading: .init(startAngle: Angle(degrees: 120), endAngle: Angle(degrees: 180)),
-//            topTrailing: .init(startAngle: Angle(degrees: 0), endAngle: Angle(degrees: 0)),
-//            bottomTrailing: .init(startAngle: Angle(degrees: 0), endAngle: Angle(degrees: 0)),
-//            bottomLeading: .init(startAngle: Angle(degrees: 180), endAngle: Angle(degrees: 269))), geometryValues: AnimatableShapeGeometryValues(referenceSize:  CGSize(width: 29.6, height: 82.0))
-//        
-//    )
-//    
-//    
-//    let zeroModel: AnimatableShapeModel = .zero
-//    
-//    var currentShapeModel: AnimatableShapeModel {
-//        !isTapped ? shapeModel : zeroModel
-//    }
-//    var body: some View {
-//        
-//        VStack {
-//            SquaredCornersShape(shapeModel: currentShapeModel)
-//                .frame(width: 29.6, height: 82.0)
-//                .background(.indigo)
-//        }
-//        .scaleEffect(3)
-//        .frame(width: 350, height: 280)
-//        .background(.red)
-//        
-//        Button {
-//            withAnimation(.linear) {
-//                isTapped.toggle()
-//            }
-//        } label: {
-//            Text("Toggle")
-//        }
-//        
-//        
-//        
-//    }
-//    
-//    
-//}
+struct SquaredCornersShapeDemo: View {
+    
+    @State var isTapped: Bool = false
+    
+    
+    
+    let shapeModel: AnimatableShapeModel = .init(
+        coordinates: .init(
+            topLeading: .init(x: 9.5, y: 18.04),
+            topTrailing: .init(x: 29.6, y: 3.28),
+            bottomLeading: .init(x: 14.83, y: 57.4),
+            bottomTrailing: .init(x: 29.6, y: 74.62)
+        ),
+        cornerRadii: .init(
+            topLeading: 6.52,
+            bottomLeading: 14.8,
+            bottomTrailing: 0,
+            topTrailing: 0
+        ),
+        angleValues: .init(
+            topLeading: .init(startAngle: Angle(degrees: 120), endAngle: Angle(degrees: 180)),
+            topTrailing: .init(startAngle: Angle(degrees: 0), endAngle: Angle(degrees: 0)),
+            bottomTrailing: .init(startAngle: Angle(degrees: 0), endAngle: Angle(degrees: 0)),
+            bottomLeading: .init(startAngle: Angle(degrees: 180), endAngle: Angle(degrees: 269))), geometryValues: AnimatableShapeGeometryValues(referenceSize:  CGSize(width: 29.6, height: 82.0))
+        
+    )
+    
+    
+    let zeroModel: AnimatableShapeModel = .init(coordinates: .init(), cornerRadii: .init(), angleValues: .init(), geometryValues: .init(referenceSize: CGSize(width: 29.6, height: 82.0)))
+    
+    var currentShapeModel: AnimatableShapeModel {
+        !isTapped ? shapeModel : zeroModel
+    }
+    var body: some View {
+        
+        VStack {
+            SquaredCornersShape(shapeModel: currentShapeModel)
+                .frame(width: 29.6, height: 82.0)
+                .background(.indigo)
+        }
+        .scaleEffect(3)
+        .frame(width: 350, height: 280)
+        .background(.red)
+        
+        Button {
+            withAnimation(.linear) {
+                isTapped.toggle()
+            }
+        } label: {
+            Text("Toggle")
+        }
+        
+        
+        
+    }
+    
+    
+}
 //
-//#Preview {
-//    SquaredCornersShapeDemo()
-//}
+#Preview {
+    SquaredCornersShapeDemo()
+}
+
+
+extension SquaredCornersShape: Animatable {
+    var animatableData: AnimatableShapeModel.AnimatableData {
+        
+        get {
+            shapeModel.animatableData
+        }
+        
+        set {
+            shapeModel.animatableData = newValue
+            testeRadius = shapeModel.cornerRadii.topTrailing
+        }
+    }
+    
+}
