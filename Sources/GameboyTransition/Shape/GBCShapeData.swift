@@ -77,18 +77,18 @@ struct GBCShapeDataDebug: View {
             
             HStack(spacing: 0) {
                 ArcCornersShape(shapeModel: gbcShape.leftScreenShapeData)
-                    .fill(Color(uiColor: .cyan))
+//                    .fill(Color(uiColor: .cyan))
 
                 ArcCornersShape(shapeModel: gbcShape.rightScreenShapeData)
-                    .fill(Color(uiColor: .cyan))
+//                    .fill(Color(uiColor: .cyan))
             }
             
             HStack(spacing: 0) {
                 ArcCornersShape(shapeModel: gbcShape.leftControllerShapeData)
-                    .fill(Color(uiColor: .cyan))
+//                    .fill(Color(uiColor: .cyan))
 
                 ArcCornersShape(shapeModel: gbcShape.rightControllerShapeData)
-                    .fill(Color(uiColor: .cyan))
+//                    .fill(Color(uiColor: .cyan))
 
             }
         }

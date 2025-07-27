@@ -18,7 +18,7 @@ struct ContentView: View {
                 Button("Teal") { colorShown = .teal }
             }
             .navigationDestination(item: $colorShown) { color in
-                KirbyDancingView(color: color)
+                color
 //                GameboyTransitionView()
             }
         } detail: {

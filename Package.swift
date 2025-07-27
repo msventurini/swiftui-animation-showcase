@@ -1,4 +1,4 @@
-// swift-tools-version: 6.1
+// swift-tools-version: 6.2
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -10,9 +10,9 @@ typealias ExecutableTargetNamed = Pkg.Target.Executable.Named
 let package = Package(
     name: Pkg.name,
     platforms: [
-        .iOS(.v18),
-        .macCatalyst(.v18),
-        .macOS(.v15)
+        .iOS(.v26),
+        .macCatalyst(.v26),
+        .macOS(.v26)
     ],
     products: [
         .executable(
@@ -40,8 +40,8 @@ let package = Package(
                 targets: [DefaultTargetNamed.animationFoundation])
     ],
     dependencies: [
-        .package(path: "../VentUI"),
-//        .package(url: "https://github.com/msventurini/VentUI.git", branch: "main")
+//        .package(path: "../VentUI"),
+        .package(url: "https://github.com/msventurini/VentUI.git", branch: "main")
 //        .package(url: "https://github.com/msventurini/VentUI.git", branch: "main")
     ],
     targets: [

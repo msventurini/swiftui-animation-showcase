@@ -24,6 +24,8 @@ extension AnimatablePointCollection: AdditiveArithmetic {
         return AnimatablePointCollection(points: sub)
     }
     
+//    static func +=
+    
     static func + (lhs: AnimatablePointCollection, rhs: AnimatablePointCollection) -> AnimatablePointCollection {
         
         let sum = zip(
