@@ -10,25 +10,21 @@ import Observation
 
 struct ContainerView: View {
 
-    @Binding var selected: Container
+    @Environment(\.sectionedShapeCollection) private var shapeCollection
+    @Environment(\.selectedShape) private var selectedShape
         
     var body: some View {
-        
-            ConsoleFrameLayout {
-                ForEach(selected.sections) { section in
-//                    Rectangle()
-//                        .stroke()
-//                        .frame(width: section.width, height: section.height)
-//                        .overlay {
-//                            Text(section.id.description)
-//                        }
-                        
-                   SectionView(section: section)
-                        .containerValue(\.centerDistanceX, section.centerDistanceX)
-                        .containerValue(\.centerDistanceY, section.centerDistanceY)
+        Rectangle()
+//            .frame(width: selectedShape.shapeData.width, height: selectedShape.shapeData.height)
+//            ConsoleFrameLayout {
+//                ForEach(selectedShape.shapeData.allSections) { section in
+////                ForEach(selected.sections) { section in
+//                    SectionView(sectionModel: section)
+//                        .containerValue(\.centerDistanceX, section.la)
+//                        .containerValue(\.centerDistanceY, section.centerDistanceY)
 
-                }
-            }
+//                }
+//            }
     }
 }
 
@@ -37,6 +33,5 @@ struct ContainerView: View {
 
 
 #Preview(traits: .modifier(ContainerPreviewModifier())) {
-//    ContainerView()
     GameBoyTransition()
 }
